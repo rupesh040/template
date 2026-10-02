@@ -3,67 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { services } from "../data/serviceData";
 
 import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  Home,
-  Building2,
-  CookingPot,
-  Bath,
-  Sofa,
 } from "lucide-react";
-
-const services = [
-  {
-    title: "Home Cleaning",
-    description: "A clean and healthy home for a happier you.",
-    image: "/services/home-cleaning.png",
-    icon: Home,
-    darkIcon: true,
-  },
-  {
-    title: "Office Cleaning",
-    description: "Bright, clean workspaces boost productivity.",
-    image: "/services/office-cleaning.png",
-    icon: Building2,
-    darkIcon: false,
-  },
-  {
-    title: "Kitchen Cleaning",
-    description: "Hygienic and spotless kitchens for safer living.",
-    image: "/services/kitchen-cleaning.png",
-    icon: CookingPot,
-    darkIcon: true,
-  },
-  {
-    title: "Bathroom Cleaning",
-    description: "Deep cleaning for a fresh and germ-free bathroom.",
-    image: "/services/bathroom-cleaning.png",
-    icon: Bath,
-    darkIcon: false,
-  },
-  {
-    title: "Carpet & Sofa Cleaning",
-    description:
-      "Remove dust, stains and allergens for a fresher home.",
-    image: "/services/carpet-cleaning.png",
-    icon: Sofa,
-    darkIcon: true,
-  },
-];
 
 export default function Services() {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-
-  /* =========================================================
-     CHECK SCROLL POSITION
-  ========================================================= */
-
   const checkScroll = () => {
     const slider = sliderRef.current;
 
@@ -78,11 +30,6 @@ export default function Services() {
       slider.scrollLeft < maxScroll - 5
     );
   };
-
-
-  /* =========================================================
-     SCROLL LEFT / RIGHT
-  ========================================================= */
 
   const scrollServices = (
     direction: "left" | "right"
@@ -101,19 +48,12 @@ export default function Services() {
           : -scrollAmount,
       behavior: "smooth",
     });
-
-    // Check after animation
     setTimeout(checkScroll, 400);
   };
 
 
   return (
     <section className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24">
-
-      {/* =====================================================
-          BACKGROUND DECORATIONS
-      ====================================================== */}
-
       <div
         className="
           pointer-events-none
@@ -154,19 +94,10 @@ export default function Services() {
           bg-[#f6fafb]
         "
       />
-
-
-      {/* =====================================================
-          MAIN CONTAINER
-      ====================================================== */}
-
       <div className="relative z-10 mx-auto w-full max-w-[1450px] px-5 sm:px-8 lg:px-12">
-
-        {/* =================================================
-            HEADER
-        ================================================== */}
-
-        <div className="mx-auto max-w-[950px] text-center">
+        <div className="mx-auto max-w-[950px] text-center relative">
+           
+           <Image src="/leaf.png" alt="leaf" width={80} height={80} className="absolute top-0 left-0 rotate-[240deg]"/>
 
           <p
             className="
@@ -216,19 +147,10 @@ export default function Services() {
             spotless.
           </p>
 
+           <Image src="/leaf.png" alt="leaf" width={80} height={80} className="absolute top-0 right-0"/>
+
         </div>
-
-
-        {/* =================================================
-            CAROUSEL
-        ================================================== */}
-
         <div className="relative mt-10 sm:mt-12">
-
-          {/* =================================================
-              LEFT ARROW
-          ================================================== */}
-
           <button
             type="button"
             onClick={() => scrollServices("left")}
@@ -266,12 +188,6 @@ export default function Services() {
               strokeWidth={2}
             />
           </button>
-
-
-          {/* =================================================
-              SLIDER
-          ================================================== */}
-
           <div
             ref={sliderRef}
             onScroll={checkScroll}
@@ -294,18 +210,12 @@ export default function Services() {
 
             {services.map((service) => (
               <ServiceCard
-                key={service.title}
+                key={service.id}
                 {...service}
               />
             ))}
 
           </div>
-
-
-          {/* =================================================
-              RIGHT ARROW
-          ================================================== */}
-
           <button
             type="button"
             onClick={() => scrollServices("right")}
@@ -333,7 +243,6 @@ export default function Services() {
               hover:text-white
               disabled:cursor-not-allowed
               disabled:opacity-30
-
               sm:h-[52px]
               sm:w-[52px]
             "
@@ -345,12 +254,6 @@ export default function Services() {
           </button>
 
         </div>
-
-
-        {/* =================================================
-            VIEW ALL SERVICES
-        ================================================== */}
-
         <div className="mt-7 flex justify-center sm:mt-9">
 
           <Link
@@ -395,13 +298,8 @@ export default function Services() {
     </section>
   );
 }
-
-
-/* =========================================================
-   SERVICE CARD
-========================================================= */
-
 interface ServiceCardProps {
+  id: string;
   title: string;
   description: string;
   image: string;
@@ -410,6 +308,7 @@ interface ServiceCardProps {
 }
 
 function ServiceCard({
+  id,
   title,
   description,
   image,
@@ -447,11 +346,6 @@ function ServiceCard({
         xl:max-w-[270px]
       "
     >
-
-      {/* =================================================
-          IMAGE
-      ================================================== */}
-
       <div
         className="
           relative
@@ -482,12 +376,6 @@ function ServiceCard({
         />
 
       </div>
-
-
-      {/* =================================================
-          ICON
-      ================================================== */}
-
       <div
         className={`
           relative
@@ -516,12 +404,6 @@ function ServiceCard({
           strokeWidth={1.8}
         />
       </div>
-
-
-      {/* =================================================
-          CONTENT
-      ================================================== */}
-
       <div className="flex flex-1 flex-col items-center px-5 pb-5 pt-2 text-center">
 
         <h3
@@ -547,14 +429,8 @@ function ServiceCard({
         >
           {description}
         </p>
-
-
-        {/* CARD ARROW */}
         <Link
-          href={`/services/${title
-            .toLowerCase()
-            .replaceAll(" ", "-")
-            .replaceAll("&", "and")}`}
+          href={`/serviceDetail/${id}`}
           aria-label={`View ${title}`}
           className="
             mt-3

@@ -14,11 +14,6 @@ import {
   Headphones,
   ChevronDown,
 } from "lucide-react";
-
-/* =========================================================
-   FAQ DATA
-========================================================= */
-
 const faqs = [
   {
     question: "What cleaning services do you offer?",
@@ -70,21 +65,7 @@ const faqs = [
   },
 ];
 
-/* =========================================================
-   FAQ COMPONENT
-========================================================= */
-
 export default function FAQ() {
-  /*
-    One shared index.
-
-    Example:
-    0 = first question open
-    5 = sixth question open
-    null = nothing open
-
-    Therefore only ONE FAQ can be open at a time.
-  */
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -97,20 +78,6 @@ export default function FAQ() {
     });
   };
 
-  /*
-    Desktop:
-    Left:
-      0, 2, 4, 6
-
-    Right:
-      1, 3, 5, 7
-
-    They are rendered as completely separate
-    vertical flex columns.
-
-    Therefore one column can never stretch
-    because of the other column.
-  */
   const leftFaqs = faqs.filter(
     (_, index) => index % 2 === 0
   );
@@ -132,11 +99,6 @@ export default function FAQ() {
         lg:py-24
       "
     >
-
-      {/* =====================================================
-          BACKGROUND DECORATIONS
-      ====================================================== */}
-
       {/* TOP LEFT */}
       <div
         className="
@@ -198,12 +160,6 @@ export default function FAQ() {
           bg-[#f5faf8]
         "
       />
-
-
-      {/* =====================================================
-          MAIN CONTAINER
-      ====================================================== */}
-
       <div
         className="
           relative
@@ -218,11 +174,6 @@ export default function FAQ() {
           lg:px-12
         "
       >
-
-        {/* ===================================================
-            HEADER
-        ==================================================== */}
-
         <div
           className="
             mx-auto
@@ -230,9 +181,6 @@ export default function FAQ() {
             text-center
           "
         >
-
-          {/* FAQ LABEL */}
-
           <div
             className="
               flex
@@ -243,6 +191,7 @@ export default function FAQ() {
               sm:gap-5
             "
           >
+            
 
             <span
               className="
@@ -305,10 +254,6 @@ export default function FAQ() {
               Questions
             </span>
           </h2>
-
-
-          {/* DESCRIPTION */}
-
           <p
             className="
               mx-auto
@@ -332,16 +277,6 @@ export default function FAQ() {
           </p>
 
         </div>
-
-
-        {/* ===================================================
-            DESKTOP FAQ
-           
-            IMPORTANT:
-            Two independent columns.
-            NOT CSS GRID ROWS.
-        ==================================================== */}
-
         <div
           className="
             mt-10
@@ -351,11 +286,6 @@ export default function FAQ() {
             lg:flex
           "
         >
-
-          {/* =================================================
-              LEFT COLUMN
-          ================================================== */}
-
           <div
             className="
               flex
@@ -385,12 +315,6 @@ export default function FAQ() {
             })}
 
           </div>
-
-
-          {/* =================================================
-              RIGHT COLUMN
-          ================================================== */}
-
           <div
             className="
               flex
@@ -422,14 +346,6 @@ export default function FAQ() {
           </div>
 
         </div>
-
-
-        {/* ===================================================
-            MOBILE / TABLET FAQ
-
-            Single independent column.
-        ==================================================== */}
-
         <div
           className="
             mt-10
@@ -451,12 +367,6 @@ export default function FAQ() {
           ))}
 
         </div>
-
-
-        {/* ===================================================
-            SUPPORT BOX
-        ==================================================== */}
-
         <div
           className="
             mx-auto
@@ -479,9 +389,6 @@ export default function FAQ() {
             lg:px-8
           "
         >
-
-          {/* LEFT */}
-
           <div
             className="
               flex
@@ -489,8 +396,6 @@ export default function FAQ() {
               gap-4
             "
           >
-
-            {/* HEADPHONE */}
 
             <div
               className="
@@ -512,10 +417,6 @@ export default function FAQ() {
                 strokeWidth={1.7}
               />
             </div>
-
-
-            {/* DIVIDER */}
-
             <div
               className="
                 hidden
@@ -527,8 +428,6 @@ export default function FAQ() {
               "
             />
 
-
-            {/* TEXT */}
 
             <div>
 
@@ -561,10 +460,6 @@ export default function FAQ() {
             </div>
 
           </div>
-
-
-          {/* CONTACT BUTTON */}
-
           <Link
             href="/contact"
             className="
@@ -614,11 +509,6 @@ export default function FAQ() {
   );
 }
 
-
-/* =========================================================
-   FAQ ITEM
-========================================================= */
-
 interface FAQItemProps {
   faq: {
     question: string;
@@ -654,10 +544,6 @@ function FAQItem({
       "
     >
 
-      {/* =================================================
-          QUESTION
-      ================================================== */}
-
       <button
         type="button"
         onClick={onToggle}
@@ -675,9 +561,6 @@ function FAQItem({
           sm:py-4
         "
       >
-
-        {/* ICON */}
-
         <span
           className="
             flex
@@ -699,10 +582,6 @@ function FAQItem({
             strokeWidth={1.8}
           />
         </span>
-
-
-        {/* QUESTION */}
-
         <span
           className="
             flex-1
@@ -716,10 +595,6 @@ function FAQItem({
         >
           {faq.question}
         </span>
-
-
-        {/* CHEVRON */}
-
         <span
           className={`
             flex
@@ -746,12 +621,6 @@ function FAQItem({
         </span>
 
       </button>
-
-
-      {/* =================================================
-          ANSWER
-      ================================================== */}
-
       <div
         className={`
           grid

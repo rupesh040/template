@@ -206,8 +206,12 @@ export default function Testimonials() {
             mx-auto
             max-w-[850px]
             text-center
+            relative
           "
         >
+              <Image src="/leaf.png" alt="leaf" width={80} height={80} className="absolute top-0 left-0 rotate-[240deg]"/>
+                <Image src="/leaf.png" alt="leaf" width={80} height={80} className="absolute top-0 right-0"/>
+              
 
           <h2
             className="

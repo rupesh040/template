@@ -139,15 +139,7 @@ export default function Footer() {
             xl:gap-14
           "
         >
-
-          {/* =================================================
-              COLUMN 1
-          ================================================== */}
-
           <div className="min-w-0">
-
-            {/* LOGO */}
-
             <Link
               href="/"
               className="inline-block"
@@ -165,10 +157,6 @@ export default function Footer() {
                 "
               />
             </Link>
-
-
-            {/* DESCRIPTION */}
-
             <p
               className="
                 mt-2
@@ -185,10 +173,6 @@ export default function Footer() {
               offices, and commercial spaces.
               Your cleanliness is our priority.
             </p>
-
-
-            {/* SOCIAL */}
-
             <div
               className="
                 mt-5
@@ -229,12 +213,6 @@ export default function Footer() {
             </div>
 
           </div>
-
-
-          {/* =================================================
-              COLUMN 2
-          ================================================== */}
-
           <div>
 
             <FooterHeading>
@@ -254,12 +232,6 @@ export default function Footer() {
             </ul>
 
           </div>
-
-
-          {/* =================================================
-              COLUMN 3
-          ================================================== */}
-
           <div>
 
             <FooterHeading>
@@ -279,41 +251,23 @@ export default function Footer() {
             </ul>
 
           </div>
-
-
-          {/* =================================================
-              COLUMN 4
-          ================================================== */}
-
           <div className="min-w-0">
 
             <FooterHeading>
               Contact Information
             </FooterHeading>
-
-
-            {/* PHONE */}
-
             <ContactItem
               icon={<Phone size={21} />}
               title="+91 98765 43210"
               subtitle="Mon - Sat, 9:00 AM - 7:00 PM"
               href="tel:+919876543210"
             />
-
-
-            {/* EMAIL */}
-
             <ContactItem
               icon={<Mail size={21} />}
               title="info@pureshine.com"
               subtitle="We reply within 24 hours"
               href="mailto:info@pureshine.com"
             />
-
-
-            {/* ADDRESS */}
-
             <ContactItem
               icon={<MapPin size={21} />}
               title={
@@ -324,12 +278,6 @@ export default function Footer() {
                 </>
               }
             />
-
-
-            {/* =================================================
-                NEWSLETTER
-            ================================================== */}
-
             <div className="mt-7">
 
               <FooterHeading>
@@ -348,10 +296,6 @@ export default function Footer() {
                 Subscribe to our newsletter for updates,
                 tips and special offers.
               </p>
-
-
-              {/* INPUT */}
-
               <form
                 onSubmit={(event) => {
                   event.preventDefault();
@@ -412,12 +356,6 @@ export default function Footer() {
           </div>
 
         </div>
-
-
-        {/* =====================================================
-            TRUST BADGES
-        ====================================================== */}
-
         <div
           className="
             mt-10
@@ -465,12 +403,6 @@ export default function Footer() {
           </div>
 
         </div>
-
-
-        {/* =====================================================
-            BOTTOM DIVIDER
-        ====================================================== */}
-
         <div
           className="
             mt-8
@@ -479,12 +411,6 @@ export default function Footer() {
             bg-white/20
           "
         />
-
-
-        {/* =====================================================
-            BOTTOM BAR
-        ====================================================== */}
-
         <div
           className="
             flex
@@ -497,9 +423,6 @@ export default function Footer() {
             lg:justify-between
           "
         >
-
-          {/* COPYRIGHT */}
-
           <p
             className="
               text-center
@@ -512,10 +435,6 @@ export default function Footer() {
           >
             © 2026 PureShine. All Rights Reserved.
           </p>
-
-
-          {/* LEGAL */}
-
           <div
             className="
               flex
@@ -561,10 +480,6 @@ export default function Footer() {
             </Link>
 
           </div>
-
-
-          {/* PAYMENT METHODS */}
-
           <div
             className="
               flex
@@ -630,11 +545,6 @@ export default function Footer() {
   );
 }
 
-
-/* =========================================================
-   FOOTER HEADING
-========================================================= */
-
 function FooterHeading({
   children,
 }: {
@@ -671,10 +581,6 @@ function FooterHeading({
   );
 }
 
-
-/* =========================================================
-   FOOTER LINK
-========================================================= */
 
 function FooterLink({
   name,
@@ -729,10 +635,6 @@ function FooterLink({
 }
 
 
-/* =========================================================
-   CONTACT ITEM
-========================================================= */
-
 function ContactItem({
   icon,
   title,
@@ -753,9 +655,6 @@ function ContactItem({
         gap-3
       "
     >
-
-      {/* ICON */}
-
       <div
         className="
           flex
@@ -771,10 +670,6 @@ function ContactItem({
       >
         {icon}
       </div>
-
-
-      {/* TEXT */}
-
       <div
         className="
           min-w-0
@@ -839,11 +734,6 @@ function ContactItem({
     </div>
   );
 }
-
-
-/* =========================================================
-   TRUST BADGE
-========================================================= */
 
 function TrustBadge({
   icon,
@@ -915,11 +805,6 @@ function TrustBadge({
   );
 }
 
-
-/* =========================================================
-   PAYMENT BADGE
-========================================================= */
-
 function PaymentBadge({
   children,
 }: {
@@ -947,9 +832,6 @@ function PaymentBadge({
 }
 
 
-/* =========================================================
-   DECORATIVE LEAF
-========================================================= */
 
 function LeafDecoration() {
   return (

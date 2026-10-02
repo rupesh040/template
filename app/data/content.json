@@ -1,0 +1,252 @@
+{
+  "services": [
+    {
+      "id": "home-cleaning",
+      "title": "Home Cleaning",
+      "description": "A clean and healthy home for a happier you.",
+      "image": "/services/home-cleaning.png",
+      "icon": "Home",
+      "darkIcon": true,
+      "tagline": "From dusty to dazzling — every room, every corner.",
+      "longDescription": "Our home cleaning service is designed to bring a spotless, healthy environment to every room in your house. From dusting and vacuuming to wiping down surfaces and sanitising bathrooms, our trained professionals handle every detail so you can focus on what matters most. We use safe, eco-friendly products that are tough on grime but gentle on your family and pets.",
+      "features": [
+        "Full room cleaning including bedrooms, living areas and hallways",
+        "Vacuuming, sweeping and mopping all floor types",
+        "Surface dusting and sanitisation",
+        "Bathroom and toilet deep scrub",
+        "Kitchen surface and appliance wipe-down",
+        "Eco-friendly, non-toxic cleaning products",
+        "Trained and background-verified cleaning staff"
+      ],
+      "includes": [
+        "All rooms & hallways",
+        "Bathrooms & toilets",
+        "Kitchen surfaces",
+        "Windows (interior)",
+        "Skirting boards",
+        "Light switches & door handles"
+      ],
+      "process": [
+        { "step": 1, "title": "Book Online", "description": "Choose your service, select a date and time, and confirm your booking in minutes." },
+        { "step": 2, "title": "We Arrive & Inspect", "description": "Our team arrives on time, inspects your home and creates a tailored cleaning plan." },
+        { "step": 3, "title": "Deep Clean", "description": "We clean every room thoroughly using professional equipment and eco-friendly products." },
+        { "step": 4, "title": "Final Check", "description": "We do a quality walkthrough before leaving to make sure you are completely satisfied." }
+      ]
+    },
+    {
+      "id": "office-cleaning",
+      "title": "Office Cleaning",
+      "description": "Bright, clean workspaces boost productivity.",
+      "image": "/services/office-cleaning.png",
+      "icon": "Building2",
+      "darkIcon": false,
+      "tagline": "A cleaner office means a sharper team.",
+      "longDescription": "First impressions matter. Our professional office cleaning service ensures your workplace is spotless, hygienic and welcoming every single day. We work around your schedule — early morning, evenings or weekends — so your business is never disrupted. From reception areas to meeting rooms, restrooms and open-plan desks, we cover it all with precision and care.",
+      "features": [
+        "Desks, chairs and workstation sanitisation",
+        "Reception and common area cleaning",
+        "Meeting room preparation and cleaning",
+        "Kitchen and breakroom cleaning",
+        "Restroom deep cleaning and restocking",
+        "Floor vacuuming, sweeping and mopping",
+        "Waste collection and recycling management"
+      ],
+      "includes": [
+        "Open-plan office areas",
+        "Meeting & conference rooms",
+        "Reception & lobby",
+        "Restrooms",
+        "Staff kitchen & break room",
+        "Corridors & stairwells"
+      ],
+      "process": [
+        { "step": 1, "title": "Schedule a Visit", "description": "Contact us and we will arrange a free on-site assessment to understand your needs." },
+        { "step": 2, "title": "Custom Plan", "description": "We create a bespoke cleaning schedule tailored to your office size and hours." },
+        { "step": 3, "title": "Regular Cleaning", "description": "Our team arrives as scheduled and delivers consistent, high-quality results every time." },
+        { "step": 4, "title": "Ongoing Support", "description": "We stay in touch with regular check-ins and adapt our service as your needs change." }
+      ]
+    },
+    {
+      "id": "kitchen-cleaning",
+      "title": "Kitchen Cleaning",
+      "description": "Hygienic and spotless kitchens for safer living.",
+      "image": "/services/kitchen-cleaning.png",
+      "icon": "CookingPot",
+      "darkIcon": true,
+      "tagline": "Where food meets cleanliness — your kitchen, spotless.",
+      "longDescription": "The kitchen is the heart of your home, and it deserves the deepest clean. Grease build-up, stained tiles, dirty ovens and blocked sinks are no match for our specialist kitchen cleaning team. We deep-clean every surface, appliance and hidden corner to eliminate bacteria, grime and odours — leaving you with a kitchen that looks, smells and feels brand new.",
+      "features": [
+        "Oven, hob and extractor fan deep cleaning",
+        "Refrigerator interior cleaning and deodorising",
+        "Microwave and small appliance cleaning",
+        "Cabinet doors and handles wipe-down",
+        "Sink and tap descaling and polishing",
+        "Tile grout scrubbing and splash-back cleaning",
+        "Floor degreasing and sanitisation"
+      ],
+      "includes": [
+        "Oven & hob",
+        "Extractor fan & filters",
+        "Fridge & microwave",
+        "Countertops & backsplash",
+        "Sink & taps",
+        "Cabinet fronts & handles"
+      ],
+      "process": [
+        { "step": 1, "title": "Book Your Clean", "description": "Select kitchen cleaning, pick your slot, and we'll confirm within minutes." },
+        { "step": 2, "title": "Pre-Clean Assessment", "description": "Our specialist assesses grease levels and trouble areas before starting." },
+        { "step": 3, "title": "Deep Clean & Degrease", "description": "We apply professional-grade degreasers and scrub every surface to perfection." },
+        { "step": 4, "title": "Sanitise & Shine", "description": "We sanitise all work surfaces and leave your kitchen sparkling and hygienic." }
+      ]
+    },
+    {
+      "id": "bathroom-cleaning",
+      "title": "Bathroom Cleaning",
+      "description": "Deep cleaning for a fresh and germ-free bathroom.",
+      "image": "/services/bathroom-cleaning.png",
+      "icon": "Bath",
+      "darkIcon": false,
+      "tagline": "Sparkling tiles, zero germs — every time.",
+      "longDescription": "Bathrooms harbour more bacteria than any other room in the house. Our deep bathroom cleaning service eliminates 99.9% of germs using hospital-grade disinfectants and professional equipment. We scrub tiles and grout, descale taps and showerheads, clean behind the toilet, and leave every surface gleaming. Enjoy a fresh, spa-like bathroom without lifting a finger.",
+      "features": [
+        "Toilet deep scrub and disinfection inside and out",
+        "Shower, bath and tile grout scrubbing",
+        "Tap, showerhead and fixture descaling",
+        "Mirror and glass polishing",
+        "Floor cleaning and sanitisation",
+        "Vanity, sink and cabinet cleaning",
+        "Mould and mildew treatment"
+      ],
+      "includes": [
+        "Toilet (inside & outside)",
+        "Shower & bathtub",
+        "Tiles & grout",
+        "Sink & vanity",
+        "Mirrors & glass",
+        "Floor & drainage"
+      ],
+      "process": [
+        { "step": 1, "title": "Book Online", "description": "Choose your date and we will dispatch a specialist bathroom cleaner." },
+        { "step": 2, "title": "Treatment Application", "description": "We pre-treat hard water stains, soap scum and mould with specialist products." },
+        { "step": 3, "title": "Scrub & Disinfect", "description": "Every surface is scrubbed, disinfected and rinsed to hospital-grade standards." },
+        { "step": 4, "title": "Polish & Finish", "description": "We polish mirrors, taps and glass for a streak-free, spa-like finish." }
+      ]
+    },
+    {
+      "id": "carpet-sofa-cleaning",
+      "title": "Carpet & Sofa Cleaning",
+      "description": "Remove dust, stains and allergens for a fresher home.",
+      "image": "/services/carpet-cleaning.png",
+      "icon": "Sofa",
+      "darkIcon": true,
+      "tagline": "Restore the softness and freshness of your fabrics.",
+      "longDescription": "Carpets and sofas trap dust mites, allergens, pet hair and stains deep within their fibres. Our hot-water extraction and steam cleaning methods reach far beyond the surface to restore your upholstery and carpets to their original freshness. Whether it's a stubborn wine stain, pet odour, or years of accumulated dust, we have the expertise and equipment to handle it all.",
+      "features": [
+        "Hot-water extraction deep carpet cleaning",
+        "Steam cleaning for sofas and upholstered furniture",
+        "Stain and spot treatment for tough marks",
+        "Pet hair and dander removal",
+        "Odour neutralisation and deodorising",
+        "Anti-allergen treatment available",
+        "Fast drying times with professional equipment"
+      ],
+      "includes": [
+        "All carpet types",
+        "Sofas & armchairs",
+        "Dining & office chairs",
+        "Rugs & mats",
+        "Stain treatment",
+        "Odour removal"
+      ],
+      "process": [
+        { "step": 1, "title": "Free Assessment", "description": "We assess the fabric type, stain severity and cleaning requirements." },
+        { "step": 2, "title": "Pre-Treatment", "description": "Stubborn stains and high-traffic areas receive targeted pre-treatment solutions." },
+        { "step": 3, "title": "Deep Extraction", "description": "Our hot-water extraction method removes dirt, allergens and bacteria from deep within fibres." },
+        { "step": 4, "title": "Dry & Refresh", "description": "We speed-dry your carpets and sofas and apply a fresh-scent finish." }
+      ]
+    }
+  ],
+  "blogs": [
+    {
+      "id": "2",
+      "title": "Easy Ways to Keep Your Office Clean",
+      "category": "Office Cleaning",
+      "date": "September 15, 2026",
+      "shortDate": "Sep 15, 2026",
+      "day": "15",
+      "month": "SEP",
+      "author": "Admin",
+      "role": "Cleaning Expert",
+      "image": "/images/blog/blog-2.jpg",
+      "comments": 8,
+      "content": [
+        {
+          "heading": "Keep Your Workspace Organized",
+          "text": "An organized workspace makes it easier to maintain cleanliness and productivity."
+        },
+        {
+          "heading": "Clean High-Touch Surfaces",
+          "text": "Frequently clean desks, keyboards, door handles and other high-touch surfaces."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "The Benefits of Deep Cleaning Your Home",
+      "category": "Deep Cleaning",
+      "date": "September 10, 2026",
+      "shortDate": "Sep 10, 2026",
+      "day": "10",
+      "month": "SEP",
+      "author": "Admin",
+      "role": "Cleaning Expert",
+      "image": "/images/blog/blog-3.jpg",
+      "comments": 15,
+      "content": [
+        {
+          "heading": "What Is Deep Cleaning?",
+          "text": "Deep cleaning focuses on areas that are not normally covered during everyday cleaning."
+        },
+        {
+          "heading": "Improve Your Indoor Environment",
+          "text": "A detailed cleaning routine can help remove accumulated dust, dirt and unwanted particles."
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "name": "Cleaning Tips",
+      "count": "8"
+    },
+    {
+      "name": "Office Cleaning",
+      "count": "5"
+    },
+    {
+      "name": "Home Cleaning",
+      "count": "6"
+    },
+    {
+      "name": "Deep Cleaning",
+      "count": "4"
+    }
+  ],
+  "professionalCleaning": {
+    "titleLine1": "Professional Home",
+    "titleLine2": "Deep Cleaning for a",
+    "highlight": "Spotless Space",
+    "image": "/about-cleaning.png",
+    "imageAlt": "Professional home deep cleaning service",
+    "paragraphs": [
+      "Our professional home deep cleaning service removes dust, dirt, allergens and hidden grime from every corner of your home. We use safe and eco-friendly cleaning products along with modern equipment to give you a fresh, healthy and hygienic living space.",
+      "Whether it's your living room, bedroom, kitchen or bathroom, our trained cleaning experts ensure a deeper clean that goes beyond regular cleaning, so you and your family can enjoy a cleaner and happier home."
+    ],
+    "features": [
+      "Thorough cleaning of all rooms and surfaces.",
+      "Safe, eco-friendly and non-toxic cleaning products.",
+      "Trained and background-verified cleaning professionals."
+    ],
+    "footer": "A clean home is a happy home. Our deep cleaning service is designed to remove accumulated dirt, dust and bacteria from hard-to-reach areas, leaving your home fresh, healthy and comfortable. We focus on every detail, including floors, windows, furniture, kitchen surfaces, bathrooms and more, to make sure your home gets the care it truly deserves."
+  }
+}

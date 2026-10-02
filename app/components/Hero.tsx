@@ -45,7 +45,7 @@ export default function Hero() {
             bg-cover
             bg-no-repeat
 
-            bg-[position:65%_center]
+            bg-[position:5%_center]
 
             min-[480px]:bg-[position:63%_center]
 

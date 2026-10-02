@@ -3,12 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import {
-  ArrowRight,
-  Users,
-  Leaf,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight, Users, Leaf, ShieldCheck } from "lucide-react";
 
 export default function AboutSection() {
   return (
@@ -29,11 +24,6 @@ export default function AboutSection() {
         xl:py-28
       "
     >
-
-      {/* =====================================================
-          MAIN CONTAINER
-      ====================================================== */}
-
       <div
         className="
           mx-auto
@@ -63,11 +53,6 @@ export default function AboutSection() {
           2xl:px-24
         "
       >
-
-        {/* =====================================================
-            LEFT IMAGE
-        ====================================================== */}
-
         <div
           className="
             relative
@@ -78,11 +63,6 @@ export default function AboutSection() {
             xl:w-[52%]
           "
         >
-
-          {/* =================================================
-              NAVY BACKGROUND SHAPE
-          ================================================== */}
-
           <div
             className="
               absolute
@@ -99,11 +79,6 @@ export default function AboutSection() {
               lg:top-[-28px]
             "
           />
-
-
-          {/* =================================================
-              IMAGE
-          ================================================== */}
 
           <div
             className="
@@ -122,7 +97,6 @@ export default function AboutSection() {
               lg:w-[84%]
             "
           >
-
             <div
               className="
                 relative
@@ -130,7 +104,6 @@ export default function AboutSection() {
                 w-full
               "
             >
-
               <Image
                 src="/about-cleaning.png"
                 alt="Professional PureShine cleaning service"
@@ -145,15 +118,8 @@ export default function AboutSection() {
                   object-center
                 "
               />
-
             </div>
-
           </div>
-
-
-          {/* =================================================
-              GREEN DOT PATTERN
-          ================================================== */}
 
           <div
             className="
@@ -178,18 +144,11 @@ export default function AboutSection() {
           >
             <DotPattern />
           </div>
-
         </div>
-
-
-        {/* =====================================================
-            RIGHT CONTENT
-        ====================================================== */}
 
         <div
           className="
             w-full
-
             lg:w-[49%]
 
             lg:pr-4
@@ -197,13 +156,9 @@ export default function AboutSection() {
             xl:pr-6
 
             2xl:pr-8
+            p-6
           "
         >
-
-          {/* =================================================
-              SMALL HEADING
-          ================================================== */}
-
           <p
             className="
               mb-3
@@ -221,12 +176,6 @@ export default function AboutSection() {
           >
             WELCOME TO PURESHINE
           </p>
-
-
-          {/* =================================================
-              MAIN HEADING
-          ================================================== */}
-
           <h2
             className="
               max-w-[650px]
@@ -246,17 +195,8 @@ export default function AboutSection() {
             "
           >
             Professional
-
-            <span className="block text-[#12a83a]">
-              Cleaning Service
-            </span>
+            <span className="block text-[#12a83a]">Cleaning Service</span>
           </h2>
-
-
-          {/* =================================================
-              DESCRIPTION
-          ================================================== */}
-
           <p
             className="
               mt-5
@@ -273,18 +213,11 @@ export default function AboutSection() {
               xl:text-[16px]
             "
           >
-            At PureShine, we believe a clean space creates a healthier,
-            happier and more productive life. We provide reliable,
-            high-quality cleaning services for homes, offices, and
-            commercial spaces with trained professionals and
-            eco-friendly products.
+            At PureShine, we believe a clean space creates a healthier, happier
+            and more productive life. We provide reliable, high-quality cleaning
+            services for homes, offices, and commercial spaces with trained
+            professionals and eco-friendly products.
           </p>
-
-
-          {/* =================================================
-              FEATURES
-          ================================================== */}
-
           <div
             className="
               mt-7
@@ -300,7 +233,6 @@ export default function AboutSection() {
               xl:gap-6
             "
           >
-
             <Feature
               icon={<Users />}
               title={
@@ -333,16 +265,9 @@ export default function AboutSection() {
                 </>
               }
             />
-
           </div>
 
-
-          {/* =================================================
-              CONTACT BUTTON
-          ================================================== */}
-
           <div className="mt-8">
-
             <Link
               href="/contact"
               className="
@@ -371,10 +296,7 @@ export default function AboutSection() {
                 sm:text-[15px]
               "
             >
-
-              <span>
-                CONTACT NOW
-              </span>
+              <span>CONTACT NOW</span>
 
               <span
                 className="
@@ -397,23 +319,13 @@ export default function AboutSection() {
               >
                 <ArrowRight size={20} />
               </span>
-
             </Link>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
   );
 }
-
-
-/* =========================================================
-   FEATURE
-========================================================= */
 
 function Feature({
   icon,
@@ -431,7 +343,6 @@ function Feature({
         min-w-0
       "
     >
-
       {/* ICON */}
 
       <div
@@ -455,10 +366,6 @@ function Feature({
       >
         {icon}
       </div>
-
-
-      {/* TEXT */}
-
       <div
         className="
           text-[11px]
@@ -475,16 +382,9 @@ function Feature({
       >
         {title}
       </div>
-
     </div>
   );
 }
-
-
-/* =========================================================
-   DOT PATTERN
-========================================================= */
-
 function DotPattern() {
   return (
     <div

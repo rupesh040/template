@@ -393,6 +393,7 @@ function ProgressCircle({
 
         lg:h-[88px]
         lg:w-[88px]
+        
       "
     >
 

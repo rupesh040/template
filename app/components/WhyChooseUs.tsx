@@ -13,11 +13,6 @@ import {
   Target,
 } from "lucide-react";
 
-
-/* =========================================================
-   BENEFITS
-========================================================= */
-
 const benefits = [
   {
     icon: Users,
@@ -40,11 +35,6 @@ const benefits = [
     description: "High-quality cleaning at competitive rates.",
   },
 ];
-
-
-/* =========================================================
-   FLOATING HIGHLIGHTS
-========================================================= */
 
 const highlights = [
   {
@@ -79,13 +69,6 @@ export default function WhyChooseUs() {
         lg:py-24
       "
     >
-
-      {/* =====================================================
-          BACKGROUND DECORATIONS
-      ====================================================== */}
-
-      {/* Large top-left circle */}
-
       <div
         className="
           pointer-events-none
@@ -104,10 +87,6 @@ export default function WhyChooseUs() {
           lg:w-[270px]
         "
       />
-
-
-      {/* Small circle */}
-
       <div
         className="
           pointer-events-none
@@ -123,10 +102,6 @@ export default function WhyChooseUs() {
           sm:w-[75px]
         "
       />
-
-
-      {/* Center decorative circle */}
-
       <div
         className="
           pointer-events-none
@@ -142,11 +117,6 @@ export default function WhyChooseUs() {
           lg:block
         "
       />
-
-
-      {/* =====================================================
-          MAIN CONTAINER
-      ====================================================== */}
 
       <div
         className="
@@ -174,12 +144,6 @@ export default function WhyChooseUs() {
           xl:px-16
         "
       >
-
-
-        {/* ===================================================
-            LEFT CONTENT
-        ==================================================== */}
-
         <div
           className="
             w-full
@@ -187,9 +151,6 @@ export default function WhyChooseUs() {
             lg:w-[51%]
           "
         >
-
-          {/* Small heading */}
-
           <p
             className="
               text-[11px]
@@ -206,10 +167,6 @@ export default function WhyChooseUs() {
           >
             WHY CHOOSE US
           </p>
-
-
-          {/* Main heading */}
-
           <h2
             className="
               mt-3
@@ -235,10 +192,6 @@ export default function WhyChooseUs() {
               A Healthier Tomorrow
             </span>
           </h2>
-
-
-          {/* Description */}
-
           <p
             className="
               mt-5
@@ -258,11 +211,6 @@ export default function WhyChooseUs() {
             healthier and more comfortable. Here's why our clients
             trust us.
           </p>
-
-
-          {/* =================================================
-              BENEFITS
-          ================================================== */}
 
           <div
             className="
@@ -288,11 +236,6 @@ export default function WhyChooseUs() {
 
           </div>
 
-
-          {/* =================================================
-              MISSION BOX
-          ================================================== */}
-
           <div
             className="
               mt-8
@@ -310,9 +253,6 @@ export default function WhyChooseUs() {
               sm:py-6
             "
           >
-
-            {/* Target */}
-
             <div
               className="
                 flex
@@ -333,10 +273,6 @@ export default function WhyChooseUs() {
                 className="sm:h-12 sm:w-12"
               />
             </div>
-
-
-            {/* Divider */}
-
             <div
               className="
                 h-[48px]
@@ -347,10 +283,6 @@ export default function WhyChooseUs() {
                 sm:h-[58px]
               "
             />
-
-
-            {/* Mission text */}
-
             <p
               className="
                 text-[13px]
@@ -372,12 +304,6 @@ export default function WhyChooseUs() {
           </div>
 
         </div>
-
-
-        {/* ===================================================
-            RIGHT IMAGE AREA
-        ==================================================== */}
-
         <div
           className="
             relative
@@ -386,10 +312,6 @@ export default function WhyChooseUs() {
             lg:w-[49%]
           "
         >
-
-          {/* =================================================
-              IMAGE CONTAINER
-          ================================================== */}
 
           <div
             className="
@@ -415,31 +337,15 @@ export default function WhyChooseUs() {
             "
           >
 
-            {/* IMAGE */}
-
-            <Image
+           <Image
               src="/why-chooseUs.png"
               alt="PureShine professional cleaning service"
               fill
               priority
-              sizes="
-                (max-width: 640px) 100vw,
-                (max-width: 1024px) 90vw,
-                50vw
-              "
-              className="
-                object-cover
-                object-center
-
-                sm:object-[55%_center]
-
-                lg:object-right
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 50vw"
+              className="object-cover object-center sm:object-[55%_center] lg:object-right
               "
             />
-
-
-            {/* Soft image overlay */}
-
             <div
               className="
                 pointer-events-none
@@ -453,13 +359,6 @@ export default function WhyChooseUs() {
             />
 
           </div>
-
-
-          {/* =================================================
-              FLOATING CARDS
-              ABOVE IMAGE
-          ================================================== */}
-
           <div
             className="
               absolute
@@ -504,12 +403,6 @@ export default function WhyChooseUs() {
             ))}
 
           </div>
-
-
-          {/* =================================================
-              BOTTOM CTA
-          ================================================== */}
-
           <div
             className="
               absolute
@@ -568,12 +461,6 @@ export default function WhyChooseUs() {
             />
 
           </div>
-
-
-          {/* =================================================
-              LEFT DOT PATTERN
-          ================================================== */}
-
           <div
             className="
               pointer-events-none
@@ -591,12 +478,6 @@ export default function WhyChooseUs() {
           >
             <DotPattern />
           </div>
-
-
-          {/* =================================================
-              LEFT CURVE DECORATION
-          ================================================== */}
-
           <div
             className="
               pointer-events-none
@@ -635,12 +516,6 @@ export default function WhyChooseUs() {
     </section>
   );
 }
-
-
-/* =========================================================
-   BENEFIT ITEM
-========================================================= */
-
 function BenefitItem({
   icon: Icon,
   title,
@@ -658,9 +533,6 @@ function BenefitItem({
         gap-3
       "
     >
-
-      {/* Icon */}
-
       <div
         className="
           flex
@@ -682,10 +554,6 @@ function BenefitItem({
           strokeWidth={1.8}
         />
       </div>
-
-
-      {/* Text */}
-
       <div className="pt-1">
 
         <h3
@@ -720,12 +588,6 @@ function BenefitItem({
     </div>
   );
 }
-
-
-/* =========================================================
-   HIGHLIGHT CARD
-========================================================= */
-
 function HighlightCard({
   icon: Icon,
   title,
@@ -823,12 +685,6 @@ function HighlightCard({
     </div>
   );
 }
-
-
-/* =========================================================
-   DOT PATTERN
-========================================================= */
-
 function DotPattern() {
   return (
     <div
