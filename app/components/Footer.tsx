@@ -38,32 +38,21 @@ const lucideIconMap: Record<string, typeof Leaf> = {
   Clock3,
 };
 
-const { footer, site } = content;
+const footer = content.footer;
 
 const quickLinks = footer.quickLinks.map((link) => [link.name, link.href]);
-
-const services =
-  footer.serviceLinks?.length > 0
-    ? footer.serviceLinks.map((link) => [link.name, link.href])
-    : content.services.map((service) => [
-        service.title,
-        `/serviceDetail/${service.id}`,
-      ]);
-
+const serviceLinks = footer.serviceLinks.map((link) => [link.name, link.href]);
 const socialLinks = footer.socialLinks.map((social) => ({
   ...social,
   icon: faIconMap[social.label] ?? FaFacebookF,
 }));
-
 const trustBadges = footer.trustBadges.map((badge) => ({
   ...badge,
   icon: lucideIconMap[badge.icon] ?? Leaf,
 }));
-
 const paymentMethods = footer.paymentMethods.map((payment) =>
   typeof payment === "string" ? payment : payment.label,
 );
-
 const legalLinks = footer.legalLinks;
 
 export default function Footer() {
@@ -76,10 +65,10 @@ export default function Footer() {
       <div className="relative z-10 mx-auto max-w-[1500px] px-5 pt-8 pb-4 sm:px-8 sm:pt-10 sm:pb-4 lg:px-10 xl:px-14">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.1fr_0.75fr_0.8fr_1.05fr_1.3fr] lg:gap-6 xl:gap-8">
           <div>
-            <Link href="/" className="inline-block">
+            <Link href={footer.logoHref} className="inline-block">
               <Image
-                src="/footer-logo.png"
-                alt="PureShine"
+                src={footer.logo}
+                alt={footer.logoAlt}
                 width={200}
                 height={115}
                 priority
@@ -106,7 +95,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <FooterHeading>Quick Links</FooterHeading>
+            <FooterHeading>{footer.quickLinksTitle}</FooterHeading>
 
             <ul className="mt-4 space-y-2.5">
               {quickLinks.map(([name, href]) => (
@@ -116,33 +105,36 @@ export default function Footer() {
           </div>
 
           <div>
-            <FooterHeading>Our Services</FooterHeading>
+            <FooterHeading>{footer.servicesTitle}</FooterHeading>
 
             <ul className="mt-4 space-y-2.5">
-              {services.map(([name, href]) => (
+              {serviceLinks.map(([name, href]) => (
                 <FooterLink key={name} name={name} href={href} />
               ))}
             </ul>
           </div>
 
           <div>
-            <FooterHeading>Contact Information</FooterHeading>
+            <FooterHeading>{footer.contactTitle}</FooterHeading>
 
             <ContactItem
               icon={<Phone size={17} />}
-              title={site.phone}
-              subtitle={site.phoneHours}
-              href={site.phoneHref}
+              title={footer.contact.phone}
+              subtitle={footer.contact.phoneHours}
+              href={footer.contact.phoneHref}
             />
 
             <ContactItem
               icon={<Mail size={17} />}
-              title={site.email}
-              subtitle={site.emailNote}
-              href={site.emailHref}
+              title={footer.contact.email}
+              subtitle={footer.contact.emailNote}
+              href={footer.contact.emailHref}
             />
 
-            <ContactItem icon={<MapPin size={17} />} title={site.address} />
+            <ContactItem
+              icon={<MapPin size={17} />}
+              title={footer.contact.address}
+            />
           </div>
 
           <div className="sm:col-span-2 lg:col-span-1">
@@ -164,7 +156,7 @@ export default function Footer() {
 
               <button
                 type="submit"
-                aria-label="Subscribe"
+                aria-label={footer.newsletter.submitLabel}
                 className="flex w-10 shrink-0 items-center justify-center bg-[#12b63a] transition hover:bg-[#0c9c30]"
               >
                 <ArrowRight size={18} strokeWidth={2.5} />
@@ -189,7 +181,7 @@ export default function Footer() {
 
         <div className="flex flex-col gap-4 pt-4 pb-1 lg:flex-row lg:items-center lg:justify-between">
           <p className="text-center text-[12px] text-white/60 lg:text-left lg:text-[13px]">
-            {site.copyright}
+            {footer.copyright}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[12px] text-white/60 lg:text-[13px]">
@@ -218,6 +210,7 @@ export default function Footer() {
     </footer>
   );
 }
+
 
 function FooterHeading({ children }: { children: React.ReactNode }) {
   return (

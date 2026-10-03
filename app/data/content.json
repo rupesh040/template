@@ -863,7 +863,23 @@
     "zoomOut": "−"
   },
   "footer": {
+    "logo": "/footer-logo.webp",
+    "logoAlt": "PureShine",
+    "logoHref": "/",
     "description": "We provide professional, reliable, and eco-friendly cleaning services for homes, offices, and commercial spaces. Your cleanliness is our priority.",
+    "quickLinksTitle": "Quick Links",
+    "servicesTitle": "Our Services",
+    "contactTitle": "Contact Information",
+    "copyright": "© 2026 PureShine. All Rights Reserved.",
+    "contact": {
+      "phone": "+91 98765 43210",
+      "phoneHref": "tel:+919876543210",
+      "phoneHours": "Mon – Sat, 9:00 AM – 7:00 PM",
+      "email": "info@pureshine.com",
+      "emailHref": "mailto:info@pureshine.com",
+      "emailNote": "We reply within 24 hours",
+      "address": "123, Green Park, New Delhi, Delhi – 110016, India"
+    },
     "newsletter": {
       "title": "Newsletter",
       "description": "Subscribe to our newsletter for updates, tips and special offers.",
