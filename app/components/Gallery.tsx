@@ -6,7 +6,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Image as ImageIcon,
-  PlaySquare,
+  Play,
 } from "lucide-react";
 import content from "../data/content.json";
 
@@ -141,13 +141,13 @@ export default function Gallery() {
             <button
               type="button"
               onClick={() => changeType("video")}
-              className={`flex min-w-[120px] items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-semibold transition sm:min-w-[130px] ${
+              className={`flex min-w-[120px] cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-semibold transition sm:min-w-[130px] ${
                 activeType === "video"
                   ? "bg-[#07534f] text-white shadow-sm"
                   : "text-[#092f4b]"
               }`}
             >
-              <PlaySquare size={17} />
+              <Play size={17} />
               Videos
             </button>
           </div>
@@ -196,9 +196,9 @@ export default function Gallery() {
                 />
 
                 {item.type === "video" && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/10">
+                  <div className="absolute cursor-pointer inset-0 flex items-center justify-center bg-black/10">
                     <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-[#0b9e37] shadow-lg">
-                      <PlaySquare size={22} fill="currentColor" />
+                      <Play size={22} fill="currentColor" />
                     </span>
                   </div>
                 )}

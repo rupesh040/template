@@ -31,8 +31,6 @@ export default async function BlogDetailPage({
   const blog = content.blogs.find((b) => b.id === id);
 
   if (!blog) notFound();
-
-  // Recent posts = all other blogs (excluding current) from content.json
   const recentPosts = content.blogs.filter((b) => b.id !== id);
 
   return (

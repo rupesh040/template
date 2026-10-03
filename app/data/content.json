@@ -4,7 +4,7 @@
     "tagline": "A Cleaner Space, A Happier You",
     "description": "We provide reliable, affordable, and eco-friendly cleaning services for homes, offices, and commercial spaces.",
     "logo": "/logo.png",
-    "footerLogo": "/footer-logo.png",
+    "footerLogo": "/footer-logo.webp",
     "copyright": "© 2026 PureShine. All Rights Reserved.",
     "email": "info@pureshine.com",
     "emailHref": "mailto:info@pureshine.com",
@@ -82,7 +82,7 @@
     "headingLine1": "A Cleaner Space",
     "headingLine2": "A Happier You",
     "description": "We provide reliable, affordable, and eco-friendly cleaning services for homes, offices, and commercial spaces.",
-    "backgroundImage": "/heroBanner.png",
+    "backgroundImage": "/heroBanner.webp",
     "primaryButton": {
       "label": "Book a Cleaning",
       "href": "/contact"
@@ -840,7 +840,27 @@
           "phoneHref": "tel:+61383766284"
         }
       }
+    },
+    "map": {
+      "title": "PureShine Location",
+      "src": "https://www.google.com/maps?q=121+King+Street,+Melbourne,+3000,+Australia&output=embed",
+      "locationTitle": "121 King Street",
+      "locationSubtitle": "Melbourne, 3000, Australia",
+      "viewLargerMapText": "View larger map",
+      "viewLargerMapHref": "https://www.google.com/maps?q=121+King+Street,+Melbourne,+3000,+Australia",
+      "zoomIn": "+",
+      "zoomOut": "−"
     }
+  },
+  "contactMap": {
+    "title": "PureShine Location",
+    "src": "https://www.google.com/maps?q=121+King+Street,+Melbourne,+3000,+Australia&output=embed",
+    "locationTitle": "121 King Street",
+    "locationSubtitle": "Melbourne, 3000, Australia",
+    "viewLargerMapText": "View larger map",
+    "viewLargerMapHref": "https://www.google.com/maps?q=121+King+Street,+Melbourne,+3000,+Australia",
+    "zoomIn": "+",
+    "zoomOut": "−"
   },
   "footer": {
     "description": "We provide professional, reliable, and eco-friendly cleaning services for homes, offices, and commercial spaces. Your cleanliness is our priority.",
@@ -899,7 +919,7 @@
       },
       {
         "name": "Sofa Cleaning",
-        "href": "/serviceDetail/sofa-cleaning"
+        "href": "/serviceDetail/carpet-sofa-cleaning"
       }
     ],
     "socialLinks": [

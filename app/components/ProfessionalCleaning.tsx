@@ -2,12 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Check, ArrowRight } from "lucide-react";
 import content from "../data/content.json";
-
-// Default data comes from content.json → "professionalCleaning"
 const defaultData = content.professionalCleaning;
-
 interface ProfessionalCleaningProps {
-  /** Pass the service id (e.g. "home-cleaning") to show that service's data */
   serviceId?: string;
 }
 
