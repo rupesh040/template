@@ -574,13 +574,17 @@
     "heading": "Frequently Asked",
     "headingHighlight": "Questions",
     "description": "Find quick answers to common questions about our cleaning services. If you need more information, feel free to contact our team.",
+    "leafImage": "/leaf.png",
+    "leafImageAlt": "leaf",
+    "defaultLimit": 8,
     "contactCard": {
       "icon": "Headphones",
       "title": "Still have questions?",
       "description": "We're here to help! Contact our support team anytime.",
       "button": {
         "label": "Contact Us",
-        "href": "/contact"
+        "href": "/contact",
+        "arrow": "→"
       }
     }
   },

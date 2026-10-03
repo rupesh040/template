@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import content from "../data/content.json";
 
@@ -22,20 +22,27 @@ export default function Testimonials() {
     setCanScrollRight(slider.scrollLeft < maxScroll - 5);
   };
 
+  useEffect(() => {
+    checkScroll();
+    window.addEventListener("resize", checkScroll);
+    return () => window.removeEventListener("resize", checkScroll);
+  }, []);
+
   const scrollTestimonials = (direction: "left" | "right") => {
     const slider = sliderRef.current;
     if (!slider) return;
 
     const card = slider.querySelector<HTMLElement>("[data-testimonial-card]");
-    const cardWidth = card?.offsetWidth || 400;
-    const gap = 24;
+    const cardWidth = card?.offsetWidth || 380;
+    const gap = typeof window !== "undefined" && window.innerWidth >= 640 ? 24 : 20;
+    const scrollAmount = cardWidth + gap;
 
     slider.scrollBy({
-      left: direction === "right" ? cardWidth + gap : -(cardWidth + gap),
+      left: direction === "right" ? scrollAmount : -scrollAmount,
       behavior: "smooth",
     });
 
-    setTimeout(checkScroll, 450);
+    setTimeout(checkScroll, 400);
   };
 
   return (
@@ -49,15 +56,15 @@ export default function Testimonials() {
           <Image
             src="/leaf.png"
             alt="leaf"
-            width={80}
-            height={80}
+            width={60}
+            height={60}
             className="absolute left-0 top-0 rotate-[240deg]"
           />
           <Image
             src="/leaf.png"
             alt="leaf"
-            width={80}
-            height={80}
+            width={60}
+            height={60}
             className="absolute right-0 top-0"
           />
 
@@ -80,7 +87,7 @@ export default function Testimonials() {
             onClick={() => scrollTestimonials("left")}
             disabled={!canScrollLeft}
             aria-label="Previous testimonials"
-            className="absolute left-0 top-1/2 z-30 flex h-[48px] w-[48px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#092f4b] shadow-[0_6px_25px_rgba(8,45,76,0.10)] transition hover:bg-[#10aa3a] hover:text-white disabled:pointer-events-none disabled:opacity-30 sm:h-[54px] sm:w-[54px]"
+            className="absolute -left-2 top-1/2 z-30 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#092f4b] shadow-[0_6px_25px_rgba(8,45,76,0.10)] transition hover:bg-[#10aa3a] hover:text-white disabled:pointer-events-none disabled:opacity-30 sm:-left-5 sm:h-[54px] sm:w-[54px] lg:-left-6"
           >
             <ChevronLeft size={27} strokeWidth={1.8} />
           </button>
@@ -88,9 +95,9 @@ export default function Testimonials() {
           <div
             ref={sliderRef}
             onScroll={checkScroll}
-            className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-6 lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0"
+            className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-5 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-6"
           >
-            {testimonials.slice(0, 3).map((testimonial) => (
+            {testimonials.map((testimonial) => (
               <TestimonialCard key={testimonial.name} {...testimonial} />
             ))}
           </div>
@@ -100,14 +107,10 @@ export default function Testimonials() {
             onClick={() => scrollTestimonials("right")}
             disabled={!canScrollRight}
             aria-label="Next testimonials"
-            className="absolute right-0 top-1/2 z-30 flex h-[48px] w-[48px] translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#092f4b] shadow-[0_6px_25px_rgba(8,45,76,0.10)] transition hover:bg-[#10aa3a] hover:text-white disabled:pointer-events-none disabled:opacity-30 sm:h-[54px] sm:w-[54px]"
+            className="absolute -right-2 top-1/2 z-30 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#092f4b] shadow-[0_6px_25px_rgba(8,45,76,0.10)] transition hover:bg-[#10aa3a] hover:text-white disabled:pointer-events-none disabled:opacity-30 sm:-right-5 sm:h-[54px] sm:w-[54px] lg:-right-6"
           >
             <ChevronRight size={27} strokeWidth={1.8} />
           </button>
-        </div>
-
-        <div className="mt-6 lg:hidden">
-          <div ref={undefined} className="flex gap-5 overflow-hidden" />
         </div>
       </div>
 
@@ -123,13 +126,14 @@ interface TestimonialProps {
   role: string;
   image: string;
   review: string;
+  rating?: number;
 }
 
-function TestimonialCard({ name, role, image, review }: TestimonialProps) {
+function TestimonialCard({ name, role, image, review, rating = 5 }: TestimonialProps) {
   return (
     <article
       data-testimonial-card
-      className="flex min-w-[calc(100vw-40px)] max-w-[calc(100vw-40px)] flex-shrink-0 snap-center flex-col sm:min-w-[430px] sm:max-w-[430px] lg:min-w-0 lg:max-w-none"
+      className="flex min-w-[calc(100vw-50px)] max-w-[calc(100vw-50px)] shrink-0 snap-start flex-col sm:min-w-[360px] sm:max-w-[360px] md:min-w-[calc((100%-24px)/2)] md:max-w-[calc((100%-24px)/2)] lg:min-w-[calc((100%-48px)/3)] lg:max-w-[calc((100%-48px)/3)]"
     >
       <div className="relative flex min-h-[275px] flex-col rounded-[14px] bg-white px-7 py-6 shadow-[0_5px_25px_rgba(8,45,76,0.07)] sm:min-h-[280px] sm:px-8">
         <div className="text-[48px] font-black leading-[0.7] text-[#10b33c]">

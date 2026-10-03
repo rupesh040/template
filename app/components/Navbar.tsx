@@ -361,8 +361,6 @@ export default function Navbar() {
           />
         </div>
       </div>
-
-      {/* Mobile/Tablet Bar - shown on screens up to 1024px (<= 1024px) */}
       <div
         className="
           relative flex h-[67px] items-center justify-between

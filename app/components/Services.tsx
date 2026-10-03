@@ -101,8 +101,8 @@ export default function Services({
           <Image
             src={leafImage}
             alt="leaf"
-            width={80}
-            height={80}
+            width={60}
+            height={60}
             className="pointer-events-none absolute left-0 top-0 rotate-[240deg]"
           />
 
@@ -122,8 +122,8 @@ export default function Services({
           <Image
             src={leafImage}
             alt="leaf"
-            width={80}
-            height={80}
+            width={60}
+            height={60}
             className="pointer-events-none absolute right-0 top-0"
           />
         </div>

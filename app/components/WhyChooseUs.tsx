@@ -102,7 +102,7 @@ export default function WhyChooseUs() {
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#062d4c]/10 via-transparent to-transparent" />
           </div>
-          <div className="absolute right-2.5 bottom-[18%] z-30 flex w-[138px] flex-col gap-1.5 min-[380px]:right-3 min-[380px]:w-[152px] min-[440px]:w-[170px] sm:right-4 sm:top-[10%] sm:w-[220px] sm:gap-3 md:right-5 md:w-[235px] lg:-right-4 lg:top-[12%] lg:w-[230px] lg:gap-4 xl:-right-5 xl:w-[245px]">
+          <div className="absolute right-2.5 bottom-[18%] z-30 flex w-[124px] flex-col gap-1.5 min-[380px]:right-3 min-[380px]:w-[138px] min-[440px]:w-[155px] sm:right-4 sm:top-[10%] sm:w-[195px] sm:gap-2.5 md:right-5 md:w-[208px] lg:-right-3 lg:top-[12%] lg:w-[205px] lg:gap-3 xl:-right-4 xl:w-[218px]">
             {highlightsWithIcons.map((item) => (
               <HighlightCard
                 key={item.title}
@@ -168,21 +168,21 @@ function HighlightCard({
   description: string;
 }) {
   return (
-    <div className="flex min-h-[48px] w-full items-center gap-1.5 rounded-[10px] border border-white/80 bg-white/95 px-2 py-1.5 shadow-[0_4px_16px_rgba(8,45,76,0.12)] backdrop-blur-sm min-[380px]:min-h-[54px] min-[380px]:gap-2 min-[380px]:rounded-[12px] min-[380px]:px-2.5 min-[380px]:py-2 sm:min-h-[94px] sm:gap-3 sm:rounded-[17px] sm:bg-white sm:px-4 sm:py-3 sm:shadow-[0_10px_35px_rgba(8,45,76,0.16)]">
+    <div className="flex min-h-[42px] w-full items-center gap-1.5 rounded-[8px] border border-white/80 bg-white/95 px-1.5 py-1 shadow-[0_4px_16px_rgba(8,45,76,0.12)] backdrop-blur-sm min-[380px]:min-h-[46px] min-[380px]:gap-2 min-[380px]:rounded-[10px] min-[380px]:px-2 min-[380px]:py-1.5 sm:min-h-[72px] sm:gap-2.5 sm:rounded-[14px] sm:bg-white sm:px-3 sm:py-2.5 sm:shadow-[0_8px_28px_rgba(8,45,76,0.14)]">
       {/* Icon Circle */}
-      <div className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full bg-[#e3f9e6] text-[#10a83a] min-[380px]:h-[30px] min-[380px]:w-[30px] sm:h-[48px] sm:w-[48px]">
+      <div className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-[#e3f9e6] text-[#10a83a] min-[380px]:h-[26px] min-[380px]:w-[26px] sm:h-[38px] sm:w-[38px]">
         <Icon
-          className="h-3 w-3 min-[380px]:h-3.5 min-[380px]:w-3.5 sm:h-6 sm:w-6"
+          className="h-2.5 w-2.5 min-[380px]:h-3 min-[380px]:w-3 sm:h-[18px] sm:w-[18px]"
           strokeWidth={1.8}
         />
       </div>
 
       {/* Text */}
       <div className="min-w-0">
-        <h3 className="truncate text-[8.5px] font-bold leading-tight text-[#102f49] min-[380px]:text-[9.5px] sm:text-[12px] sm:leading-5">
+        <h3 className="truncate text-[7.5px] font-bold leading-tight text-[#102f49] min-[380px]:text-[8.5px] sm:text-[11px] sm:leading-tight">
           {title}
         </h3>
-        <p className="truncate text-[7px] leading-tight text-[#68798a] min-[380px]:text-[8px] sm:text-[10px] sm:leading-4">
+        <p className="truncate text-[6.5px] leading-tight text-[#68798a] min-[380px]:text-[7.5px] sm:text-[9.5px] sm:leading-tight">
           {description}
         </p>
       </div>

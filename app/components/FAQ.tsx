@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -40,24 +41,18 @@ const iconMap: Record<string, LucideIcon> = {
   FileCheck,
 };
 
-const faqSection = content.faqSection;
 const {
-  badge = "FAQ",
-  heading = "Frequently Asked",
-  headingHighlight = "Questions",
-  description = "Find quick answers to common questions about our cleaning services. If you need more information, feel free to contact our team.",
-  contactCard = {
-    icon: "Headphones",
-    title: "Still have questions?",
-    description: "We're here to help! Contact our support team anytime.",
-    button: {
-      label: "Contact Us",
-      href: "/contact",
-    },
-  },
-} = faqSection ?? {};
+  badge,
+  heading,
+  headingHighlight,
+  description,
+  leafImage,
+  leafImageAlt,
+  defaultLimit,
+  contactCard,
+} = content.faqSection;
 
-const rawFaqs = content.faqs ?? [];
+const rawFaqs = content.faqs;
 
 const allFaqs = rawFaqs.map((f) => ({
   ...f,
@@ -87,7 +82,7 @@ export default function FAQ({
     showContactCard !== undefined ? showContactCard : !isFaqPage;
   const shouldShowAll = showAll !== undefined ? showAll : isFaqPage;
   const effectiveLimit =
-    limit !== undefined ? limit : shouldShowAll ? undefined : 8;
+    limit !== undefined ? limit : shouldShowAll ? undefined : defaultLimit;
 
   const displayedFaqs = effectiveLimit
     ? allFaqs.slice(0, effectiveLimit)
@@ -100,7 +95,7 @@ export default function FAQ({
   const leftFaqs = displayedFaqs.filter((_, index) => index % 2 === 0);
   const rightFaqs = displayedFaqs.filter((_, index) => index % 2 !== 0);
 
-  const ContactCardIcon = iconMap[contactCard?.icon ?? "Headphones"] ?? Headphones;
+  const ContactCardIcon = iconMap[contactCard.icon] ?? Headphones;
 
   return (
     <section className="relative overflow-hidden bg-white py-12">
@@ -110,7 +105,22 @@ export default function FAQ({
       <div className="pointer-events-none absolute -bottom-[100px] -right-[60px] h-[200px] w-[200px] rounded-full bg-[#f5faf8]" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-12">
-        <div className="mx-auto max-w-[950px] text-center">
+        <div className="relative mx-auto max-w-[950px] text-center">
+          <Image
+            src={leafImage}
+            alt={leafImageAlt}
+            width={60}
+            height={60}
+            className="pointer-events-none absolute left-0 top-0 rotate-[240deg]"
+          />
+            <Image
+            src={leafImage}
+            alt="leaf"
+            width={60}
+            height={60}
+            className="pointer-events-none absolute right-0 top-0"
+          />
+
           <div className="flex items-center justify-center gap-4 sm:gap-5">
             <span className="hidden h-[2px] w-[55px] bg-[#13aa3b] sm:block" />
             <span className="text-[13px] font-bold tracking-[3px] text-[#10a83a] sm:text-[14px] sm:tracking-[4px]">
@@ -178,22 +188,21 @@ export default function FAQ({
 
               <div>
                 <h3 className="text-[16px] font-bold text-[#092f4b] sm:text-[18px]">
-                  {contactCard?.title ?? "Still have questions?"}
+                  {contactCard.title}
                 </h3>
                 <p className="mt-1 text-[12px] leading-5 text-[#607689] sm:text-[13px]">
-                  {contactCard?.description ??
-                    "We're here to help! Contact our support team anytime."}
+                  {contactCard.description}
                 </p>
               </div>
             </div>
 
             <Link
-              href={contactCard?.button?.href ?? "/contact"}
+              href={contactCard.button.href}
               className="group flex h-[50px] shrink-0 items-center justify-center gap-5 rounded-full bg-[#10ad3b] px-8 text-[14px] font-bold text-white transition hover:bg-[#07972f] sm:min-w-[185px]"
             >
-              <span>{contactCard?.button?.label ?? "Contact Us"}</span>
+              <span>{contactCard.button.label}</span>
               <span className="text-[22px] leading-none transition-transform duration-300 group-hover:translate-x-1">
-                →
+                {contactCard.button.arrow}
               </span>
             </Link>
           </div>
