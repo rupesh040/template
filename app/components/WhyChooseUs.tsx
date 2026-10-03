@@ -23,6 +23,7 @@ const iconMap: Record<string, LucideIcon> = {
   Sparkles,
   Home,
   Clock3,
+  Target,
 };
 
 const {
@@ -35,7 +36,12 @@ const {
   mission,
   benefits,
   highlights,
+  banner,
 } = content.whyChooseUs;
+
+const missionText = typeof mission === "string" ? mission : mission.text;
+const MissionIcon =
+  iconMap[typeof mission === "object" ? mission.icon : "Target"] ?? Target;
 
 const benefitsWithIcons = benefits.map((b) => ({
   ...b,
@@ -82,11 +88,11 @@ export default function WhyChooseUs() {
 
           <div className="mt-8 flex items-center gap-3 rounded-[18px] bg-[#ddf8d5] px-4 py-5 sm:mt-9 sm:gap-4 sm:px-7 sm:py-6">
             <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center text-[#062d4c] sm:h-[62px] sm:w-[62px]">
-              <Target size={44} strokeWidth={1.6} className="sm:h-12 sm:w-12" />
+              <MissionIcon size={44} strokeWidth={1.6} className="sm:h-12 sm:w-12" />
             </div>
             <div className="h-[48px] w-[2px] shrink-0 bg-[#8edc81] sm:h-[58px]" />
             <p className="text-[13px] font-semibold leading-5 text-[#092f4b] sm:text-[16px] sm:leading-7 lg:text-[17px]">
-              {mission}
+              {missionText}
             </p>
           </div>
         </div>
@@ -114,9 +120,9 @@ export default function WhyChooseUs() {
           </div>
           <div className="absolute bottom-0 right-0 z-40 flex h-[75px] w-[175px] items-center justify-center rounded-tl-[38px] bg-[#062d4c] px-4 sm:h-[88px] sm:w-[205px] sm:rounded-tl-[45px] lg:h-[100px] lg:w-[235px] xl:h-[108px] xl:w-[250px]">
             <p className="text-[12px] font-semibold leading-5 text-white sm:text-[14px] lg:text-[15px]">
-              Let&apos;s Make
+              {banner.line1}
               <br />
-              Life Cleaner
+              {banner.line2}
             </p>
             <span className="ml-2 h-[2px] w-[25px] bg-[#18bd3e] sm:ml-3 sm:w-[32px]" />
           </div>

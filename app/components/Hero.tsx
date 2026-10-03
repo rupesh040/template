@@ -25,23 +25,16 @@ const iconMap: Record<string, LucideIcon> = {
   Shield,
 };
 
-const hero = content.hero ?? {};
 const {
-  badge = "PROFESSIONAL CLEANING SERVICES",
-  headingLine1 = "A Cleaner Space",
-  headingLine2 = "A Happier You",
-  description = "We provide reliable, affordable, and eco-friendly cleaning services for homes, offices, and commercial spaces.",
-  backgroundImage = "/heroBanner.png",
-  primaryButton = {
-    label: "Book a Cleaning",
-    href: "/contact",
-  },
-  secondaryButton = {
-    label: "Our Services",
-    href: "/services",
-  },
-  features: rawFeatures = [],
-} = hero;
+  badge,
+  headingLine1,
+  headingLine2,
+  description,
+  backgroundImage,
+  primaryButton,
+  secondaryButton,
+  features: rawFeatures,
+} = content.hero;
 
 const features = rawFeatures.map((f) => ({
   ...f,

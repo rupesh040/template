@@ -179,7 +179,10 @@
     "description": "We are committed to delivering high-quality cleaning services that make your home or workplace cleaner, healthier and more comfortable. Here is why our clients trust us.",
     "image": "/aboutCleaning.webp",
     "imageAlt": "PureShine professional cleaning service",
-    "mission": "Our Mission: Creating Cleaner, Healthier Spaces for Happier Lives.",
+    "mission": {
+      "icon": "Target",
+      "text": "Our Mission: Creating Cleaner, Healthier Spaces for Happier Lives."
+    },
     "benefits": [
       {
         "icon": "Users",
@@ -218,7 +221,11 @@
         "title": "Easy Booking",
         "description": "Quick, simple and hassle-free process."
       }
-    ]
+    ],
+    "banner": {
+      "line1": "Let's Make",
+      "line2": "Life Cleaner"
+    }
   },
   "professionalCleaning": {
     "titleLine1": "Professional Home",
