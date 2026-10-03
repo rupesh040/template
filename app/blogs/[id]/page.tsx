@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
-import { blogs, categories } from "../../data/blogData";
+import content from "../../data/content.json";
 import AboutHero from "../../components/AboutHero";
 import BlogDetails from "../../components/BlogDetails";
 import BlogGrid from "../../components/BlogGrid";
 
 export async function generateStaticParams() {
-  return blogs.map((b) => ({ id: b.id }));
+  return content.blogs.map((b) => ({ id: b.id }));
 }
 
 export async function generateMetadata({
@@ -14,10 +14,10 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const blog = blogs.find((b) => b.id === id);
+  const blog = content.blogs.find((b) => b.id === id);
   if (!blog) return {};
   return {
-    title: `${blog.title} | PureShine Blog`,
+    title: `${blog.title} | ${content.site.name} Blog`,
     description: blog.content[0]?.text.slice(0, 155),
   };
 }
@@ -28,12 +28,12 @@ export default async function BlogDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const blog = blogs.find((b) => b.id === id);
+  const blog = content.blogs.find((b) => b.id === id);
 
   if (!blog) notFound();
 
-  // Recent posts = all other blogs (excluding current)
-  const recentPosts = blogs.filter((b) => b.id !== id);
+  // Recent posts = all other blogs (excluding current) from content.json
+  const recentPosts = content.blogs.filter((b) => b.id !== id);
 
   return (
     <>
@@ -46,7 +46,7 @@ export default async function BlogDetailPage({
       <BlogDetails
         blog={blog}
         recentPosts={recentPosts}
-        categories={categories}
+        categories={content.categories}
       />
 
       {/* Other articles */}

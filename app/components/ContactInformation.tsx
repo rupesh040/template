@@ -1,40 +1,9 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, LucideIcon } from "lucide-react";
+import content from "../data/content.json";
 
-const contactItems = [
-  {
-    title: "Our Location",
-    icon: MapPin,
-    content: (
-      <>
-        121 King Street Melbourne,
-        <br />
-        3000, Australia
-      </>
-    ),
-  },
-  {
-    title: "Phone Number",
-    icon: Phone,
-    content: (
-      <>
-        (+61 3 8376 6284)
-        <br />
-        (+800 2345 6789)
-      </>
-    ),
-  },
-  {
-    title: "Email us at",
-    icon: Mail,
-    content: (
-      <>
-        info@cleanmax.com
-        <br />
-        cleanmax@gmail.com
-      </>
-    ),
-  },
-];
+const iconMap: Record<string, LucideIcon> = { MapPin, Phone, Mail };
+
+const { badge, heading, headingHighlight, description, items } = content.contact;
 
 export default function ContactInformation() {
   return (
@@ -50,26 +19,24 @@ export default function ContactInformation() {
       <div className="relative mx-auto max-w-[1180px]">
         <div className="mx-auto max-w-[760px] text-center">
           <span className="inline-flex rounded-full bg-[#dff6e6] px-4 py-1.5 text-[11px] font-bold text-[#118b38] sm:text-[12px]">
-            Get In Touch
+            {badge}
           </span>
 
           <h2 className="mt-4 text-[30px] font-extrabold leading-[1.1] tracking-tight text-[#062d4c] sm:text-[40px] lg:text-[44px]">
-            Our Contact{" "}
-            <span className="text-[#0a9b38]">Information</span>
+            {heading}{" "}
+            <span className="text-[#0a9b38]">{headingHighlight}</span>
           </h2>
 
           <div className="mx-auto mt-3 h-[3px] w-12 rounded-full bg-[#0a9b38]" />
 
           <p className="mx-auto mt-4 max-w-[700px] text-[13px] leading-6 text-[#657789] sm:text-[15px] sm:leading-7">
-            We’d love to hear from you! Whether you have a question, need a
-            quote, or want to schedule a cleaning service, our team is here to
-            help.
+            {description}
           </p>
         </div>
 
         <div className="mt-9 grid grid-cols-1 gap-5 sm:mt-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          {contactItems.map((item) => {
-            const Icon = item.icon;
+          {items.map((item) => {
+            const Icon = iconMap[item.icon] ?? MapPin;
 
             return (
               <div
@@ -94,7 +61,12 @@ export default function ContactInformation() {
                   </h3>
 
                   <div className="mt-2 text-[14px] leading-6 text-[#637789] sm:text-[15px]">
-                    {item.content}
+                    {item.lines.map((line, i) => (
+                      <span key={i}>
+                        {line}
+                        {i < item.lines.length - 1 && <br />}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -104,4 +76,4 @@ export default function ContactInformation() {
       </div>
     </section>
   );
-}
+}

@@ -1,17 +1,10 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import {
-  ChevronDown,
-  Mail,
-  Menu,
-  Phone,
-  X,
-} from "lucide-react";
+import { ChevronDown, Mail, Menu, Phone, X } from "lucide-react";
 
 import {
   FaFacebookF,
@@ -21,81 +14,45 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 
-const socialLinks = [
-  {
-    icon: FaFacebookF,
-    href: "#",
-    label: "Facebook",
-  },
-  {
-    icon: FaTwitter,
-    href: "#",
-    label: "Twitter",
-  },
-  {
-    icon: FaInstagram,
-    href: "#",
-    label: "Instagram",
-  },
-  {
-    icon: FaLinkedinIn,
-    href: "#",
-    label: "LinkedIn",
-  },
-  {
-    icon: FaYoutube,
-    href: "#",
-    label: "YouTube",
-  },
-];
+import content from "../data/content.json";
 
-const leftMenu = [
-  {
-    name: "HOME",
-    href: "/",
-  },
-  {
-    name: "ABOUT US",
-    href: "/about",
-  },
-  {
-    name: "SERVICES",
-    href: "/services",
-  },
-];
+const iconMap: Record<string, typeof FaFacebookF> = {
+  Facebook: FaFacebookF,
+  Twitter: FaTwitter,
+  Instagram: FaInstagram,
+  LinkedIn: FaLinkedinIn,
+  YouTube: FaYoutube,
+};
 
-const rightMenu = [
-  {
-    name: "GALLERY",
-    href: "/gallery",
-  },
-  {
-    name: "BLOGS",
-    href: "/blogs",
-    dropdown: true,
-  },
-  {
-    name: "CONTACT US",
-    href: "/contact",
-  },
-];
+const {
+  socialLinks: rawSocial,
+  leftMenu,
+  rightMenu,
+  blogDropdown,
+} = content.navbar;
+const { phone, phoneHref, email, emailHref } = content.site;
 
-const blogLinks = [
-  {
-    name: "Latest Blogs",
-    href: "/blogs",
-  },
-  {
-    name: "Articles",
-    href: "/articles",
-  },
-];
+const socialLinks = rawSocial.map((s) => ({
+  ...s,
+  icon: iconMap[s.label] ?? FaFacebookF,
+}));
+
+const blogLinks = blogDropdown;
 
 export default function Navbar() {
   const pathname = usePathname();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [blogsOpen, setBlogsOpen] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -104,6 +61,11 @@ export default function Navbar() {
 
     return pathname === href || pathname.startsWith(`${href}/`);
   };
+
+  const isBlogsDropdownActive =
+    isActive("/blogs") ||
+    isActive("/articles") ||
+    blogLinks.some((blog) => isActive(blog.href));
 
   return (
     <header className="relative z-50 w-full">
@@ -118,82 +80,63 @@ export default function Navbar() {
             <span
               className="
                 mr-3 hidden whitespace-nowrap text-sm font-medium
-                sm:block lg:mr-4
+                min-[1025px]:block min-[1025px]:mr-4
               "
             >
               Follow Us:
             </span>
 
             <div className="flex items-center gap-1.5 sm:gap-2.5">
-              {socialLinks.map(
-                ({ icon: Icon, href, label }) => (
-                  <Link
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    className="
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="
                       flex h-8 w-8 items-center justify-center rounded-full
                       border border-white/60 text-white transition duration-200
                       hover:bg-white hover:text-[#092a43]
                       sm:h-9 sm:w-9
                     "
-                  >
-                    <Icon
-                      size={15}
-                      className="sm:h-[17px] sm:w-[17px]"
-                    />
-                  </Link>
-                ),
-              )}
+                >
+                  <Icon size={15} className="sm:h-[17px] sm:w-[17px]" />
+                </Link>
+              ))}
             </div>
           </div>
 
           <div className="flex items-center">
             <a
-              href="tel:+919876543210"
+              href={phoneHref}
               aria-label="Call PureShine"
               className="
                 flex items-center gap-2 whitespace-nowrap text-sm
               "
             >
-              <Phone
-                size={18}
-                strokeWidth={2.5}
-                className="text-[#62c542]"
-              />
+              <Phone size={18} strokeWidth={2.5} className="text-[#62c542]" />
 
-              <span className="hidden md:inline">
-                +91 98765 43210
-              </span>
+              <span className="hidden md:inline">{phone}</span>
             </a>
 
             <a
-              href="mailto:info@pureshine.com"
+              href={emailHref}
               aria-label="Email PureShine"
               className="
                 ml-4 flex items-center gap-2 whitespace-nowrap text-sm
-                lg:ml-10
+                sm:ml-6 lg:ml-10
               "
             >
-              <Mail
-                size={18}
-                strokeWidth={2.5}
-                className="text-[#62c542]"
-              />
+              <Mail size={18} strokeWidth={2.5} className="text-[#62c542]" />
 
-              <span className="hidden md:inline">
-                info@pureshine.com
-              </span>
+              <span className="hidden md:inline">{email}</span>
             </a>
           </div>
         </div>
-
         <div
           className="
-            absolute left-1/2 top-0 z-50 hidden h-[120px] w-[280px]
+            absolute left-1/2 top-0 z-50 hidden h-[120px] w-[260px]
             -translate-x-1/2 bg-white
-            sm:flex sm:h-[128px] sm:w-[310px]
-            lg:h-[132px] lg:w-[330px]
+            min-[1025px]:flex xl:w-[280px]
           "
           style={{
             borderRadius: "0 0 50% 50%",
@@ -202,7 +145,7 @@ export default function Navbar() {
           <Link
             href="/"
             className="
-              flex h-full w-full items-center justify-center
+              relative z-10 flex h-full w-full items-center justify-center
             "
           >
             <Image
@@ -218,13 +161,20 @@ export default function Navbar() {
               "
             />
           </Link>
+          <svg
+            className="pointer-events-none absolute -bottom-12 left-1/2 z-0 h-[180px] w-[280px] -translate-x-1/2"
+            viewBox="0 0 280 200"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <ellipse cx="140" cy="100" rx="140" ry="100" fill="white" />
+          </svg>
         </div>
       </div>
-
       <div
         className="
           relative hidden h-[69px] bg-white shadow-sm
-          md:block
+          min-[1025px]:block
         "
       >
         <div
@@ -234,8 +184,8 @@ export default function Navbar() {
         >
           <nav
             className="
-              flex h-full items-center gap-10
-              lg:gap-14
+              flex h-full items-center gap-6
+              min-[1150px]:gap-10 xl:gap-14
             "
           >
             {leftMenu.map((item) => {
@@ -247,7 +197,7 @@ export default function Navbar() {
                   href={item.href}
                   className={`
                     relative flex h-full items-center whitespace-nowrap
-                    text-[14px] font-semibold lg:text-[15px]
+                    text-[14px] font-semibold xl:text-[15px]
                     ${
                       active
                         ? "text-[#42b83c]"
@@ -260,7 +210,7 @@ export default function Navbar() {
                   {active && (
                     <span
                       className="
-                        absolute bottom-[10px] left-0 h-[2px] w-full
+                        absolute bottom-[12px] left-0 h-[2px] w-full
                         bg-[#42b83c]
                       "
                     />
@@ -272,8 +222,8 @@ export default function Navbar() {
 
           <nav
             className="
-              ml-auto flex h-full items-center gap-10
-              lg:gap-14
+              ml-auto flex h-full items-center gap-6
+              min-[1150px]:gap-10 xl:gap-14
             "
           >
             {rightMenu.map((item) => {
@@ -290,18 +240,25 @@ export default function Navbar() {
                     <Link
                       href={item.href}
                       className={`
-                        flex h-full items-center gap-1 whitespace-nowrap
+                        relative flex h-full items-center gap-1 whitespace-nowrap
                         text-[14px] font-semibold transition-colors duration-200
-                        lg:text-[15px]
+                        xl:text-[15px]
                         ${
-                          active
+                          isBlogsDropdownActive
                             ? "text-[#42b83c]"
                             : "text-[#17202a] hover:text-[#42b83c]"
                         }
                       `}
                     >
                       BLOGS
-
+                      {isBlogsDropdownActive && (
+                        <span
+                          className="
+                            absolute bottom-[12px] left-0 h-[2px] w-full
+                            bg-[#42b83c]
+                          "
+                        />
+                      )}
                       <ChevronDown
                         size={13}
                         strokeWidth={2.5}
@@ -365,9 +322,9 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   className={`
-                    flex h-full items-center gap-1 whitespace-nowrap
+                    relative flex h-full items-center gap-1 whitespace-nowrap
                     text-[14px] font-semibold transition duration-200
-                    lg:text-[15px]
+                    xl:text-[15px]
                     ${
                       active
                         ? "text-[#42b83c]"
@@ -376,6 +333,14 @@ export default function Navbar() {
                   `}
                 >
                   {item.name}
+                  {active && (
+                    <span
+                      className="
+                        absolute bottom-[12px] left-0 h-[2px] w-full
+                        bg-[#42b83c]
+                      "
+                    />
+                  )}
                 </Link>
               );
             })}
@@ -397,20 +362,19 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile/Tablet Bar - shown on screens up to 1024px (<= 1024px) */}
       <div
         className="
           relative flex h-[67px] items-center justify-between
           bg-white px-4 shadow-sm
-          md:hidden
+          min-[1025px]:hidden
         "
       >
         <button
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={
-            mobileMenuOpen
-              ? "Close navigation menu"
-              : "Open navigation menu"
+            mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
           }
           aria-expanded={mobileMenuOpen}
           className="
@@ -418,11 +382,7 @@ export default function Navbar() {
             text-[#092a43] transition hover:bg-[#f1f5f7]
           "
         >
-          {mobileMenuOpen ? (
-            <X size={25} />
-          ) : (
-            <Menu size={25} />
-          )}
+          {mobileMenuOpen ? <X size={25} /> : <Menu size={25} />}
         </button>
 
         <Link
@@ -434,7 +394,7 @@ export default function Navbar() {
         >
           <div
             className="
-              flex h-[78px] w-[170px] items-center justify-center
+              flex h-[85px] w-[170px] items-center justify-center
               rounded-b-[50%] bg-white
             "
           >
@@ -449,12 +409,11 @@ export default function Navbar() {
           </div>
         </Link>
       </div>
-
       {mobileMenuOpen && (
         <div
           className="
             border-t border-gray-100 bg-white shadow-lg
-            md:hidden
+            min-[1025px]:hidden
           "
         >
           <nav className="flex flex-col">
@@ -469,11 +428,7 @@ export default function Navbar() {
                   className={`
                     border-b border-gray-100 px-6 py-4
                     text-sm font-semibold
-                    ${
-                      active
-                        ? "bg-[#f4fff5] text-[#42b83c]"
-                        : "text-[#17202a]"
-                    }
+                    ${active ? "bg-[#f4fff5] text-[#42b83c]" : "text-[#17202a]"}
                   `}
                 >
                   {item.name}
@@ -505,14 +460,13 @@ export default function Navbar() {
                 border-b border-gray-100 px-6 py-4 text-left
                 text-sm font-semibold
                 ${
-                  isActive("/blogs")
+                  isBlogsDropdownActive
                     ? "bg-[#f4fff5] text-[#42b83c]"
                     : "text-[#17202a]"
                 }
               `}
             >
               BLOGS
-
               <ChevronDown
                 size={17}
                 className={`
@@ -549,7 +503,7 @@ export default function Navbar() {
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
               className={`
-                px-6 py-4 text-sm font-semibold
+                border-b border-gray-100 px-6 py-4 text-sm font-semibold
                 ${
                   isActive("/contact")
                     ? "bg-[#f4fff5] text-[#42b83c]"
@@ -560,6 +514,23 @@ export default function Navbar() {
               CONTACT US
             </Link>
           </nav>
+
+          <div className="flex flex-col gap-2.5 bg-[#f8fafc] px-6 py-4 text-xs text-[#092a43]/70 sm:flex-row sm:items-center sm:justify-between">
+            <a
+              href={phoneHref}
+              className="flex items-center gap-2 hover:text-[#42b83c]"
+            >
+              <Phone size={14} className="text-[#42b83c]" />
+              <span>{phone}</span>
+            </a>
+            <a
+              href={emailHref}
+              className="flex items-center gap-2 hover:text-[#42b83c]"
+            >
+              <Mail size={14} className="text-[#42b83c]" />
+              <span>{email}</span>
+            </a>
+          </div>
         </div>
       )}
     </header>

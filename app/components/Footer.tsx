@@ -1,639 +1,252 @@
 "use client";
 
+import React, { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import {
-  Phone,
+  ArrowRight,
+  Award,
+  Clock3,
+  Leaf,
   Mail,
   MapPin,
-  ArrowRight,
+  Phone,
+  ShieldCheck,
+} from "lucide-react";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa";
+
+import content from "../data/content.json";
+
+const faIconMap: Record<string, typeof FaFacebookF> = {
+  Facebook: FaFacebookF,
+  Instagram: FaInstagram,
+  Twitter: FaTwitter,
+  LinkedIn: FaLinkedinIn,
+  YouTube: FaYoutube,
+};
+
+const lucideIconMap: Record<string, typeof Leaf> = {
   Leaf,
   Award,
   ShieldCheck,
   Clock3,
-} from "lucide-react";
+};
 
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-  FaLinkedinIn,
-  FaYoutube,
-} from "react-icons/fa";
+const { footer, site } = content;
 
-/* =========================================================
-   DATA
-========================================================= */
+const quickLinks = footer.quickLinks.map((link) => [link.name, link.href]);
 
-const quickLinks = [
-  ["Home", "/"],
-  ["About Us", "/about"],
-  ["Our Services", "/services"],
-  ["Pricing / Packages", "/pricing"],
-  ["Gallery", "/gallery"],
-  ["FAQ", "/faq"],
-  ["Contact Us", "/contact"],
-];
+const services =
+  footer.serviceLinks?.length > 0
+    ? footer.serviceLinks.map((link) => [link.name, link.href])
+    : content.services.map((service) => [
+        service.title,
+        `/serviceDetail/${service.id}`,
+      ]);
 
-const services = [
-  ["House Cleaning", "/services/house-cleaning"],
-  ["Office Cleaning", "/services/office-cleaning"],
-  ["Deep Cleaning", "/services/deep-cleaning"],
-  ["Carpet Cleaning", "/services/carpet-cleaning"],
-  ["Window Cleaning", "/services/window-cleaning"],
-  ["Move-in / Move-out Cleaning", "/services/move-in-move-out"],
-  ["Customized Cleaning", "/services/customized-cleaning"],
-];
+const socialLinks = footer.socialLinks.map((social) => ({
+  ...social,
+  icon: faIconMap[social.label] ?? FaFacebookF,
+}));
 
-const socialLinks = [
-  {
-    icon: FaFacebookF,
-    href: "#",
-    label: "Facebook",
-  },
-  {
-    icon: FaInstagram,
-    href: "#",
-    label: "Instagram",
-  },
-  {
-    icon: FaTwitter,
-    href: "#",
-    label: "Twitter",
-  },
-  {
-    icon: FaLinkedinIn,
-    href: "#",
-    label: "LinkedIn",
-  },
-  {
-    icon: FaYoutube,
-    href: "#",
-    label: "YouTube",
-  },
-];
+const trustBadges = footer.trustBadges.map((badge) => ({
+  ...badge,
+  icon: lucideIconMap[badge.icon] ?? Leaf,
+}));
 
-/* =========================================================
-   FOOTER
-========================================================= */
+const paymentMethods = footer.paymentMethods.map((payment) =>
+  typeof payment === "string" ? payment : payment.label,
+);
+
+const legalLinks = footer.legalLinks;
 
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#032e47] text-white">
-
-      {/* Decorative leaf */}
-      <div
-        className="
-          pointer-events-none
-          absolute
-          right-[-20px]
-          top-[-20px]
-          hidden
-          h-[220px]
-          w-[150px]
-          opacity-[0.08]
-
-          lg:block
-        "
-      >
+      <div className="pointer-events-none absolute right-[-20px] top-[-20px] hidden h-[220px] w-[150px] opacity-[0.08] lg:block">
         <LeafDecoration />
       </div>
 
-
-      {/* =====================================================
-          MAIN FOOTER
-      ====================================================== */}
-
-      <div
-        className="
-          relative
-          z-10
-          mx-auto
-          max-w-[1500px]
-          px-6
-          py-12
-
-          sm:px-8
-          sm:py-14
-
-          lg:px-10
-          lg:py-12
-
-          xl:px-14
-        "
-      >
-
-        <div
-          className="
-            grid
-            grid-cols-1
-            gap-10
-
-            sm:grid-cols-2
-
-            lg:grid-cols-[1.05fr_0.8fr_0.9fr_1.1fr]
-
-            lg:gap-10
-
-            xl:gap-14
-          "
-        >
-          <div className="min-w-0">
-            <Link
-              href="/"
-              className="inline-block"
-            >
+      <div className="relative z-10 mx-auto max-w-[1500px] px-5 pt-8 pb-4 sm:px-8 sm:pt-10 sm:pb-4 lg:px-10 xl:px-14">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.1fr_0.75fr_0.8fr_1.05fr_1.3fr] lg:gap-6 xl:gap-8">
+          <div>
+            <Link href="/" className="inline-block">
               <Image
                 src="/footer-logo.png"
                 alt="PureShine"
                 width={200}
                 height={115}
                 priority
-                className="
-                  h-auto
-                  w-[175px]
-                  object-contain
-                "
+                className="h-auto w-[165px] object-contain"
               />
             </Link>
-            <p
-              className="
-                mt-2
-                max-w-[305px]
-                text-[13px]
-                leading-[1.8]
-                text-white/75
 
-                sm:text-[14px]
-              "
-            >
-              We provide professional, reliable, and
-              eco-friendly cleaning services for homes,
-              offices, and commercial spaces.
-              Your cleanliness is our priority.
+            <p className="mt-2 max-w-[280px] text-[13px] leading-5 text-white/70 sm:text-[13.5px]">
+              {footer.description}
             </p>
-            <div
-              className="
-                mt-5
-                flex
-                items-center
-                gap-3
-              "
-            >
 
-              {socialLinks.map(
-                ({ icon: Icon, href, label }) => (
-                  <Link
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    className="
-                      flex
-                      h-[39px]
-                      w-[39px]
-                      items-center
-                      justify-center
-                      rounded-full
-                      border
-                      border-white/45
-                      text-white
-                      transition-all
-                      duration-200
-
-                      hover:border-[#17b83c]
-                      hover:bg-[#17b83c]
-                    "
-                  >
-                    <Icon size={15} />
-                  </Link>
-                )
-              )}
-
-            </div>
-
-          </div>
-          <div>
-
-            <FooterHeading>
-              Quick Links
-            </FooterHeading>
-
-            <ul className="mt-5 space-y-3">
-
-              {quickLinks.map(([name, href]) => (
-                <FooterLink
-                  key={name}
-                  name={name}
+            <div className="mt-4 flex items-center gap-2.5">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <Link
+                  key={label}
                   href={href}
-                />
-              ))}
-
-            </ul>
-
-          </div>
-          <div>
-
-            <FooterHeading>
-              Our Services
-            </FooterHeading>
-
-            <ul className="mt-5 space-y-3">
-
-              {services.map(([name, href]) => (
-                <FooterLink
-                  key={name}
-                  name={name}
-                  href={href}
-                />
-              ))}
-
-            </ul>
-
-          </div>
-          <div className="min-w-0">
-
-            <FooterHeading>
-              Contact Information
-            </FooterHeading>
-            <ContactItem
-              icon={<Phone size={21} />}
-              title="+91 98765 43210"
-              subtitle="Mon - Sat, 9:00 AM - 7:00 PM"
-              href="tel:+919876543210"
-            />
-            <ContactItem
-              icon={<Mail size={21} />}
-              title="info@pureshine.com"
-              subtitle="We reply within 24 hours"
-              href="mailto:info@pureshine.com"
-            />
-            <ContactItem
-              icon={<MapPin size={21} />}
-              title={
-                <>
-                  123, Green Park, New Delhi,
-                  <br />
-                  Delhi - 110016, India
-                </>
-              }
-            />
-            <div className="mt-7">
-
-              <FooterHeading>
-                Newsletter
-              </FooterHeading>
-
-              <p
-                className="
-                  mt-2
-                  max-w-[330px]
-                  text-[13px]
-                  leading-5
-                  text-white/70
-                "
-              >
-                Subscribe to our newsletter for updates,
-                tips and special offers.
-              </p>
-              <form
-                onSubmit={(event) => {
-                  event.preventDefault();
-                }}
-                className="
-                  mt-4
-                  flex
-                  h-[49px]
-                  w-full
-                  max-w-[360px]
-                  overflow-hidden
-                  rounded-[7px]
-                  border
-                  border-white/25
-                  bg-white/[0.04]
-                "
-              >
-
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="
-                    min-w-0
-                    flex-1
-                    bg-transparent
-                    px-4
-                    text-[13px]
-                    text-white
-                    outline-none
-                    placeholder:text-white/45
-                  "
-                />
-
-                <button
-                  type="submit"
-                  aria-label="Subscribe"
-                  className="
-                    flex
-                    w-[49px]
-                    shrink-0
-                    items-center
-                    justify-center
-                    bg-[#12b63a]
-                    transition
-                    hover:bg-[#0c9c30]
-                  "
+                  aria-label={label}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-white/25 text-white/80 transition-all duration-200 hover:border-[#17b83c] hover:bg-[#17b83c] hover:text-white"
                 >
-                  <ArrowRight
-                    size={22}
-                    strokeWidth={2.5}
-                  />
-                </button>
-
-              </form>
-
+                  <Icon size={13} />
+                </Link>
+              ))}
             </div>
-
           </div>
 
-        </div>
-        <div
-          className="
-            mt-10
-            border-t
-            border-white/15
-            pt-8
-          "
-        >
+          <div>
+            <FooterHeading>Quick Links</FooterHeading>
 
-          <div
-            className="
-              grid
-              grid-cols-2
-              gap-y-8
-
-              sm:grid-cols-4
-              sm:gap-y-0
-            "
-          >
-
-            <TrustBadge
-              icon={<Leaf size={23} />}
-              title="Eco-Friendly"
-              subtitle="Products"
-            />
-
-            <TrustBadge
-              icon={<Award size={23} />}
-              title="Trusted"
-              subtitle="Professionals"
-            />
-
-            <TrustBadge
-              icon={<ShieldCheck size={23} />}
-              title="Satisfaction"
-              subtitle="Guaranteed"
-            />
-
-            <TrustBadge
-              icon={<Clock3 size={23} />}
-              title="On-Time"
-              subtitle="Service"
-            />
-
+            <ul className="mt-4 space-y-2.5">
+              {quickLinks.map(([name, href]) => (
+                <FooterLink key={name} name={name} href={href} />
+              ))}
+            </ul>
           </div>
 
+          <div>
+            <FooterHeading>Our Services</FooterHeading>
+
+            <ul className="mt-4 space-y-2.5">
+              {services.map(([name, href]) => (
+                <FooterLink key={name} name={name} href={href} />
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <FooterHeading>Contact Information</FooterHeading>
+
+            <ContactItem
+              icon={<Phone size={17} />}
+              title={site.phone}
+              subtitle={site.phoneHours}
+              href={site.phoneHref}
+            />
+
+            <ContactItem
+              icon={<Mail size={17} />}
+              title={site.email}
+              subtitle={site.emailNote}
+              href={site.emailHref}
+            />
+
+            <ContactItem icon={<MapPin size={17} />} title={site.address} />
+          </div>
+
+          <div className="sm:col-span-2 lg:col-span-1">
+            <FooterHeading>{footer.newsletter.title}</FooterHeading>
+
+            <p className="mt-2 text-[12.5px] leading-5 text-white/65">
+              {footer.newsletter.description}
+            </p>
+
+            <form
+              onSubmit={(event) => event.preventDefault()}
+              className="mt-3.5 flex h-10 w-full overflow-hidden rounded-md border border-white/20 bg-white/[0.04]"
+            >
+              <input
+                type="email"
+                placeholder={footer.newsletter.placeholder}
+                className="min-w-0 flex-1 bg-transparent px-3 text-[12.5px] text-white outline-none placeholder:text-white/40"
+              />
+
+              <button
+                type="submit"
+                aria-label="Subscribe"
+                className="flex w-10 shrink-0 items-center justify-center bg-[#12b63a] transition hover:bg-[#0c9c30]"
+              >
+                <ArrowRight size={18} strokeWidth={2.5} />
+              </button>
+            </form>
+
+            <div className="mt-4 pt-3.5 border-t border-white/10">
+              <div className="grid grid-cols-4 gap-2">
+                {trustBadges.map((badge) => (
+                  <TrustBadge
+                    key={badge.title}
+                    icon={<badge.icon size={16} />}
+                    title={badge.title}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-        <div
-          className="
-            mt-8
-            h-px
-            w-full
-            bg-white/20
-          "
-        />
-        <div
-          className="
-            flex
-            flex-col
-            gap-5
-            py-6
 
-            lg:flex-row
-            lg:items-center
-            lg:justify-between
-          "
-        >
-          <p
-            className="
-              text-center
-              text-[12px]
-              text-white/70
+        <div className="mt-7 h-px w-full bg-white/15" />
 
-              lg:text-left
-              lg:text-[13px]
-            "
-          >
-            © 2026 PureShine. All Rights Reserved.
+        <div className="flex flex-col gap-4 pt-4 pb-1 lg:flex-row lg:items-center lg:justify-between">
+          <p className="text-center text-[12px] text-white/60 lg:text-left lg:text-[13px]">
+            {site.copyright}
           </p>
-          <div
-            className="
-              flex
-              flex-wrap
-              items-center
-              justify-center
-              gap-x-3
-              gap-y-2
-              text-[12px]
-              text-white/70
 
-              lg:text-[13px]
-            "
-          >
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[12px] text-white/60 lg:text-[13px]">
+            {legalLinks.map((link, index) => (
+              <Fragment key={link.name}>
+                <Link href={link.href} className="transition hover:text-white">
+                  {link.name}
+                </Link>
 
-            <Link
-              href="/privacy-policy"
-              className="hover:text-white"
-            >
-              Privacy Policy
-            </Link>
-
-            <span className="text-white/30">
-              |
-            </span>
-
-            <Link
-              href="/terms"
-              className="hover:text-white"
-            >
-              Terms & Conditions
-            </Link>
-
-            <span className="text-white/30">
-              |
-            </span>
-
-            <Link
-              href="/sitemap"
-              className="hover:text-white"
-            >
-              Sitemap
-            </Link>
-
-          </div>
-          <div
-            className="
-              flex
-              items-center
-              justify-center
-              gap-2
-
-              lg:justify-end
-            "
-          >
-
-            <PaymentBadge>
-              VISA
-            </PaymentBadge>
-
-            <PaymentBadge>
-              <span className="relative h-4 w-7">
-
-                <span
-                  className="
-                    absolute
-                    left-0
-                    top-0
-                    h-4
-                    w-4
-                    rounded-full
-                    bg-[#eb001b]
-                  "
-                />
-
-                <span
-                  className="
-                    absolute
-                    right-0
-                    top-0
-                    h-4
-                    w-4
-                    rounded-full
-                    bg-[#f79e1b]
-                  "
-                />
-
-              </span>
-            </PaymentBadge>
-
-            <PaymentBadge>
-              <span className="text-[#0879d1]">
-                Paytm
-              </span>
-            </PaymentBadge>
-
-            <PaymentBadge>
-              UPI
-            </PaymentBadge>
-
+                {index < legalLinks.length - 1 && (
+                  <span className="text-white/25">|</span>
+                )}
+              </Fragment>
+            ))}
           </div>
 
+          <div className="flex items-center justify-center gap-2 lg:justify-end">
+            {paymentMethods.map((payment) => (
+              <PaymentBadge key={payment} type={payment}>
+                {payment}
+              </PaymentBadge>
+            ))}
+          </div>
         </div>
-
       </div>
-
     </footer>
   );
 }
 
-function FooterHeading({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function FooterHeading({ children }: { children: React.ReactNode }) {
   return (
     <div>
-
-      <h3
-        className="
-          text-[17px]
-          font-bold
-          leading-6
-          text-white
-
-          sm:text-[18px]
-        "
-      >
+      <h3 className="text-[15px] font-bold leading-5 text-white sm:text-[16px] mb-2">
         {children}
       </h3>
 
-      <span
-        className="
-          mt-3
-          block
-          h-[3px]
-          w-[37px]
-          rounded-full
-          bg-[#12b83b]
-        "
-      />
-
+      <span className="mt-2 block h-[2.5px] w-8 rounded-full bg-[#12b83b]" />
     </div>
   );
 }
 
-
-function FooterLink({
-  name,
-  href,
-}: {
-  name: string;
-  href: string;
-}) {
+function FooterLink({ name, href }: { name: string; href: string }) {
   return (
     <li>
-
       <Link
         href={href}
-        className="
-          group
-          flex
-          items-center
-          gap-2
-          text-[13px]
-          leading-5
-          text-white/72
-          transition-colors
-
-          sm:text-[14px]
-
-          hover:text-[#18bb40]
-        "
+        className="group flex items-center gap-2 text-[13px] leading-5 text-white/65 transition-colors hover:text-[#18bb40] sm:text-[13.5px]"
       >
-
-        <span
-          className="
-            text-[20px]
-            leading-4
-            text-white/80
-            transition-transform
-            duration-200
-
-            group-hover:translate-x-1
-          "
-        >
+        <span className="text-[18px] leading-4 text-white/70 transition-transform duration-200 group-hover:translate-x-1">
           ›
         </span>
 
-        <span>
-          {name}
-        </span>
-
+        <span>{name}</span>
       </Link>
-
     </li>
   );
 }
-
 
 function ContactItem({
   icon,
@@ -647,68 +260,22 @@ function ContactItem({
   href?: string;
 }) {
   const content = (
-    <div
-      className="
-        flex
-        w-full
-        items-start
-        gap-3
-      "
-    >
-      <div
-        className="
-          flex
-          h-[50px]
-          w-[50px]
-          shrink-0
-          items-center
-          justify-center
-          rounded-full
-          bg-[#075f4e]
-          text-white
-        "
-      >
+    <div className="flex w-full items-start gap-2.5 mb-6">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#075f4e] text-white">
         {icon}
       </div>
-      <div
-        className="
-          min-w-0
-          flex-1
-          pt-1
-        "
-      >
 
-        <div
-          className="
-            break-words
-            text-[13px]
-            font-medium
-            leading-5
-            text-white
-
-            sm:text-[14px]
-          "
-        >
+      <div className="min-w-0 flex-1 pt-0.5">
+        <div className="break-words text-[13px] font-medium leading-4 text-white sm:text-[13.5px]">
           {title}
         </div>
 
         {subtitle && (
-          <p
-            className="
-              mt-0.5
-              text-[11px]
-              leading-4
-              text-white/55
-
-              sm:text-[12px]
-            "
-          >
+          <p className="mt-0.5 text-[11px] leading-3 text-white/50 sm:text-[11.5px]">
             {subtitle}
           </p>
         )}
-
       </div>
-
     </div>
   );
 
@@ -716,122 +283,63 @@ function ContactItem({
     return (
       <Link
         href={href}
-        className="
-          mt-5
-          block
-          transition-opacity
-          hover:opacity-80
-        "
+        className="mt-3.5 block transition-opacity hover:opacity-80"
       >
         {content}
       </Link>
     );
   }
 
-  return (
-    <div className="mt-5">
-      {content}
-    </div>
-  );
+  return <div className="mt-3.5">{content}</div>;
 }
 
 function TrustBadge({
   icon,
   title,
-  subtitle,
 }: {
   icon: React.ReactNode;
   title: string;
-  subtitle: string;
 }) {
   return (
-    <div
-      className="
-        flex
-        flex-col
-        items-center
-        justify-center
-        text-center
-
-        sm:border-r
-        sm:border-white/10
-
-        sm:last:border-r-0
-      "
-    >
-
-      <div
-        className="
-          flex
-          h-[53px]
-          w-[53px]
-          items-center
-          justify-center
-          rounded-full
-          bg-[#075f4e]
-          text-white
-        "
-      >
+    <div className="flex flex-col items-center justify-center text-center">
+      <div className="flex h-8.5 w-8.5 items-center justify-center rounded-full bg-[#075f4e] text-white">
         {icon}
       </div>
 
-      <p
-        className="
-          mt-2
-          text-[11px]
-          font-semibold
-          leading-4
-          text-white
-
-          sm:text-[12px]
-        "
-      >
+      <p className="mt-1.5 text-[10px] font-medium leading-tight text-white/80 sm:text-[10.5px]">
         {title}
       </p>
-
-      <p
-        className="
-          text-[10px]
-          leading-4
-          text-white/55
-
-          sm:text-[11px]
-        "
-      >
-        {subtitle}
-      </p>
-
     </div>
   );
 }
 
 function PaymentBadge({
   children,
+  type,
 }: {
   children: React.ReactNode;
+  type: string;
 }) {
+  const styles: Record<string, string> = {
+    VISA: "text-[#1a4fa3]",
+    Mastercard: "text-[#111]",
+    Paytm: "text-[#0879d1]",
+    UPI: "text-[#273746]",
+  };
+
   return (
-    <div
-      className="
-        flex
-        h-[30px]
-        min-w-[43px]
-        items-center
-        justify-center
-        rounded-[3px]
-        bg-white
-        px-2
-        text-[10px]
-        font-bold
-        text-[#273746]
-      "
-    >
-      {children}
+    <div className="flex h-7 min-w-[43px] items-center justify-center rounded-[3px] bg-white px-2 text-[10px] font-bold">
+      {type === "Mastercard" ? (
+        <span className="relative h-4 w-7">
+          <span className="absolute left-0 top-0 h-4 w-4 rounded-full bg-[#eb001b]" />
+          <span className="absolute right-0 top-0 h-4 w-4 rounded-full bg-[#f79e1b] mix-blend-multiply" />
+        </span>
+      ) : (
+        <span className={styles[type] ?? "text-[#273746]"}>{children}</span>
+      )}
     </div>
   );
 }
-
-
 
 function LeafDecoration() {
   return (
@@ -841,7 +349,6 @@ function LeafDecoration() {
       xmlns="http://www.w3.org/2000/svg"
       className="h-full w-full"
     >
-
       <path
         d="M80 215C80 150 77 82 38 15"
         stroke="currentColor"
@@ -867,7 +374,6 @@ function LeafDecoration() {
         d="M83 52C107 52 124 37 128 14C104 16 89 29 83 52Z"
         fill="currentColor"
       />
-
     </svg>
   );
 }

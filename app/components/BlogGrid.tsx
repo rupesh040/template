@@ -8,8 +8,9 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useState } from "react";
-import { blogs } from "../data/blogData";
+import content from "../data/content.json";
 
+const blogs = content.blogs;
 const blogsPerPage = 6;
 
 export default function BlogGrid() {
@@ -46,7 +47,11 @@ export default function BlogGrid() {
               key={blog.id}
               className="group overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-[0_4px_18px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
             >
-              <div className="relative h-[210px] w-full overflow-hidden">
+              <Link
+                href={`/blogs/${blog.id}`}
+                aria-label={`Read ${blog.title}`}
+                className="relative block h-[210px] w-full overflow-hidden"
+              >
                 <Image
                   src={blog.image}
                   alt={blog.title}
@@ -64,7 +69,7 @@ export default function BlogGrid() {
                     {blog.month}
                   </span>
                 </div>
-              </div>
+              </Link>
 
               <div className="p-5 sm:p-6">
                 <span className="inline-flex rounded-full bg-[#e7f8eb] px-4 py-1.5 text-xs font-semibold text-[#11952b]">
@@ -72,7 +77,12 @@ export default function BlogGrid() {
                 </span>
 
                 <h2 className="mt-4 line-clamp-2 min-h-[58px] text-xl font-bold leading-7 text-[#092a43]">
-                  {blog.title}
+                  <Link
+                    href={`/blogs/${blog.id}`}
+                    className="transition-colors hover:text-[#11952b]"
+                  >
+                    {blog.title}
+                  </Link>
                 </h2>
                 <Link
                   href={`/blogs/${blog.id}`}

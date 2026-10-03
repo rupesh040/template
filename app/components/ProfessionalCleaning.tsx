@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Check, ArrowRight } from "lucide-react";
-import { services } from "../data/serviceData";
 import content from "../data/content.json";
 
 // Default data comes from content.json → "professionalCleaning"
@@ -15,9 +14,8 @@ interface ProfessionalCleaningProps {
 export default function ProfessionalCleaning({
   serviceId,
 }: ProfessionalCleaningProps) {
-  // Look up the service by id when provided
   const service = serviceId
-    ? services.find((s) => s.id === serviceId)
+    ? content.services.find((s) => s.id === serviceId)
     : undefined;
 
   const title = service ? service.title : defaultData.titleLine1;
@@ -36,8 +34,6 @@ export default function ProfessionalCleaning({
     <section className="w-full bg-white py-12 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-
-          {/* Image */}
           <div className="relative w-full">
             <div className="absolute bottom-5 left-0 h-[calc(100%-20px)] w-[calc(100%-20px)] rounded-[14px] bg-[#11952b] sm:bottom-6 sm:h-[calc(100%-24px)] sm:w-[calc(100%-24px)]" />
             <div className="relative ml-5 overflow-hidden rounded-[14px] border-[6px] border-white sm:ml-6">
@@ -51,8 +47,6 @@ export default function ProfessionalCleaning({
               />
             </div>
           </div>
-
-          {/* Text */}
           <div className="w-full">
             {service && (
               <span className="inline-block rounded-full bg-[#e8f9ed] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#11952b]">
@@ -97,16 +91,6 @@ export default function ProfessionalCleaning({
                 </div>
               ))}
             </div>
-
-            {linkHref && (
-              <Link
-                href={linkHref}
-                className="mt-8 inline-flex h-[50px] items-center gap-2.5 rounded-full bg-[#11952b] px-7 text-[14px] font-bold text-white shadow-md transition hover:bg-[#0c7d24]"
-              >
-                View Full Details
-                <ArrowRight size={17} />
-              </Link>
-            )}
           </div>
         </div>
 

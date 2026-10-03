@@ -8,6 +8,7 @@ import {
   Image as ImageIcon,
   PlaySquare,
 } from "lucide-react";
+import content from "../data/content.json";
 
 type GalleryType = "photo" | "video";
 
@@ -19,175 +20,18 @@ interface GalleryItem {
   image: string;
 }
 
-const categories = [
-  "All Photos",
-  "Home Cleaning",
-  "Office Cleaning",
-  "Deep Cleaning",
-  "Kitchen Cleaning",
-  "Bathroom Cleaning",
-  "Carpet & Upholstery",
-  "Before & After",
-];
+const {
+  badge,
+  headingLine1,
+  headingLine2,
+  description,
+  itemsPerPage: rawItemsPerPage,
+  categories,
+  items: rawItems,
+} = content.gallery;
 
-const galleryItems: GalleryItem[] = [
-  {
-    id: 1,
-    type: "photo",
-    category: "Home Cleaning",
-    title: "Clean and organized living room",
-    image: "/images/gallery/home-1.jpg",
-  },
-  {
-    id: 2,
-    type: "photo",
-    category: "Kitchen Cleaning",
-    title: "Professional kitchen cleaning",
-    image: "/images/gallery/kitchen-1.jpg",
-  },
-  {
-    id: 3,
-    type: "photo",
-    category: "Carpet & Upholstery",
-    title: "Professional carpet cleaning",
-    image: "/images/gallery/carpet-1.jpg",
-  },
-  {
-    id: 4,
-    type: "photo",
-    category: "Home Cleaning",
-    title: "Bedroom cleaning service",
-    image: "/images/gallery/bedroom-1.jpg",
-  },
-  {
-    id: 5,
-    type: "photo",
-    category: "Bathroom Cleaning",
-    title: "Bathroom deep cleaning",
-    image: "/images/gallery/bathroom-1.jpg",
-  },
-  {
-    id: 6,
-    type: "photo",
-    category: "Office Cleaning",
-    title: "Professional window cleaning",
-    image: "/images/gallery/window-1.jpg",
-  },
-  {
-    id: 7,
-    type: "photo",
-    category: "Kitchen Cleaning",
-    title: "Kitchen surface cleaning",
-    image: "/images/gallery/kitchen-2.jpg",
-  },
-  {
-    id: 8,
-    type: "photo",
-    category: "Deep Cleaning",
-    title: "Floor deep cleaning",
-    image: "/images/gallery/floor-1.jpg",
-  },
-  {
-    id: 9,
-    type: "photo",
-    category: "Carpet & Upholstery",
-    title: "Sofa cleaning service",
-    image: "/images/gallery/sofa-1.jpg",
-  },
-  {
-    id: 10,
-    type: "photo",
-    category: "Home Cleaning",
-    title: "Living room cleaning",
-    image: "/images/gallery/home-2.jpg",
-  },
-  {
-    id: 11,
-    type: "photo",
-    category: "Office Cleaning",
-    title: "Office workspace cleaning",
-    image: "/images/gallery/office-1.jpg",
-  },
-  {
-    id: 12,
-    type: "photo",
-    category: "Deep Cleaning",
-    title: "Deep floor cleaning",
-    image: "/images/gallery/deep-1.jpg",
-  },
-  {
-    id: 13,
-    type: "photo",
-    category: "Bathroom Cleaning",
-    title: "Bathroom surface cleaning",
-    image: "/images/gallery/bathroom-2.jpg",
-  },
-  {
-    id: 14,
-    type: "photo",
-    category: "Carpet & Upholstery",
-    title: "Upholstery cleaning",
-    image: "/images/gallery/sofa-2.jpg",
-  },
-  {
-    id: 15,
-    type: "photo",
-    category: "Kitchen Cleaning",
-    title: "Kitchen appliance cleaning",
-    image: "/images/gallery/kitchen-3.jpg",
-  },
-  {
-    id: 16,
-    type: "photo",
-    category: "Home Cleaning",
-    title: "Home floor cleaning",
-    image: "/images/gallery/home-3.jpg",
-  },
-  {
-    id: 17,
-    type: "photo",
-    category: "Office Cleaning",
-    title: "Office floor cleaning",
-    image: "/images/gallery/office-2.jpg",
-  },
-  {
-    id: 18,
-    type: "photo",
-    category: "Before & After",
-    title: "Cleaning transformation",
-    image: "/images/gallery/before-after-1.jpg",
-  },
-  {
-    id: 19,
-    type: "video",
-    category: "Home Cleaning",
-    title: "Home cleaning process",
-    image: "/images/gallery/home-video-1.jpg",
-  },
-  {
-    id: 20,
-    type: "video",
-    category: "Deep Cleaning",
-    title: "Deep cleaning process",
-    image: "/images/gallery/deep-video-1.jpg",
-  },
-  {
-    id: 21,
-    type: "video",
-    category: "Kitchen Cleaning",
-    title: "Kitchen cleaning process",
-    image: "/images/gallery/kitchen-video-1.jpg",
-  },
-  {
-    id: 22,
-    type: "video",
-    category: "Bathroom Cleaning",
-    title: "Bathroom cleaning process",
-    image: "/images/gallery/bathroom-video-1.jpg",
-  },
-];
-
-const ITEMS_PER_PAGE = 9;
+const galleryItems: GalleryItem[] = rawItems as GalleryItem[];
+const ITEMS_PER_PAGE = rawItemsPerPage || 9;
 
 export default function Gallery() {
   const [activeType, setActiveType] = useState<GalleryType>("photo");
@@ -199,8 +43,7 @@ export default function Gallery() {
       const typeMatches = item.type === activeType;
 
       const categoryMatches =
-        activeCategory === "All Photos" ||
-        item.category === activeCategory;
+        activeCategory === "All Photos" || item.category === activeCategory;
 
       return typeMatches && categoryMatches;
     });
@@ -219,7 +62,7 @@ export default function Gallery() {
   const changeType = (type: GalleryType) => {
     setActiveType(type);
     setCurrentPage(1);
-    setActiveCategory(type === "video" ? "All Photos" : "All Photos");
+    setActiveCategory("All Photos");
   };
 
   const changeCategory = (category: string) => {
@@ -255,13 +98,7 @@ export default function Gallery() {
       ];
     }
 
-    return [
-      1,
-      currentPage - 1,
-      currentPage,
-      currentPage + 1,
-      totalPages,
-    ];
+    return [1, currentPage - 1, currentPage, currentPage + 1, totalPages];
   };
 
   const pageNumbers = getPageNumbers();
@@ -269,25 +106,23 @@ export default function Gallery() {
   return (
     <section className="min-h-screen bg-white px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
       <div className="mx-auto w-full max-w-[1180px]">
+        {/* Section Header */}
         <div className="mx-auto max-w-[700px] text-center">
           <span className="inline-flex rounded-full bg-[#dff7e7] px-4 py-1.5 text-[11px] font-bold text-[#0c9d36] sm:text-[12px]">
-            Our Gallery
+            {badge}
           </span>
 
           <h1 className="mt-3 text-[30px] font-extrabold leading-[1.1] tracking-tight text-[#062d4c] sm:text-[40px] lg:text-[44px]">
-            Our Cleaning{" "}
-            <span className="text-[#0b9e37]">Work Gallery</span>
+            {headingLine1}{" "}
+            <span className="text-[#0b9e37]">{headingLine2}</span>
           </h1>
 
           <div className="mx-auto mt-2 h-[3px] w-[34px] rounded-full bg-[#0b9e37]" />
 
           <p className="mx-auto mt-4 max-w-[620px] text-[12px] leading-5 text-[#718191] sm:text-[14px] sm:leading-6">
-            Take a look at some of our recent cleaning work. We deliver
-            spotless, fresh and healthier spaces for homes, offices and
-            commercial properties.
+            {description}
           </p>
         </div>
-
         <div className="mt-7 flex justify-center">
           <div className="inline-flex rounded-full bg-[#edf4f8] p-1">
             <button
@@ -317,7 +152,6 @@ export default function Gallery() {
             </button>
           </div>
         </div>
-
         <div className="mt-6 overflow-x-auto pb-2 scrollbar-hide">
           <div className="flex min-w-max justify-center gap-2 px-1 lg:min-w-0 lg:flex-wrap">
             {categories.map((category) => {
@@ -346,7 +180,6 @@ export default function Gallery() {
             })}
           </div>
         </div>
-
         {currentItems.length > 0 ? (
           <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
             {currentItems.map((item) => (
@@ -374,12 +207,9 @@ export default function Gallery() {
           </div>
         ) : (
           <div className="mt-6 flex min-h-[300px] items-center justify-center rounded-2xl bg-[#f7faf8]">
-            <p className="text-sm text-[#718191]">
-              No gallery items found.
-            </p>
+            <p className="text-sm text-[#718191]">No gallery items found.</p>
           </div>
         )}
-
         {totalPages > 1 && (
           <div className="mt-5 flex items-center justify-center gap-2">
             <button
