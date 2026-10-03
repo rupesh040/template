@@ -6,35 +6,35 @@
     "logo": "/logo.png",
     "footerLogo": "/footer-logo.webp",
     "copyright": "© 2026 PureShine. All Rights Reserved.",
-    "email": "info@pureshine.com",
-    "emailHref": "mailto:info@pureshine.com",
-    "phone": "+91 98765 43210",
-    "phoneHref": "tel:+919876543210",
+    "email": "info@xyz.com",
+    "emailHref": "info@xyz.com",
+    "phone": "+1 0000000000",
+    "phoneHref": "tel:+10000000000",
     "phoneHours": "Mon – Sat, 9:00 AM – 7:00 PM",
     "emailNote": "We reply within 24 hours",
-    "address": "123, Green Park, New Delhi, Delhi – 110016, India"
+    "address": "495 Boulevard, Ste 10, Elmwood Park, NJ 07407, USA"
   },
   "navbar": {
     "socialLinks": [
       {
         "label": "Facebook",
-        "href": "#"
+        "href": "https://www.facebook.com"
       },
       {
-        "label": "Twitter",
-        "href": "#"
+        "label": "X",
+        "href": "https://www.x.com"
       },
       {
         "label": "Instagram",
-        "href": "#"
+        "href": "https://www.instagram.com"
       },
       {
         "label": "LinkedIn",
-        "href": "#"
+        "href": "https://www.linkedin.com"
       },
       {
         "label": "YouTube",
-        "href": "#"
+        "href": "https://www.youtube.com"
       }
     ],
     "leftMenu": [
@@ -58,22 +58,11 @@
       },
       {
         "name": "BLOGS",
-        "href": "/blogs",
-        "dropdown": true
+        "href": "/blogs"
       },
       {
         "name": "CONTACT US",
         "href": "/contact"
-      }
-    ],
-    "blogDropdown": [
-      {
-        "name": "Latest Blogs",
-        "href": "/blogs"
-      },
-      {
-        "name": "Articles",
-        "href": "/blogs"
       }
     ]
   },
@@ -145,6 +134,11 @@
     }
   ],
   "about": {
+    "hero": {
+      "title": "About Us",
+      "breadcrumb": "About Us",
+      "backgroundImage": "/about-hero.webp"
+    },
     "badge": "ABOUT PURESHINE",
     "headingLine1": "Professional",
     "headingLine2": "Cleaning Service",
@@ -253,6 +247,11 @@
     "viewAllButton": {
       "label": "View All Services",
       "href": "/services"
+    },
+    "hero": {
+      "title": "Services",
+      "breadcrumb": "Services",
+      "backgroundImage": "/about-hero.webp"
     }
   },
   "services": [
@@ -593,6 +592,11 @@
         "href": "/contact",
         "arrow": "→"
       }
+    },
+    "hero": {
+      "title": "Our FAQs",
+      "breadcrumb": "Our FAQs",
+      "backgroundImage": "/about-hero.webp"
     }
   },
   "faqs": [
@@ -669,7 +673,7 @@
   ],
   "blogs": [
     {
-      "id": "1",
+      "id": "how-professional-cleaning-services-improve-your-home",
       "title": "How Professional Cleaning Services Improve Your Home",
       "category": "Cleaning Tips",
       "date": "September 20, 2026",
@@ -693,10 +697,12 @@
           "heading": "Protect Your Home's Value",
           "text": "Regular professional maintenance helps protect the value of your home by preventing the build-up of grime that can damage surfaces, stain tiles and degrade flooring over time. Clean windows, sealed grout, properly maintained carpets and spotless appliances all contribute to a home that stays in excellent condition for longer. Think of professional cleaning not as an expense but as an investment in your property."
         }
-      ]
+      ],
+      "slug": "how-professional-cleaning-services-improve-your-home",
+      "numericId": "1"
     },
     {
-      "id": "2",
+      "id": "easy-ways-to-keep-your-office-clean",
       "title": "Easy Ways to Keep Your Office Clean",
       "category": "Office Cleaning",
       "date": "September 15, 2026",
@@ -720,10 +726,12 @@
           "heading": "Clean High-Touch Surfaces",
           "text": "Keyboards, mice, phone handsets, door handles, light switches and shared equipment are touched dozens of times every day. Disinfecting these surfaces regularly dramatically reduces the spread of illness in the workplace."
         }
-      ]
+      ],
+      "slug": "easy-ways-to-keep-your-office-clean",
+      "numericId": "2"
     },
     {
-      "id": "3",
+      "id": "the-benefits-of-deep-cleaning-your-home",
       "title": "The Benefits of Deep Cleaning Your Home",
       "category": "Deep Cleaning",
       "date": "September 10, 2026",
@@ -747,7 +755,9 @@
           "heading": "Eliminate Bacteria and Odours",
           "text": "Bathrooms and kitchens are particularly prone to bacterial build-up and persistent odours that regular cleaning cannot fully resolve. Professional deep cleaning uses specialist products to sanitise surfaces and leave your home genuinely fresh."
         }
-      ]
+      ],
+      "slug": "the-benefits-of-deep-cleaning-your-home",
+      "numericId": "3"
     }
   ],
   "categories": [
@@ -777,18 +787,26 @@
       {
         "icon": "MapPin",
         "title": "Our Location",
-        "lines": ["121 King Street Melbourne,", "3000, Australia"]
+        "lines": [
+          "Awel Kiett-turner 495 Boulevard, Ste 10 Elmwood Park, NJ 07407, USA"
+        ]
       },
       {
         "icon": "Phone",
         "title": "Phone Number",
-        "lines": ["(+61 3 8376 6284)", "(+800 2345 6789)"]
+        "lines": [
+          "(+1 0000000000)",
+          "(+1 0000000000)"
+        ]
       },
       {
         "icon": "Mail",
         "title": "Email us at",
-        "lines": ["info@cleanmax.com", "cleanmax@gmail.com"]
-      }
+        "lines": [
+          "info@xyz.com",
+          "info@xyz.com"
+        ]
+      } 
     ],
     "form": {
       "badge": "Send us a Message",
@@ -861,6 +879,11 @@
       "viewLargerMapHref": "https://www.google.com/maps?q=121+King+Street,+Melbourne,+3000,+Australia",
       "zoomIn": "+",
       "zoomOut": "−"
+    },
+    "hero": {
+      "title": "Contact Us",
+      "breadcrumb": "Contact Us",
+      "backgroundImage": "/about-hero.webp"
     }
   },
   "contactMap": {
@@ -952,23 +975,23 @@
     "socialLinks": [
       {
         "label": "Facebook",
-        "href": "#"
+        "href": "https://www.facebook.com"
       },
       {
         "label": "Instagram",
-        "href": "#"
+        "href": "https://www.instagram.com"
       },
       {
-        "label": "Twitter",
-        "href": "#"
+        "label": "X",
+        "href": "https://www.x.com"
       },
       {
         "label": "LinkedIn",
-        "href": "#"
+        "href": "https://www.linkedin.com"
       },
       {
         "label": "YouTube",
-        "href": "#"
+        "href": "https://www.youtube.com"
       }
     ],
     "trustBadges": [
@@ -1197,7 +1220,19 @@
         "title": "Bathroom cleaning process",
         "image": "/services/bathroom-cleaning.png"
       }
-    ]
+    ],
+    "hero": {
+      "title": "Our Gallery",
+      "breadcrumb": "Our Gallery",
+      "backgroundImage": "/about-hero.webp"
+    }
+  },
+  "blogsPage": {
+    "title": "Our Blog",
+    "breadcrumb": "Our Blog",
+    "backgroundImage": "/about-hero.webp"
+  },
+  "blogDetailPage": {
+    "backgroundImage": "/about-hero.webp"
   }
 }
-

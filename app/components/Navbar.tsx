@@ -4,21 +4,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { ChevronDown, Mail, Menu, Phone, X } from "lucide-react";
+import { Mail, Menu, Phone, X } from "lucide-react";
 
 import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
-  FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import type { IconType } from "react-icons";
 
 import content from "../data/content.json";
 
-const iconMap: Record<string, typeof FaFacebookF> = {
+const iconMap: Record<string, IconType> = {
   Facebook: FaFacebookF,
-  Twitter: FaTwitter,
+  Twitter: FaXTwitter,
+  X: FaXTwitter,
   Instagram: FaInstagram,
   LinkedIn: FaLinkedinIn,
   YouTube: FaYoutube,
@@ -28,7 +30,6 @@ const {
   socialLinks: rawSocial,
   leftMenu,
   rightMenu,
-  blogDropdown,
 } = content.navbar;
 const { phone, phoneHref, email, emailHref } = content.site;
 
@@ -37,13 +38,10 @@ const socialLinks = rawSocial.map((s) => ({
   icon: iconMap[s.label] ?? FaFacebookF,
 }));
 
-const blogLinks = blogDropdown;
-
 export default function Navbar() {
   const pathname = usePathname();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [blogsOpen, setBlogsOpen] = useState(false);
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1024) {
@@ -61,11 +59,6 @@ export default function Navbar() {
 
     return pathname === href || pathname.startsWith(`${href}/`);
   };
-
-  const isBlogsDropdownActive =
-    isActive("/blogs") ||
-    isActive("/articles") ||
-    blogLinks.some((blog) => isActive(blog.href));
 
   return (
     <header className="relative z-50 w-full">
@@ -91,6 +84,8 @@ export default function Navbar() {
                 <Link
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="
                       flex h-8 w-8 items-center justify-center rounded-full
@@ -229,94 +224,6 @@ export default function Navbar() {
             {rightMenu.map((item) => {
               const active = isActive(item.href);
 
-              if (item.dropdown) {
-                return (
-                  <div
-                    key={item.name}
-                    className="
-                      group relative flex h-full items-center
-                    "
-                  >
-                    <Link
-                      href={item.href}
-                      className={`
-                        relative flex h-full items-center gap-1 whitespace-nowrap
-                        text-[14px] font-semibold transition-colors duration-200
-                        xl:text-[15px]
-                        ${
-                          isBlogsDropdownActive
-                            ? "text-[#42b83c]"
-                            : "text-[#17202a] hover:text-[#42b83c]"
-                        }
-                      `}
-                    >
-                      BLOGS
-                      {isBlogsDropdownActive && (
-                        <span
-                          className="
-                            absolute bottom-[12px] left-0 h-[2px] w-full
-                            bg-[#42b83c]
-                          "
-                        />
-                      )}
-                      <ChevronDown
-                        size={13}
-                        strokeWidth={2.5}
-                        className="
-                          transition-transform duration-200
-                          group-hover:rotate-180
-                          group-focus-within:rotate-180
-                        "
-                      />
-                    </Link>
-
-                    <div
-                      className="
-                        pointer-events-none absolute left-1/2 top-[69px] z-[100]
-                        w-[195px] -translate-x-1/2 translate-y-2 rounded-xl
-                        border border-gray-100 bg-white p-2 opacity-0
-                        shadow-[0_12px_35px_rgba(0,0,0,0.14)]
-                        transition-all duration-200
-                        group-hover:pointer-events-auto
-                        group-hover:translate-y-0
-                        group-hover:opacity-100
-                        group-focus-within:pointer-events-auto
-                        group-focus-within:translate-y-0
-                        group-focus-within:opacity-100
-                      "
-                    >
-                      <span
-                        className="
-                          absolute -top-[6px] left-1/2 h-3 w-3
-                          -translate-x-1/2 rotate-45 border-l border-t
-                          border-gray-100 bg-white
-                        "
-                      />
-
-                      {blogLinks.map((blog) => (
-                        <Link
-                          key={blog.name}
-                          href={blog.href}
-                          className="
-                            relative z-10 flex items-center rounded-lg
-                            px-4 py-3 text-[14px] font-medium text-[#263c4d]
-                            transition-all duration-200
-                            hover:bg-[#f0fbf2]
-                            hover:pl-5
-                            hover:text-[#42b83c]
-                            focus:bg-[#f0fbf2]
-                            focus:text-[#42b83c]
-                            focus:outline-none
-                          "
-                        >
-                          {blog.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                );
-              }
-
               return (
                 <Link
                   key={item.name}
@@ -434,83 +341,24 @@ export default function Navbar() {
               );
             })}
 
-            <Link
-              href="/gallery"
-              onClick={() => setMobileMenuOpen(false)}
-              className={`
-                border-b border-gray-100 px-6 py-4
-                text-sm font-semibold
-                ${
-                  isActive("/gallery")
-                    ? "bg-[#f4fff5] text-[#42b83c]"
-                    : "text-[#17202a]"
-                }
-              `}
-            >
-              GALLERY
-            </Link>
+            {rightMenu.map((item) => {
+              const active = isActive(item.href);
 
-            <button
-              type="button"
-              onClick={() => setBlogsOpen(!blogsOpen)}
-              className={`
-                flex w-full items-center justify-between
-                border-b border-gray-100 px-6 py-4 text-left
-                text-sm font-semibold
-                ${
-                  isBlogsDropdownActive
-                    ? "bg-[#f4fff5] text-[#42b83c]"
-                    : "text-[#17202a]"
-                }
-              `}
-            >
-              BLOGS
-              <ChevronDown
-                size={17}
-                className={`
-                  transition-transform duration-200
-                  ${blogsOpen ? "rotate-180" : ""}
-                `}
-              />
-            </button>
-
-            {blogsOpen && (
-              <div className="bg-[#f7fafb]">
-                {blogLinks.map((blog) => (
-                  <Link
-                    key={blog.name}
-                    href={blog.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`
-                      block border-b border-gray-100 px-10 py-3
-                      text-sm transition-colors
-                      ${
-                        isActive(blog.href)
-                          ? "bg-[#eefaf0] text-[#42b83c]"
-                          : "text-[#405565] hover:bg-[#eefaf0] hover:text-[#42b83c]"
-                      }
-                    `}
-                  >
-                    {blog.name}
-                  </Link>
-                ))}
-              </div>
-            )}
-
-            <Link
-              href="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className={`
-                border-b border-gray-100 px-6 py-4 text-sm font-semibold
-                ${
-                  isActive("/contact")
-                    ? "bg-[#f4fff5] text-[#42b83c]"
-                    : "text-[#17202a]"
-                }
-              `}
-            >
-              CONTACT US
-            </Link>
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`
+                    border-b border-gray-100 px-6 py-4
+                    text-sm font-semibold
+                    ${active ? "bg-[#f4fff5] text-[#42b83c]" : "text-[#17202a]"}
+                  `}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex flex-col gap-2.5 bg-[#f8fafc] px-6 py-4 text-xs text-[#092a43]/70 sm:flex-row sm:items-center sm:justify-between">

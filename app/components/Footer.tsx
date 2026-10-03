@@ -17,16 +17,18 @@ import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
-  FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import type { IconType } from "react-icons";
 
 import content from "../data/content.json";
 
-const faIconMap: Record<string, typeof FaFacebookF> = {
+const faIconMap: Record<string, IconType> = {
   Facebook: FaFacebookF,
   Instagram: FaInstagram,
-  Twitter: FaTwitter,
+  Twitter: FaXTwitter,
+  X: FaXTwitter,
   LinkedIn: FaLinkedinIn,
   YouTube: FaYoutube,
 };
@@ -85,6 +87,8 @@ export default function Footer() {
                 <Link
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="flex h-8 w-8 items-center justify-center rounded-full border border-white/25 text-white/80 transition-all duration-200 hover:border-[#17b83c] hover:bg-[#17b83c] hover:text-white"
                 >

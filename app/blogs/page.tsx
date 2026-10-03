@@ -1,17 +1,18 @@
 import AboutHero from "../components/AboutHero";
 import BlogGrid from "../components/BlogGrid";
+import content from "../data/content.json";
 
+export default function Blog() {
+  const { title, breadcrumb, backgroundImage } = content.blogsPage;
 
-
-export default function blog() {
   return (
-   <>
-     <AboutHero
-          title="Our Blog"
-          breadcrumb="Our Blog"
-          backgroundImage="/about-hero.webp"
-        />
-        <BlogGrid/>
-   </>
+    <>
+      <AboutHero
+        title={title}
+        breadcrumb={breadcrumb}
+        backgroundImage={backgroundImage}
+      />
+      <BlogGrid />
+    </>
   );
 }

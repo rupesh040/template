@@ -1,17 +1,18 @@
 import AboutHero from "../components/AboutHero";
 import Gallery from "../components/Gallery";
+import content from "../data/content.json";
 
+export default function GalleryPage() {
+  const { title, breadcrumb, backgroundImage } = content.gallery.hero;
 
-
-export default function gallery() {
   return (
-   <>
-     <AboutHero
-          title="Our Gallery"
-          breadcrumb="Our Gallery"
-          backgroundImage="/about-hero.webp"
-        />
-        <Gallery/>
-   </>
+    <>
+      <AboutHero
+        title={title}
+        breadcrumb={breadcrumb}
+        backgroundImage={backgroundImage}
+      />
+      <Gallery />
+    </>
   );
 }

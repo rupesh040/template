@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { Users, SprayCan, UserRound, Award, LucideIcon } from "lucide-react";
 import content from "../data/content.json";
 
@@ -72,9 +73,7 @@ function StatItem({
       <ProgressCircle value={progress} Icon={Icon} />
 
       <div className="min-w-0 flex-1">
-        <h3 className="text-[28px] font-extrabold leading-none tracking-tight text-[#092f4b] min-[380px]:text-[30px] sm:text-[33px] lg:text-[35px]">
-          {value}
-        </h3>
+        <AnimatedNumber value={value} />
 
         <p className="mt-2 text-[13px] font-semibold leading-5 text-[#263f55] sm:text-[14px] lg:text-[15px]">
           {title}
@@ -87,6 +86,80 @@ function StatItem({
         </p>
       </div>
     </div>
+  );
+}
+
+function AnimatedNumber({ value }: { value: string }) {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const [displayValue, setDisplayValue] = useState("0");
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (!element) return;
+
+    const match = value.match(/^([^0-9]*)([\d,.]+)(.*)$/);
+
+    if (!match) {
+      setDisplayValue(value);
+      return;
+    }
+
+    const prefix = match[1];
+    const target = Number(match[2].replace(/,/g, ""));
+    const suffix = match[3];
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasAnimated.current) return;
+
+        hasAnimated.current = true;
+
+        const duration = 1800;
+        const startTime = performance.now();
+
+        const animate = (currentTime: number) => {
+          const progress = Math.min(
+            (currentTime - startTime) / duration,
+            1,
+          );
+
+          const easedProgress = 1 - Math.pow(1 - progress, 3);
+          const currentValue = Math.floor(target * easedProgress);
+
+          setDisplayValue(
+            `${prefix}${currentValue.toLocaleString()}${suffix}`,
+          );
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            setDisplayValue(
+              `${prefix}${target.toLocaleString()}${suffix}`,
+            );
+          }
+        };
+
+        requestAnimationFrame(animate);
+      },
+      {
+        threshold: 0.4,
+      },
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [value]);
+
+  return (
+    <h3
+      ref={ref}
+      className="text-[28px] font-extrabold leading-none tracking-tight text-[#092f4b] min-[380px]:text-[30px] sm:text-[33px] lg:text-[35px]"
+    >
+      {displayValue}
+    </h3>
   );
 }
 

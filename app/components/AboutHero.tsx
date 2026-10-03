@@ -1,17 +1,89 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
+
+export type BreadcrumbItem = {
+  label: string;
+  href?: string;
+};
 
 type AboutHeroProps = {
   title: string;
-  breadcrumb: string;
+  breadcrumb?: string;
+  breadcrumbs?: BreadcrumbItem[];
   backgroundImage: string;
+};
+
+const routeNameMap: Record<string, string> = {
+  about: "About Us",
+  services: "Services",
+  serviceDetail: "Services",
+  blogs: "Blogs",
+  contact: "Contact Us",
+  faq: "Our FAQs",
+  faqs: "Our FAQs",
+  gallery: "Our Gallery",
 };
 
 export default function AboutHero({
   title,
   breadcrumb,
+  breadcrumbs,
   backgroundImage,
 }: AboutHeroProps) {
+  const pathname = usePathname();
+
+  let items: BreadcrumbItem[] = [];
+
+  if (breadcrumbs && breadcrumbs.length > 0) {
+    items = breadcrumbs;
+  } else if (pathname) {
+    const rawSegments = pathname.split("/").filter(Boolean);
+
+    if (rawSegments.length === 0) {
+      items = [
+        { label: "Home", href: "/" },
+        { label: breadcrumb || title },
+      ];
+    } else if (rawSegments.length === 1) {
+      const seg = rawSegments[0];
+      items = [
+        { label: "Home", href: "/" },
+        { label: breadcrumb || routeNameMap[seg] || title },
+      ];
+    } else {
+      items = [{ label: "Home", href: "/" }];
+
+      let accumulatedPath = "";
+      rawSegments.forEach((segment, index) => {
+        const isLast = index === rawSegments.length - 1;
+        accumulatedPath += `/${segment}`;
+
+        if (isLast) {
+          items.push({
+            label: breadcrumb || title,
+          });
+        } else {
+          const parentHref =
+            segment === "serviceDetail" ? "/services" : accumulatedPath;
+          items.push({
+            label:
+              routeNameMap[segment] ||
+              segment.charAt(0).toUpperCase() + segment.slice(1),
+            href: parentHref,
+          });
+        }
+      });
+    }
+  } else {
+    items = [
+      { label: "Home", href: "/" },
+      { label: breadcrumb || title },
+    ];
+  }
+
   return (
     <section className="relative w-full overflow-hidden">
       <div
@@ -28,24 +100,42 @@ export default function AboutHero({
               {title}
             </h1>
 
-            <div className="mt-5 inline-flex items-center rounded-full border border-white/30 bg-black/20 px-5 py-2.5 backdrop-blur-sm sm:mt-6 sm:px-6 sm:py-3">
-              <Link
-                href="/"
-                className="text-sm font-medium text-white transition-colors hover:text-[#42c943] sm:text-[15px]"
-              >
-                Home
-              </Link>
+            <nav
+              aria-label="Breadcrumb"
+              className="mt-5 inline-flex max-w-full flex-wrap items-center gap-y-1 rounded-full border border-white/30 bg-black/20 px-5 py-2.5 backdrop-blur-sm sm:mt-6 sm:px-6 sm:py-3"
+            >
+              {items.map((item, index) => {
+                const isLast = index === items.length - 1;
 
-              <ArrowRight
-                size={16}
-                strokeWidth={2}
-                className="mx-3 text-white/80"
-              />
+                return (
+                  <div
+                    key={`${item.label}-${index}`}
+                    className="flex items-center"
+                  >
+                    {index > 0 && (
+                      <ArrowRight
+                        size={16}
+                        strokeWidth={2}
+                        className="mx-2.5 shrink-0 text-white/80 sm:mx-3"
+                      />
+                    )}
 
-              <span className="text-sm font-medium text-[#f4c430] sm:text-[15px]">
-                {breadcrumb}
-              </span>
-            </div>
+                    {isLast || !item.href ? (
+                      <span className="text-sm font-medium text-[#f4c430] sm:text-[15px]">
+                        {item.label}
+                      </span>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className="text-sm font-medium text-white transition-colors hover:text-[#42c943] sm:text-[15px]"
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
           </div>
         </div>
       </div>

@@ -1,13 +1,16 @@
 import AboutHero from "../components/AboutHero";
 import FAQ from "../components/FAQ";
+import content from "../data/content.json";
 
 export default function FAQsPage() {
+  const { title, breadcrumb, backgroundImage } = content.faqSection.hero;
+
   return (
     <>
       <AboutHero
-        title="Our FAQs"
-        breadcrumb="Our FAQs"
-        backgroundImage="/about-hero.webp"
+        title={title}
+        breadcrumb={breadcrumb}
+        backgroundImage={backgroundImage}
       />
       <FAQ showContactCard={false} showAll={true} />
     </>

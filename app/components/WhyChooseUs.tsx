@@ -39,9 +39,7 @@ const {
   banner,
 } = content.whyChooseUs;
 
-const missionText = typeof mission === "string" ? mission : mission.text;
-const MissionIcon =
-  iconMap[typeof mission === "object" ? mission.icon : "Target"] ?? Target;
+const MissionIcon = iconMap[mission.icon] ?? Target;
 
 const benefitsWithIcons = benefits.map((b) => ({
   ...b,
@@ -92,7 +90,7 @@ export default function WhyChooseUs() {
             </div>
             <div className="h-[48px] w-[2px] shrink-0 bg-[#8edc81] sm:h-[58px]" />
             <p className="text-[13px] font-semibold leading-5 text-[#092f4b] sm:text-[16px] sm:leading-7 lg:text-[17px]">
-              {missionText}
+              {mission.text}
             </p>
           </div>
         </div>

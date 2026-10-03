@@ -10,45 +10,133 @@ const { heading, subheading, description, items: testimonials } =
 
 export default function Testimonials() {
   const sliderRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const isJumpingRef = useRef(false);
 
-  const checkScroll = () => {
+  const [isPaused, setIsPaused] = useState(false);
+
+  const total = testimonials.length;
+
+  const infiniteTestimonials = [
+    ...testimonials,
+    ...testimonials,
+    ...testimonials,
+  ];
+
+  const getCardWidth = () => {
+    const slider = sliderRef.current;
+    if (!slider) return 380;
+
+    const card = slider.querySelector<HTMLElement>(
+      "[data-testimonial-card]",
+    );
+
+    if (!card) return 380;
+
+    const styles = window.getComputedStyle(slider);
+    const gap = parseFloat(styles.columnGap || styles.gap || "20");
+
+    return card.offsetWidth + gap;
+  };
+
+  const setInitialPosition = () => {
     const slider = sliderRef.current;
     if (!slider) return;
 
-    const maxScroll = slider.scrollWidth - slider.clientWidth;
-    setCanScrollLeft(slider.scrollLeft > 5);
-    setCanScrollRight(slider.scrollLeft < maxScroll - 5);
+    const cardWidth = getCardWidth();
+
+    slider.scrollLeft = cardWidth * total;
   };
 
   useEffect(() => {
-    checkScroll();
-    window.addEventListener("resize", checkScroll);
-    return () => window.removeEventListener("resize", checkScroll);
+    const timer = setTimeout(() => {
+      setInitialPosition();
+    }, 50);
+
+    return () => clearTimeout(timer);
   }, []);
+
+  const normalizePosition = () => {
+    const slider = sliderRef.current;
+
+    if (!slider || isJumpingRef.current) return;
+
+    const cardWidth = getCardWidth();
+
+    const firstSetStart = cardWidth * total;
+    const secondSetStart = cardWidth * total * 2;
+
+    if (slider.scrollLeft < firstSetStart - cardWidth * 0.5) {
+      isJumpingRef.current = true;
+
+      slider.style.scrollBehavior = "auto";
+      slider.scrollLeft += cardWidth * total;
+
+      requestAnimationFrame(() => {
+        slider.style.scrollBehavior = "";
+        isJumpingRef.current = false;
+      });
+    }
+
+    if (slider.scrollLeft >= secondSetStart - cardWidth * 0.5) {
+      isJumpingRef.current = true;
+
+      slider.style.scrollBehavior = "auto";
+      slider.scrollLeft -= cardWidth * total;
+
+      requestAnimationFrame(() => {
+        slider.style.scrollBehavior = "";
+        isJumpingRef.current = false;
+      });
+    }
+  };
 
   const scrollTestimonials = (direction: "left" | "right") => {
     const slider = sliderRef.current;
+
     if (!slider) return;
 
-    const card = slider.querySelector<HTMLElement>("[data-testimonial-card]");
-    const cardWidth = card?.offsetWidth || 380;
-    const gap = typeof window !== "undefined" && window.innerWidth >= 640 ? 24 : 20;
-    const scrollAmount = cardWidth + gap;
+    const cardWidth = getCardWidth();
 
     slider.scrollBy({
-      left: direction === "right" ? scrollAmount : -scrollAmount,
+      left: direction === "right" ? cardWidth : -cardWidth,
       behavior: "smooth",
     });
-
-    setTimeout(checkScroll, 400);
   };
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      scrollTestimonials("right");
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+
+    if (!slider) return;
+
+    const handleScroll = () => {
+      normalizePosition();
+    };
+
+    slider.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      slider.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-white py-12">
       <div className="pointer-events-none absolute -left-[70px] -top-[80px] h-[180px] w-[180px] rounded-full bg-[#f4f9f8] sm:h-[230px] sm:w-[230px]" />
+
       <div className="pointer-events-none absolute -bottom-[100px] -left-[80px] h-[230px] w-[230px] rounded-full bg-[#f5faf9]" />
+
       <div className="pointer-events-none absolute -bottom-[100px] right-[7%] hidden h-[180px] w-[180px] rounded-full bg-[#f6faf9] lg:block" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-12">
@@ -60,6 +148,7 @@ export default function Testimonials() {
             height={60}
             className="absolute left-0 top-0 rotate-[240deg]"
           />
+
           <Image
             src="/leaf.png"
             alt="leaf"
@@ -81,33 +170,39 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div className="relative mt-10 sm:mt-12">
+        <div
+          className="relative mt-10 sm:mt-12"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
+        >
           <button
             type="button"
             onClick={() => scrollTestimonials("left")}
-            disabled={!canScrollLeft}
             aria-label="Previous testimonials"
-            className="absolute -left-2 top-1/2 z-30 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#092f4b] shadow-[0_6px_25px_rgba(8,45,76,0.10)] transition hover:bg-[#10aa3a] hover:text-white disabled:pointer-events-none disabled:opacity-30 sm:-left-5 sm:h-[54px] sm:w-[54px] lg:-left-6"
+            className="absolute -left-2 top-1/2 z-30 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#092f4b] shadow-[0_6px_25px_rgba(8,45,76,0.10)] transition hover:bg-[#10aa3a] hover:text-white sm:-left-5 sm:h-[54px] sm:w-[54px] lg:-left-6"
           >
             <ChevronLeft size={27} strokeWidth={1.8} />
           </button>
 
           <div
             ref={sliderRef}
-            onScroll={checkScroll}
             className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-5 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-6"
           >
-            {testimonials.map((testimonial) => (
-              <TestimonialCard key={testimonial.name} {...testimonial} />
+            {infiniteTestimonials.map((testimonial, index) => (
+              <TestimonialCard
+                key={`${testimonial.name}-${index}`}
+                {...testimonial}
+              />
             ))}
           </div>
 
           <button
             type="button"
             onClick={() => scrollTestimonials("right")}
-            disabled={!canScrollRight}
             aria-label="Next testimonials"
-            className="absolute -right-2 top-1/2 z-30 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#092f4b] shadow-[0_6px_25px_rgba(8,45,76,0.10)] transition hover:bg-[#10aa3a] hover:text-white disabled:pointer-events-none disabled:opacity-30 sm:-right-5 sm:h-[54px] sm:w-[54px] lg:-right-6"
+            className="absolute -right-2 top-1/2 z-30 flex h-[48px] w-[48px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#092f4b] shadow-[0_6px_25px_rgba(8,45,76,0.10)] transition hover:bg-[#10aa3a] hover:text-white sm:-right-5 sm:h-[54px] sm:w-[54px] lg:-right-6"
           >
             <ChevronRight size={27} strokeWidth={1.8} />
           </button>
@@ -129,7 +224,13 @@ interface TestimonialProps {
   rating?: number;
 }
 
-function TestimonialCard({ name, role, image, review, rating = 5 }: TestimonialProps) {
+function TestimonialCard({
+  name,
+  role,
+  image,
+  review,
+  rating = 5,
+}: TestimonialProps) {
   return (
     <article
       data-testimonial-card
@@ -147,14 +248,15 @@ function TestimonialCard({ name, role, image, review, rating = 5 }: TestimonialP
         <div className="mt-auto flex items-end justify-between pt-5">
           <div
             className="flex gap-[2px] text-[#ffbd00]"
-            aria-label="5 out of 5 stars"
+            aria-label={`${rating} out of 5 stars`}
           >
             {"★★★★★".split("").map((_, index) => (
               <span key={index} className="text-[20px]">
-                ★
+                {index < rating ? "★" : "☆"}
               </span>
             ))}
           </div>
+
           <div className="text-[65px] font-black leading-[0.45] text-[#d9f1df]">
             ”
           </div>

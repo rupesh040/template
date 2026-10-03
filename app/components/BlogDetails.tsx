@@ -220,7 +220,7 @@ export default function BlogDetails({
               {recentPosts.map((post) => (
                 <Link
                   key={post.id}
-                  href={`/blogs/${post.id}`}
+                  href={`/blogs/${(post as any).slug || post.id}`}
                   className="group flex gap-3 py-3 first:pt-0 last:pb-0"
                 >
                   <Image

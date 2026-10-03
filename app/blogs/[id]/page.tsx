@@ -1,11 +1,17 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import content from "../../data/content.json";
 import AboutHero from "../../components/AboutHero";
 import BlogDetails from "../../components/BlogDetails";
 import BlogGrid from "../../components/BlogGrid";
 
 export async function generateStaticParams() {
-  return content.blogs.map((b) => ({ id: b.id }));
+  return (content.blogs as any[]).flatMap((b) => {
+    const params = [{ id: b.id }];
+    if (b.numericId) {
+      params.push({ id: b.numericId });
+    }
+    return params;
+  });
 }
 
 export async function generateMetadata({
@@ -14,7 +20,16 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const blog = content.blogs.find((b) => b.id === id);
+  const decodedId = decodeURIComponent(id);
+  const blog = (content.blogs as any[]).find(
+    (b) =>
+      b.id === decodedId ||
+      b.slug === decodedId ||
+      b.numericId === decodedId ||
+      b.id === id ||
+      b.slug === id ||
+      b.numericId === id
+  );
   if (!blog) return {};
   return {
     title: `${blog.title} | ${content.site.name} Blog`,
@@ -28,17 +43,36 @@ export default async function BlogDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const blog = content.blogs.find((b) => b.id === id);
+  const decodedId = decodeURIComponent(id);
+  const blog = (content.blogs as any[]).find(
+    (b) =>
+      b.id === decodedId ||
+      b.slug === decodedId ||
+      b.numericId === decodedId ||
+      b.id === id ||
+      b.slug === id ||
+      b.numericId === id
+  );
 
   if (!blog) notFound();
-  const recentPosts = content.blogs.filter((b) => b.id !== id);
+
+  if (decodedId === blog.numericId) {
+    redirect(`/blogs/${blog.id}`);
+  }
+
+  const recentPosts = (content.blogs as any[]).filter((b) => b.id !== blog.id);
 
   return (
     <>
       <AboutHero
         title={blog.title}
-        breadcrumb={blog.category}
-        backgroundImage="/about-hero.webp"
+        breadcrumb={blog.title}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Blogs", href: "/blogs" },
+          { label: blog.title },
+        ]}
+        backgroundImage={content.blogDetailPage.backgroundImage}
       />
 
       <BlogDetails

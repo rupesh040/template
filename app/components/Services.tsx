@@ -230,18 +230,16 @@ function ServiceCard({
   isGrid = false,
 }: ServiceCardProps) {
   return (
-    <article
-      className={`group flex flex-col overflow-hidden rounded-[40px] border border-[#eef2f3] bg-white shadow-[0_8px_30px_rgba(8,45,76,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(8,45,76,0.12)] ${
+    <Link
+      href={`/services/${id}`}
+      aria-label={`View details for ${title}`}
+      className={`group flex flex-col overflow-hidden rounded-[40px] border border-[#eef2f3] bg-white shadow-[0_8px_30px_rgba(8,45,76,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(8,45,76,0.12)] cursor-pointer ${
         isGrid
           ? "w-full max-w-[320px]"
           : "min-w-[270px] max-w-[270px] flex-shrink-0 snap-center sm:min-w-[290px] sm:max-w-[290px] lg:min-w-[250px] lg:max-w-[250px] xl:min-w-[270px] xl:max-w-[270px]"
       }`}
     >
-      <Link
-        href={`/serviceDetail/${id}`}
-        aria-label={`View details for ${title}`}
-        className="relative mx-auto mt-4 block aspect-square w-[calc(100%-24px)] overflow-hidden rounded-full"
-      >
+      <div className="relative mx-auto mt-4 block aspect-square w-[calc(100%-24px)] overflow-hidden rounded-full">
         <Image
           src={image}
           alt={title}
@@ -249,10 +247,10 @@ function ServiceCard({
           sizes="(max-width: 640px) 75vw, (max-width: 1024px) 35vw, 20vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-      </Link>
+      </div>
 
       <div
-        className={`relative z-10 mx-auto -mt-8 flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-full border-[3px] border-white shadow-sm ${
+        className={`relative z-10 mx-auto -mt-8 flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-full border-[3px] border-white shadow-sm transition-transform duration-300 group-hover:scale-105 ${
           darkIcon ? "bg-[#092a43] text-white" : "bg-[#12b43c] text-white"
         }`}
       >
@@ -260,13 +258,8 @@ function ServiceCard({
       </div>
 
       <div className="flex flex-1 flex-col items-center px-5 pb-5 pt-2 text-center">
-        <h3 className="text-[16px] font-bold leading-tight text-[#122f48]">
-          <Link
-            href={`/serviceDetail/${id}`}
-            className="transition-colors hover:text-[#12b43c]"
-          >
-            {title}
-          </Link>
+        <h3 className="text-[16px] font-bold leading-tight text-[#122f48] transition-colors group-hover:text-[#12b43c]">
+          {title}
         </h3>
 
         <p className="mt-2 min-h-[48px] max-w-[220px] text-[12px] leading-5 text-[#65788a]">
@@ -274,15 +267,14 @@ function ServiceCard({
         </p>
 
         <div className="mt-auto flex w-full justify-center pt-3">
-          <Link
-            href={`/serviceDetail/${id}`}
+          <span
             aria-label={`View ${title}`}
-            className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-[#12b43c] text-white transition-all duration-300 hover:scale-110 hover:bg-[#07972f]"
+            className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-[#12b43c] text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-[#07972f]"
           >
             <ArrowRight size={19} />
-          </Link>
+          </span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
