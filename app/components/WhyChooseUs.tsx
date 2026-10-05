@@ -238,7 +238,7 @@ export default function WhyChooseUs() {
                           {benefit.title}
                         </h3>
 
-                        <p className="mt-1 text-[10px] leading-4 text-[#718095] sm:text-xs">
+                        <p className="mt-1 text-[10px] font-semibold leading-4 text-[#718095] sm:text-xs">
                           {benefit.description}
                         </p>
                       </div>

@@ -8,9 +8,29 @@ const iconMap: Record<string, LucideIcon> = { MapPin, Phone, Mail };
 
 const { badge, heading, headingHighlight, description, items } = content.contact;
 
+const mapHref =
+  content.contact?.map?.viewLargerMapHref ||
+  "https://www.google.com/maps?q=Awel+Kiett-turner+495+Boulevard,+Ste+10+Elmwood+Park,+NJ+07407,+USA";
+
 export default function ContactInformation() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  const handleCardClick = (item: (typeof items)[number]) => {
+    if (item.icon === "MapPin") {
+      window.open(mapHref, "_blank", "noopener,noreferrer");
+    } else if (item.icon === "Phone") {
+      const tel = item.lines[0]?.replace(/[^0-9+]/g, "") || "";
+      if (tel) {
+        window.location.href = `tel:${tel}`;
+      }
+    } else if (item.icon === "Mail") {
+      const email = item.lines[0] || "";
+      if (email) {
+        window.location.href = `mailto:${email}`;
+      }
+    }
+  };
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -119,35 +139,71 @@ export default function ContactInformation() {
             return (
               <div
                 key={item.title}
+                role="button"
+                tabIndex={0}
+                onClick={() => handleCardClick(item)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleCardClick(item);
+                  }
+                }}
                 style={{ animationDelay: `${500 + idx * 100}ms` }}
-                className={`group relative min-h-[210px] overflow-hidden rounded-[16px] border border-[#f0f3f1] bg-white px-7 py-7 shadow-[0_8px_30px_rgba(8,45,76,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_35px_rgba(8,45,76,0.10)] sm:min-h-[220px] sm:px-8 ${
+                className={`group relative flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-[16px] border border-[#e8ecea] bg-white px-7 py-7 shadow-[0_8px_30px_rgba(8,45,76,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0b9d3b]/35 hover:shadow-[0_16px_36px_rgba(11,157,59,0.12)] sm:min-h-[220px] sm:px-8 ${
                   isVisible ? "animate-fade-in-scale" : "opacity-0"
                 }`}
               >
-                <div className="absolute right-[-15px] top-[-12px] opacity-[0.07] transition-transform duration-500 group-hover:scale-110">
+                <div className="absolute right-3 top-[-4px] text-[#0b9d3b] opacity-[0.08] transition-all duration-500 group-hover:scale-110 group-hover:opacity-[0.14] sm:right-5">
                   <Icon
                     size={100}
                     strokeWidth={1.5}
-                    className="text-[#8b9296]"
                   />
                 </div>
 
                 <div className="relative z-10">
-                  <div className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#dff4e5] text-[#0b9d3b] shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  <div className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#dff4e5] text-[#0b9d3b] shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:bg-[#0b9d3b] group-hover:text-white group-hover:shadow-md group-hover:shadow-[#0b9d3b]/30">
                     <Icon size={36} strokeWidth={2} />
                   </div>
 
-                  <h3 className="mt-5 text-[19px] font-extrabold text-[#092f4b] sm:text-[20px]">
+                  <h3 className="mt-5 text-[19px] font-extrabold text-[#092f4b] transition-colors duration-300 group-hover:text-[#0b9d3b] sm:text-[20px]">
                     {item.title}
                   </h3>
 
                   <div className="mt-2 text-[14px] leading-6 text-[#637789] sm:text-[15px]">
-                    {item.lines.map((line, i) => (
-                      <span key={i}>
-                        {line}
-                        {i < item.lines.length - 1 && <br />}
-                      </span>
-                    ))}
+                    {item.lines.map((line, i) => {
+                      if (item.icon === "Phone") {
+                        const tel = line.replace(/[^0-9+]/g, "");
+                        return (
+                          <span key={i} className="block">
+                            <a
+                              href={`tel:${tel}`}
+                              onClick={(e) => e.stopPropagation()}
+                              className="transition-colors hover:text-[#0b9d3b]"
+                            >
+                              {line}
+                            </a>
+                          </span>
+                        );
+                      }
+                      if (item.icon === "Mail") {
+                        return (
+                          <span key={i} className="block">
+                            <a
+                              href={`mailto:${line}`}
+                              onClick={(e) => e.stopPropagation()}
+                              className="transition-colors hover:text-[#0b9d3b]"
+                            >
+                              {line}
+                            </a>
+                          </span>
+                        );
+                      }
+                      return (
+                        <span key={i} className="block">
+                          {line}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

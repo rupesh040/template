@@ -253,6 +253,7 @@
     "headingHighlight": "Cleaning Services",
     "description": "We offer a wide range of professional cleaning services to keep your spaces fresh, healthy and spotless.",
     "leafImage": "/leaf.png",
+    "itemsPerPage": 8,
     "viewAllButton": {
       "label": "View All Services",
       "href": "/services"
@@ -313,6 +314,58 @@
           "step": 4,
           "title": "Final Check",
           "description": "We do a quality walkthrough before leaving to make sure you are completely satisfied."
+        }
+      ]
+    },
+    {
+      "id": "office-cleaning",
+      "badge": "Our Services",
+      "title": "Office Cleaning",
+      "description": "Bright, clean workspaces boost productivity.",
+      "image": "/services/office-cleaning.webp",
+      "imageAlt": "Professional office cleaning service",
+      "icon": "Building2",
+      "darkIcon": false,
+      "tagline": "A cleaner office means a sharper team.",
+      "longDescription": "First impressions matter. Our professional office cleaning service ensures your workplace is spotless, hygienic and welcoming every single day. We work around your schedule — early morning, evenings or weekends — so your business is never disrupted. From reception areas to meeting rooms, restrooms and open-plan desks, we cover it all with precision and care.",
+      "footer": "Whether it's executive boardrooms, open workstations, client reception lounges, or employee break areas, our certified commercial cleaning experts deliver an immaculate, thoroughly sanitized workspace that actively fosters team productivity, morale, and everyday wellness. We provide highly flexible scheduling options—including early mornings, evening shifts, and weekend maintenance—to ensure your daily business operations remain entirely uninterrupted. From hospital-grade surface disinfection to detailed electronic equipment wipe-downs and commercial waste management, we uphold strict standards of cleanliness that project professionalism to every visiting client and partner.",
+      "features": [
+        "Desks, chairs and workstation sanitisation",
+        "Reception and common area cleaning",
+        "Meeting room preparation and cleaning",
+        "Kitchen and breakroom cleaning",
+        "Restroom deep cleaning and restocking",
+        "Floor vacuuming, sweeping and mopping",
+        "Waste collection and recycling management"
+      ],
+      "includes": [
+        "Open-plan office areas",
+        "Meeting & conference rooms",
+        "Reception & lobby",
+        "Restrooms",
+        "Staff kitchen & break room",
+        "Corridors & stairwells"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Schedule a Visit",
+          "description": "Contact us and we will arrange a free on-site assessment to understand your needs."
+        },
+        {
+          "step": 2,
+          "title": "Custom Plan",
+          "description": "We create a bespoke cleaning schedule tailored to your office size and hours."
+        },
+        {
+          "step": 3,
+          "title": "Regular Cleaning",
+          "description": "Our team arrives as scheduled and delivers consistent, high-quality results every time."
+        },
+        {
+          "step": 4,
+          "title": "Ongoing Support",
+          "description": "We stay in touch with regular check-ins and adapt our service as your needs change."
         }
       ]
     },
@@ -1025,6 +1078,93 @@
       ],
       "slug": "mastering-bathroom-hygiene-and-tile-care",
       "numericId": "6"
+    },
+    {
+      "id": "eco-friendly-cleaning-practices-for-healthy-homes",
+      "title": "Eco-Friendly Cleaning: Green Solutions for a Healthy Home",
+      "category": "Cleaning Tips",
+      "date": "August 12, 2026",
+      "shortDate": "Aug 12, 2026",
+      "day": "12",
+      "month": "AUG",
+      "author": "Admin",
+      "role": "Green Cleaning Expert",
+      "image": "/services/deep-cleaning.webp",
+      "comments": 7,
+      "content": [
+        {
+          "heading": "The Power of Plant-Based Cleaning Agents",
+          "text": "Traditional household chemical cleaners often contain volatile organic compounds (VOCs) that irritate respiratory tracts and degrade indoor air quality. Switching to biodegradable, enzyme-based solutions cleans effectively without leaving harmful residues on dining tables or floors where children and pets play."
+        },
+        {
+          "heading": "Reducing Water and Plastic Waste",
+          "text": "Sustainable cleaning isn't just about ingredients; it's also about methodology. Microfiber technology captures 99% of bacteria using minimal water, while refillable concentrate bottles eliminate single-use plastics from landfills."
+        },
+        {
+          "heading": "Natural Disinfectants That Actually Work",
+          "text": "Distilled white vinegar, hydrogen peroxide, and essential oils like tea tree and eucalyptus provide natural antibacterial and antifungal properties that sanitize high-touch zones safely."
+        }
+      ],
+      "slug": "eco-friendly-cleaning-practices-for-healthy-homes",
+      "numericId": "7"
+    },
+    {
+      "id": "post-construction-cleaning-checklist",
+      "title": "The Ultimate Post-Construction Cleaning & Dust Removal Guide",
+      "category": "Deep Cleaning",
+      "date": "August 05, 2026",
+      "shortDate": "Aug 05, 2026",
+      "day": "05",
+      "month": "AUG",
+      "author": "Admin",
+      "role": "Facility Supervisor",
+      "image": "/services/commercial-cleaning.webp",
+      "comments": 10,
+      "content": [
+        {
+          "heading": "Capturing Airborne Drywall Particulates",
+          "text": "Remodeling and new construction leave microscopic silica and drywall dust that settles on every conceivable surface. Standard vacuums recirculate this dust back into the air; industrial HEPA filtration vacuums are essential for genuine particulate capture."
+        },
+        {
+          "heading": "Protecting Fresh Finishes and Hardwood",
+          "text": "Grout haze on freshly laid tile, paint overspray on window glass, and adhesive residue on new cabinetry require specialized, non-abrasive scrapers and neutral pH solutions to avoid surface scratching."
+        },
+        {
+          "heading": "Multi-Stage Detailing Before Move-In",
+          "text": "Post-construction cleaning requires a rough clean for large debris, a deep scrub of surfaces and HVAC vents, and a final touch-up polish just before furniture installation."
+        }
+      ],
+      "slug": "post-construction-cleaning-checklist",
+      "numericId": "8"
+    },
+    {
+      "id": "seasonal-spring-cleaning-checklist-for-every-room",
+      "title": "Seasonal Spring Cleaning: Resetting Your Home Room by Room",
+      "category": "Home Cleaning",
+      "date": "July 28, 2026",
+      "shortDate": "Jul 28, 2026",
+      "day": "28",
+      "month": "JUL",
+      "author": "Admin",
+      "role": "Home Organizer",
+      "image": "/services/window-cleaning.webp",
+      "comments": 16,
+      "content": [
+        {
+          "heading": "Decluttering Before Deep Scrubbing",
+          "text": "The secret to an effortless seasonal reset is clearing horizontal surfaces first. Donate unused items, organize storage bins, and create open space so vacuuming and wiping can proceed without obstacles."
+        },
+        {
+          "heading": "Refreshing Mattress & Upholstery Deep Fibers",
+          "text": "Spring is the ideal time to flip mattresses, steam clean fabric sofas, and launder heavy winter drapes to eliminate trapped dust mites before seasonal allergies peak."
+        },
+        {
+          "heading": "Window Glass & Screen Rejuvenation",
+          "text": "Washing screens and wiping interior window tracks allows fresh spring breezes to circulate through your home without blowing trapped dust back into living areas."
+        }
+      ],
+      "slug": "seasonal-spring-cleaning-checklist-for-every-room",
+      "numericId": "9"
     }
   ],
   "categories": [
@@ -1510,6 +1650,54 @@
         "type": "video",
         "category": "Carpet & Upholstery",
         "title": "Carpet & upholstery cleaning process",
+        "image": "/services/carpet-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 25,
+        "type": "video",
+        "category": "Deep Cleaning",
+        "title": "Sanitization and disinfection process",
+        "image": "/why-chooseUs.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 26,
+        "type": "video",
+        "category": "Home Cleaning",
+        "title": "Eco-friendly living space care",
+        "image": "/services/home-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 27,
+        "type": "video",
+        "category": "Office Cleaning",
+        "title": "Corporate workspace detailing",
+        "image": "/services/office-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 28,
+        "type": "video",
+        "category": "Kitchen Cleaning",
+        "title": "Appliance and stovetop deep scrub",
+        "image": "/services/kitchen-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 29,
+        "type": "video",
+        "category": "Bathroom Cleaning",
+        "title": "Tile and shower grout revitalization",
+        "image": "/services/bathroom-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 30,
+        "type": "video",
+        "category": "Carpet & Upholstery",
+        "title": "Steam extraction and stain removal",
         "image": "/services/carpet-cleaning.webp",
         "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       }

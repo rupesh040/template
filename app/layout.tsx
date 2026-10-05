@@ -77,8 +77,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${lato.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className={`${lato.className} min-h-full bg-white font-sans`}>
+      <body
+        className={`${lato.className} min-h-full bg-white font-sans`}
+        suppressHydrationWarning
+      >
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

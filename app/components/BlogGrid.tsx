@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   ArrowRight,
   ChevronLeft,
@@ -11,9 +12,18 @@ import { useEffect, useRef, useState } from "react";
 import content from "../data/content.json";
 
 const blogs = content.blogs;
-const blogsPerPage = 6;
 
-export default function BlogGrid() {
+interface BlogGridProps {
+  limit?: number;
+  itemsPerPage?: number;
+}
+
+export default function BlogGrid({
+  limit,
+  itemsPerPage = 6,
+}: BlogGridProps = {}) {
+  const pathname = usePathname();
+  const isBlogsPage = pathname === "/blogs";
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,14 +63,21 @@ export default function BlogGrid() {
     };
   }, []);
 
-  const totalPages = Math.ceil(blogs.length / blogsPerPage);
+  const pageSize = itemsPerPage ?? 6;
+  const totalPages = Math.ceil(blogs.length / pageSize);
 
-  const startIndex = (currentPage - 1) * blogsPerPage;
+  const cardLimit = limit !== undefined ? limit : 6;
+  const startIndex = (currentPage - 1) * pageSize;
 
-  const currentBlogs = blogs.slice(
-    startIndex,
-    startIndex + blogsPerPage,
-  );
+  const currentBlogs = isBlogsPage
+    ? blogs.slice(startIndex, startIndex + pageSize)
+    : blogs.slice(0, cardLimit);
+
+  const shouldShowPagination = isBlogsPage && totalPages > 1;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [pathname]);
 
   const goToPage = (page: number) => {
     if (page < 1 || page > totalPages) {
@@ -69,10 +86,17 @@ export default function BlogGrid() {
 
     setCurrentPage(page);
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    if (sectionRef.current) {
+      sectionRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
@@ -143,7 +167,7 @@ export default function BlogGrid() {
           })}
         </div>
 
-        {totalPages > 1 && (
+        {shouldShowPagination && (
           <div
             style={{ animationDelay: `${120 + currentBlogs.length * 80 + 80}ms` }}
             className={`mt-10 flex items-center justify-center gap-2 sm:mt-12 ${

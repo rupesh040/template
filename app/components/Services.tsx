@@ -36,12 +36,16 @@ interface ServicesProps {
   limit?: number;
   showViewAll?: boolean;
   layout?: "slider" | "grid";
+  itemsPerPage?: number;
+  excludeId?: string;
 }
 
 export default function Services({
   limit,
   showViewAll,
   layout,
+  itemsPerPage,
+  excludeId,
 }: ServicesProps = {}) {
   const pathname = usePathname();
   const isServicesPage = pathname === "/services";
@@ -57,9 +61,33 @@ export default function Services({
 
   const allServices = content.services;
 
-  const cardLimit = limit !== undefined ? limit : isServicesPage ? 0 : 8;
-  const displayedServices =
-    cardLimit > 0 ? allServices.slice(0, cardLimit) : allServices;
+  const activeExcludeId =
+    excludeId ??
+    (pathname.startsWith("/services/")
+      ? pathname.replace("/services/", "").split("/")[0]
+      : pathname.startsWith("/serviceDetail/")
+      ? pathname.replace("/serviceDetail/", "").split("/")[0]
+      : undefined);
+
+  const availableServices = activeExcludeId
+    ? allServices.filter((s) => s.id !== activeExcludeId)
+    : allServices;
+
+  const pageSize =
+    itemsPerPage ??
+    (content.servicesSection as { itemsPerPage?: number }).itemsPerPage ??
+    8;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(availableServices.length / pageSize);
+
+  const cardLimit = limit !== undefined ? limit : 8;
+  const displayedServices = isServicesPage
+    ? availableServices.slice(
+        (currentPage - 1) * pageSize,
+        currentPage * pageSize,
+      )
+    : availableServices.slice(0, cardLimit);
   const shouldShowViewAll =
     showViewAll !== undefined ? showViewAll : !isServicesPage;
 
@@ -69,6 +97,18 @@ export default function Services({
   const [isPaused, setIsPaused] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [pathname, activeExcludeId]);
+
+  const goToPage = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+    if (sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -225,7 +265,7 @@ export default function Services({
               const Icon = iconMap[service.icon] ?? Home;
               return (
                 <ServiceCard
-                  key={service.id}
+                  key={`${service.id}-${idx}`}
                   id={service.id}
                   title={service.title}
                   description={service.description}
@@ -269,7 +309,7 @@ export default function Services({
                 const Icon = iconMap[service.icon] ?? Home;
                 return (
                   <ServiceCard
-                    key={service.id}
+                    key={`${service.id}-${idx}`}
                     id={service.id}
                     title={service.title}
                     description={service.description}
@@ -294,6 +334,54 @@ export default function Services({
               }`}
             >
               <ChevronRight size={22} strokeWidth={2.2} className="ml-0.5 sm:h-[26px] sm:w-[26px]" />
+            </button>
+          </div>
+        )}
+
+        {isServicesPage && totalPages > 1 && (
+          <div
+            style={{
+              animationDelay: `${450 + displayedServices.length * 80 + 80}ms`,
+            }}
+            className={`mt-10 flex items-center justify-center gap-2 sm:mt-12 ${
+              isVisible ? "animate-fade-in-scale" : "opacity-0"
+            }`}
+          >
+            <button
+              type="button"
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              aria-label="Previous page"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#092a43] transition-all hover:border-[#10aa3a] hover:text-[#10aa3a] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
+            >
+              <ChevronLeft size={20} />
+            </button>
+
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+              (page) => (
+                <button
+                  key={page}
+                  type="button"
+                  onClick={() => goToPage(page)}
+                  className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-all cursor-pointer ${
+                    currentPage === page
+                      ? "bg-[#10aa3a] text-white shadow-md scale-105"
+                      : "border border-gray-200 bg-white text-[#092a43] hover:border-[#10aa3a] hover:text-[#10aa3a]"
+                  }`}
+                >
+                  {page}
+                </button>
+              ),
+            )}
+
+            <button
+              type="button"
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              aria-label="Next page"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#092a43] transition-all hover:border-[#10aa3a] hover:text-[#10aa3a] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
+            >
+              <ChevronRight size={20} />
             </button>
           </div>
         )}

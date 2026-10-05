@@ -52,7 +52,7 @@ export default async function ServiceDetailPage({
       />
 
       <ProfessionalCleaning serviceId={id} />
-      <Services />
+      <Services excludeId={id} />
     </>
   );
 }
