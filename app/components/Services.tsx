@@ -211,13 +211,11 @@ export default function Services({
           </p>
 
           <Image
-            src={leafImage}
+           src={leafImage}
             alt="leaf"
             width={60}
             height={60}
-            className={`pointer-events-none absolute right-0 top-1 h-auto w-[46px] -scale-x-100 rotate-[240deg] transition-all duration-700 sm:right-2 sm:top-2 sm:w-[58px] ${
-              isVisible ? "scale-100 opacity-100" : "scale-75 opacity-0"
-            }`}
+            className="absolute right-0 top-0"
           />
         </div>
 

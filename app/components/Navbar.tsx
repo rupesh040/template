@@ -386,7 +386,7 @@ export default function Navbar() {
       >
         <div
           className={`
-            min-h-0 overflow-hidden border-t border-gray-100 bg-white shadow-lg
+            min-h-0 overflow-hidden   bg-white shadow-lg
             transition-transform duration-300 ease-in-out
             ${mobileMenuOpen ? "translate-y-0" : "-translate-y-2"}
           `}
