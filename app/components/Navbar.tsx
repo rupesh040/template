@@ -32,6 +32,9 @@ const {
   rightMenu,
 } = content.navbar;
 const { phone, phoneHref, email, emailHref } = content.site;
+const mailtoHref = emailHref.startsWith("mailto:")
+  ? emailHref
+  : `mailto:${emailHref}`;
 
 const socialLinks = rawSocial.map((s) => ({
   ...s,
@@ -114,7 +117,7 @@ export default function Navbar() {
             </a>
 
             <a
-              href={emailHref}
+              href={mailtoHref}
               aria-label="Email PureShine"
               className="
                 ml-4 flex items-center gap-2 whitespace-nowrap text-sm
@@ -370,7 +373,7 @@ export default function Navbar() {
               <span>{phone}</span>
             </a>
             <a
-              href={emailHref}
+              href={mailtoHref}
               className="flex items-center gap-2 hover:text-[#42b83c]"
             >
               <Mail size={14} className="text-[#42b83c]" />
