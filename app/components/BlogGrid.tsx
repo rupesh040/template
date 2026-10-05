@@ -7,14 +7,51 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import content from "../data/content.json";
 
 const blogs = content.blogs;
 const blogsPerPage = 6;
 
 export default function BlogGrid() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
+    }
+
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const timer = setTimeout(() => setIsVisible(true), 60);
+      return () => clearTimeout(timer);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.05,
+        rootMargin: "0px 0px -20px 0px",
+      },
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const totalPages = Math.ceil(blogs.length / blogsPerPage);
 
@@ -39,15 +76,18 @@ export default function BlogGrid() {
   };
 
   return (
-    <section className="w-full bg-white py-6">
+    <section ref={sectionRef} className="w-full bg-white py-6">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {currentBlogs.map((blog) => {
+          {currentBlogs.map((blog, idx) => {
             const blogSlug = (blog as any).slug || blog.id;
             return (
               <article
                 key={blog.id}
-                className="group overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-[0_4px_18px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
+                style={{ animationDelay: `${120 + idx * 80}ms` }}
+                className={`group overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-[0_4px_18px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.12)] ${
+                  isVisible ? "animate-fade-in-up" : "opacity-0"
+                }`}
               >
                 <Link
                   href={`/blogs/${blogSlug}`}
@@ -104,13 +144,18 @@ export default function BlogGrid() {
         </div>
 
         {totalPages > 1 && (
-          <div className="mt-10 flex items-center justify-center gap-2 sm:mt-12">
+          <div
+            style={{ animationDelay: `${120 + currentBlogs.length * 80 + 80}ms` }}
+            className={`mt-10 flex items-center justify-center gap-2 sm:mt-12 ${
+              isVisible ? "animate-fade-in-scale" : "opacity-0"
+            }`}
+          >
             <button
               type="button"
               onClick={() => goToPage(currentPage - 1)}
               disabled={currentPage === 1}
               aria-label="Previous page"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#092a43] transition-all hover:border-[#11952b] hover:text-[#11952b] disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#092a43] transition-all hover:border-[#11952b] hover:text-[#11952b] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
             >
               <ChevronLeft size={20} />
             </button>
@@ -123,7 +168,7 @@ export default function BlogGrid() {
                 key={page}
                 type="button"
                 onClick={() => goToPage(page)}
-                className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-all ${
+                className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-all cursor-pointer ${
                   currentPage === page
                     ? "bg-[#11952b] text-white shadow-md"
                     : "border border-gray-200 bg-white text-[#092a43] hover:border-[#11952b] hover:text-[#11952b]"
@@ -138,7 +183,7 @@ export default function BlogGrid() {
               onClick={() => goToPage(currentPage + 1)}
               disabled={currentPage === totalPages}
               aria-label="Next page"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#092a43] transition-all hover:border-[#11952b] hover:text-[#11952b] disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#092a43] transition-all hover:border-[#11952b] hover:text-[#11952b] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
             >
               <ChevronRight size={20} />
             </button>
