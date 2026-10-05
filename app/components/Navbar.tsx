@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Mail, Menu, Phone, X } from "lucide-react";
 import {
   FaFacebookF,
@@ -48,8 +48,13 @@ const socialLinks = rawSocial.map((s) => ({
 }));
 
 export default function Navbar() {
+  const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -61,6 +66,35 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [mobileMenuOpen]);
+
   const isActive = (href: string) => {
     if (href === "/") {
       return pathname === "/";
@@ -70,7 +104,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="relative z-50 w-full">
+    <header ref={headerRef} className="relative z-50 w-full">
       <div className="relative h-[58px] bg-[#092a43] text-white sm:h-[63px]">
         <div
           className="
@@ -301,6 +335,7 @@ export default function Navbar() {
 
         <Link
           href="/"
+          onClick={() => setMobileMenuOpen(false)}
           className="
             absolute left-1/2 top-0 flex -translate-x-1/2
             items-center justify-center
