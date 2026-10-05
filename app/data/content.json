@@ -1143,9 +1143,9 @@
         "assistance": {
           "icon": "Headphones",
           "title": "Need Immediate Assistance?",
-          "subtitle": "Call us now: (+61 3 8376 6284)",
-          "phone": "(+61 3 8376 6284)",
-          "phoneHref": "tel:+61383766284"
+          "subtitle": "Call us now: (+1 0000000000)",
+          "phone": "(+1 0000000000)",
+          "phoneHref": "tel:+10000000000"
         }
       }
     },
