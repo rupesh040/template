@@ -234,8 +234,8 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   className={`
-                    relative flex h-full items-center whitespace-nowrap
-                    text-[14px] font-semibold xl:text-[15px]
+                    group relative flex h-full items-center whitespace-nowrap
+                    text-[14px] font-semibold transition-colors duration-200 xl:text-[15px]
                     ${
                       active
                         ? "text-[#42b83c]"
@@ -245,14 +245,18 @@ export default function Navbar() {
                 >
                   {item.name}
 
-                  {active && (
-                    <span
-                      className="
-                        absolute bottom-[12px] left-0 h-[2px] w-full
-                        bg-[#42b83c]
-                      "
-                    />
-                  )}
+                  <span
+                    className={`
+                      absolute bottom-[12px] left-0 h-[2.5px] w-full rounded-full
+                      bg-gradient-to-r from-[#42b83c] via-[#52d24b] to-[#42b83c]
+                      transition-all duration-300 ease-out origin-left
+                      ${
+                        active
+                          ? "scale-x-100 opacity-100 shadow-[0_2px_8px_rgba(66,184,60,0.4)]"
+                          : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                      }
+                    `}
+                  />
                 </Link>
               );
             })}
@@ -272,8 +276,8 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   className={`
-                    relative flex h-full items-center gap-1 whitespace-nowrap
-                    text-[14px] font-semibold transition duration-200
+                    group relative flex h-full items-center gap-1 whitespace-nowrap
+                    text-[14px] font-semibold transition-colors duration-200
                     xl:text-[15px]
                     ${
                       active
@@ -283,14 +287,19 @@ export default function Navbar() {
                   `}
                 >
                   {item.name}
-                  {active && (
-                    <span
-                      className="
-                        absolute bottom-[12px] left-0 h-[2px] w-full
-                        bg-[#42b83c]
-                      "
-                    />
-                  )}
+
+                  <span
+                    className={`
+                      absolute bottom-[12px] left-0 h-[2.5px] w-full rounded-full
+                      bg-gradient-to-r from-[#42b83c] via-[#52d24b] to-[#42b83c]
+                      transition-all duration-300 ease-out origin-left
+                      ${
+                        active
+                          ? "scale-x-100 opacity-100 shadow-[0_2px_8px_rgba(66,184,60,0.4)]"
+                          : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                      }
+                    `}
+                  />
                 </Link>
               );
             })}
@@ -401,12 +410,28 @@ export default function Navbar() {
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`
-                    border-b border-gray-100 px-6 py-4
-                    text-sm font-semibold transition-colors duration-200
-                    ${active ? "bg-[#f4fff5] text-[#42b83c]" : "text-[#17202a]"}
+                    group relative flex items-center justify-between border-b border-gray-100 px-6 py-4
+                    text-sm font-semibold transition-all duration-200
+                    ${
+                      active
+                        ? "bg-[#f4fff5] text-[#42b83c]"
+                        : "text-[#17202a] hover:bg-gray-50 hover:text-[#42b83c]"
+                    }
                   `}
                 >
-                  {item.name}
+                  <span className="relative">
+                    {item.name}
+                    <span
+                      className={`
+                        absolute -bottom-1 left-0 h-[2px] w-full rounded-full bg-[#42b83c]
+                        transition-all duration-300 ease-out origin-left
+                        ${active ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"}
+                      `}
+                    />
+                  </span>
+                  {active && (
+                    <span className="h-2 w-2 rounded-full bg-[#42b83c] shadow-[0_0_8px_rgba(66,184,60,0.6)]" />
+                  )}
                 </Link>
               );
             })}
@@ -420,12 +445,28 @@ export default function Navbar() {
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`
-                    border-b border-gray-100 px-6 py-4
-                    text-sm font-semibold transition-colors duration-200
-                    ${active ? "bg-[#f4fff5] text-[#42b83c]" : "text-[#17202a]"}
+                    group relative flex items-center justify-between border-b border-gray-100 px-6 py-4
+                    text-sm font-semibold transition-all duration-200
+                    ${
+                      active
+                        ? "bg-[#f4fff5] text-[#42b83c]"
+                        : "text-[#17202a] hover:bg-gray-50 hover:text-[#42b83c]"
+                    }
                   `}
                 >
-                  {item.name}
+                  <span className="relative">
+                    {item.name}
+                    <span
+                      className={`
+                        absolute -bottom-1 left-0 h-[2px] w-full rounded-full bg-[#42b83c]
+                        transition-all duration-300 ease-out origin-left
+                        ${active ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"}
+                      `}
+                    />
+                  </span>
+                  {active && (
+                    <span className="h-2 w-2 rounded-full bg-[#42b83c] shadow-[0_0_8px_rgba(66,184,60,0.6)]" />
+                  )}
                 </Link>
               );
             })}
