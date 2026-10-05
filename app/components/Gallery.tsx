@@ -35,6 +35,8 @@ const {
 const galleryItems: GalleryItem[] = rawItems as GalleryItem[];
 const PHOTOS_PER_PAGE = rawItemsPerPage || 9;
 const VIDEOS_PER_PAGE = 6;
+const CATEGORY_PHOTOS_PER_PAGE = 3;
+const CATEGORY_VIDEOS_PER_PAGE = 2;
 
 function getEmbedUrl(url?: string): string {
   if (!url) return "";
@@ -58,8 +60,18 @@ export default function Gallery() {
   const [activeType, setActiveType] = useState<GalleryType>("photo");
   const [activeCategory, setActiveCategory] = useState("All Photos");
   const [currentPage, setCurrentPage] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
   const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(null);
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -192,7 +204,17 @@ export default function Gallery() {
     };
   }, [selectedVideoIndex, videoItems.length]);
 
-  const itemsPerPage = activeType === "video" ? VIDEOS_PER_PAGE : PHOTOS_PER_PAGE;
+  const isAllCategory = isAll(activeCategory);
+
+  const itemsPerPage = isMobile
+    ? 4
+    : isAllCategory
+      ? activeType === "video"
+        ? VIDEOS_PER_PAGE
+        : PHOTOS_PER_PAGE
+      : activeType === "video"
+        ? CATEGORY_VIDEOS_PER_PAGE
+        : CATEGORY_PHOTOS_PER_PAGE;
 
   const totalPages = Math.max(
     1,
@@ -203,6 +225,10 @@ export default function Gallery() {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeType, activeCategory, isMobile]);
 
   const changeType = (type: GalleryType) => {
     setActiveType(type);
@@ -432,7 +458,7 @@ export default function Gallery() {
             </button>
           </div>
         )}
-        {totalPages > 1 && (
+        {filteredItems.length > 0 && (
           <div
             style={{ animationDelay: "600ms" }}
             className={`mt-8 flex items-center justify-center gap-2 ${

@@ -107,7 +107,7 @@ export default function AboutHero({
             <nav
               aria-label="Breadcrumb"
               style={{ animationDelay: "280ms" }}
-              className="animate-fade-in-up mt-5 inline-flex max-w-full flex-wrap items-center gap-y-1 rounded-full border border-white/30 bg-black/25 px-5 py-2.5 backdrop-blur-md shadow-lg transition-all duration-300 hover:border-white/50 hover:bg-black/35 sm:mt-6 sm:px-6 sm:py-3"
+              className="animate-fade-in-up mt-4 inline-flex max-w-full flex-wrap items-center gap-y-1 rounded-2xl sm:rounded-full border border-white/30 bg-black/30 px-4 py-2 sm:mt-6 sm:px-6 sm:py-2.5 backdrop-blur-md shadow-lg transition-all duration-300 hover:border-white/50 hover:bg-black/40"
             >
               {items.map((item, index) => {
                 const isLast = index === items.length - 1;
@@ -115,24 +115,27 @@ export default function AboutHero({
                 return (
                   <div
                     key={`${item.label}-${index}`}
-                    className="flex items-center"
+                    className="flex min-w-0 items-center"
                   >
                     {index > 0 && (
                       <ArrowRight
-                        size={16}
-                        strokeWidth={2}
-                        className="mx-2.5 shrink-0 text-white/80 transition-transform duration-300 group-hover:translate-x-0.5 sm:mx-3"
+                        size={15}
+                        strokeWidth={2.5}
+                        className="mx-2 shrink-0 text-white/70 sm:mx-2.5"
                       />
                     )}
 
                     {isLast || !item.href ? (
-                      <span className="text-sm font-semibold text-[#f4c430] sm:text-[15px]">
+                      <span
+                        title={item.label}
+                        className="block max-w-[160px] truncate text-xs font-semibold text-[#f4c430] min-[400px]:max-w-[220px] min-[500px]:max-w-[280px] sm:max-w-[380px] md:max-w-[500px] lg:max-w-none sm:text-sm"
+                      >
                         {item.label}
                       </span>
                     ) : (
                       <Link
                         href={item.href}
-                        className="text-sm font-medium text-white/90 transition-all duration-200 hover:text-[#42c943] hover:underline sm:text-[15px]"
+                        className="shrink-0 text-xs font-medium text-white/90 transition-all duration-200 hover:text-[#42c943] hover:underline sm:text-sm"
                       >
                         {item.label}
                       </Link>

@@ -27,6 +27,16 @@ export default function BlogGrid({
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -63,10 +73,10 @@ export default function BlogGrid({
     };
   }, []);
 
-  const pageSize = itemsPerPage ?? 6;
+  const pageSize = isMobile ? 4 : (itemsPerPage ?? 6);
   const totalPages = Math.ceil(blogs.length / pageSize);
 
-  const cardLimit = limit !== undefined ? limit : 6;
+  const cardLimit = limit !== undefined ? limit : (isMobile ? 4 : 6);
   const startIndex = (currentPage - 1) * pageSize;
 
   const currentBlogs = isBlogsPage
@@ -77,7 +87,7 @@ export default function BlogGrid({
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [pathname]);
+  }, [pathname, isMobile]);
 
   const goToPage = (page: number) => {
     if (page < 1 || page > totalPages) {

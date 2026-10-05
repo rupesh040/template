@@ -1700,6 +1700,358 @@
         "title": "Steam extraction and stain removal",
         "image": "/services/carpet-cleaning.webp",
         "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 31,
+        "type": "photo",
+        "category": "Deep Cleaning",
+        "title": "Comprehensive room deep sanitation",
+        "image": "/why-chooseUs.webp"
+      },
+      {
+        "id": 32,
+        "type": "photo",
+        "category": "Deep Cleaning",
+        "title": "Detailed surface scrubbing",
+        "image": "/about-hero.webp"
+      },
+      {
+        "id": 33,
+        "type": "photo",
+        "category": "Bathroom Cleaning",
+        "title": "Sparkling porcelain and tile finish",
+        "image": "/services/bathroom-cleaning.webp"
+      },
+      {
+        "id": 34,
+        "type": "photo",
+        "category": "Bathroom Cleaning",
+        "title": "Mirror and glass polishing",
+        "image": "/services/bathroom-cleaning.webp"
+      },
+      {
+        "id": 35,
+        "type": "photo",
+        "category": "Before & After",
+        "title": "Kitchen deep clean before and after",
+        "image": "/services/kitchen-cleaning.webp"
+      },
+      {
+        "id": 36,
+        "type": "photo",
+        "category": "Before & After",
+        "title": "Tile floor shine before and after",
+        "image": "/why-chooseUs.webp"
+      },
+      {
+        "id": 37,
+        "type": "photo",
+        "category": "Before & After",
+        "title": "Living space revival before and after",
+        "image": "/services/home-cleaning.webp"
+      },
+      {
+        "id": 38,
+        "type": "photo",
+        "category": "Kitchen Cleaning",
+        "title": "Countertop and stove degreasing",
+        "image": "/services/kitchen-cleaning.webp"
+      },
+      {
+        "id": 39,
+        "type": "photo",
+        "category": "Office Cleaning",
+        "title": "Conference room hygienic tidying",
+        "image": "/services/office-cleaning.webp"
+      },
+      {
+        "id": 40,
+        "type": "photo",
+        "category": "Carpet & Upholstery",
+        "title": "Deep fabric wash and vacuuming",
+        "image": "/services/carpet-cleaning.webp"
+      },
+      {
+        "id": 41,
+        "type": "photo",
+        "category": "Home Cleaning",
+        "title": "Fresh bedroom dusting and arrangement",
+        "image": "/services/home-cleaning.webp"
+      },
+      {
+        "id": 42,
+        "type": "video",
+        "category": "Before & After",
+        "title": "Transformation reveal walkthrough",
+        "image": "/why-chooseUs.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 43,
+        "type": "video",
+        "category": "Before & After",
+        "title": "Full house cleanup comparison",
+        "image": "/about-hero.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 44,
+        "type": "video",
+        "category": "Home Cleaning",
+        "title": "Living room step-by-step clean",
+        "image": "/services/home-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 45,
+        "type": "video",
+        "category": "Office Cleaning",
+        "title": "Commercial cubicle sanitized sweep",
+        "image": "/services/office-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 46,
+        "type": "video",
+        "category": "Deep Cleaning",
+        "title": "Heavy grime removal and steam treatment",
+        "image": "/why-chooseUs.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 47,
+        "type": "video",
+        "category": "Kitchen Cleaning",
+        "title": "Cabinet and exhaust fan degreasing",
+        "image": "/services/kitchen-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 48,
+        "type": "video",
+        "category": "Bathroom Cleaning",
+        "title": "Sanitary wash and glass restoration",
+        "image": "/services/bathroom-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 49,
+        "type": "video",
+        "category": "Carpet & Upholstery",
+        "title": "Deep pile shampoo and dry extract",
+        "image": "/services/carpet-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 50,
+        "type": "video",
+        "category": "Before & After",
+        "title": "Property renewal final inspection",
+        "image": "/services/home-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 51,
+        "type": "photo",
+        "category": "Home Cleaning",
+        "title": "Spotless master suite sanctuary",
+        "image": "/services/home-cleaning.webp"
+      },
+      {
+        "id": 52,
+        "type": "photo",
+        "category": "Kitchen Cleaning",
+        "title": "Pantry organization and sanitation",
+        "image": "/services/kitchen-cleaning.webp"
+      },
+      {
+        "id": 53,
+        "type": "photo",
+        "category": "Kitchen Cleaning",
+        "title": "Sink and backsplash detailing",
+        "image": "/services/kitchen-cleaning.webp"
+      },
+      {
+        "id": 54,
+        "type": "photo",
+        "category": "Carpet & Upholstery",
+        "title": "Pet stain removal treatment",
+        "image": "/services/carpet-cleaning.webp"
+      },
+      {
+        "id": 55,
+        "type": "photo",
+        "category": "Carpet & Upholstery",
+        "title": "Wool rug gentle washing",
+        "image": "/services/carpet-cleaning.webp"
+      },
+      {
+        "id": 56,
+        "type": "photo",
+        "category": "Bathroom Cleaning",
+        "title": "Walk-in shower tile restoration",
+        "image": "/services/bathroom-cleaning.webp"
+      },
+      {
+        "id": 57,
+        "type": "photo",
+        "category": "Bathroom Cleaning",
+        "title": "Faucet and chrome de-scaling",
+        "image": "/services/bathroom-cleaning.webp"
+      },
+      {
+        "id": 58,
+        "type": "photo",
+        "category": "Office Cleaning",
+        "title": "Reception lobby floor buffing",
+        "image": "/services/office-cleaning.webp"
+      },
+      {
+        "id": 59,
+        "type": "photo",
+        "category": "Office Cleaning",
+        "title": "Breakroom sanitization service",
+        "image": "/services/office-cleaning.webp"
+      },
+      {
+        "id": 60,
+        "type": "photo",
+        "category": "Deep Cleaning",
+        "title": "Baseboard and trim wiping",
+        "image": "/why-chooseUs.webp"
+      },
+      {
+        "id": 61,
+        "type": "photo",
+        "category": "Deep Cleaning",
+        "title": "Behind-appliance deep vacuuming",
+        "image": "/about-hero.webp"
+      },
+      {
+        "id": 62,
+        "type": "photo",
+        "category": "Before & After",
+        "title": "Basement cleanup before and after",
+        "image": "/services/home-cleaning.webp"
+      },
+      {
+        "id": 63,
+        "type": "photo",
+        "category": "Before & After",
+        "title": "Wood floor polish transformation",
+        "image": "/why-chooseUs.webp"
+      },
+      {
+        "id": 64,
+        "type": "video",
+        "category": "Home Cleaning",
+        "title": "Family room dusting routine",
+        "image": "/services/home-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 65,
+        "type": "video",
+        "category": "Home Cleaning",
+        "title": "Staircase vacuuming technique",
+        "image": "/services/home-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 66,
+        "type": "video",
+        "category": "Kitchen Cleaning",
+        "title": "Oven interior deep cleaning",
+        "image": "/services/kitchen-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 67,
+        "type": "video",
+        "category": "Kitchen Cleaning",
+        "title": "Sink basin stain scrubbing",
+        "image": "/services/kitchen-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 68,
+        "type": "video",
+        "category": "Deep Cleaning",
+        "title": "Air vent and radiator dusting",
+        "image": "/why-chooseUs.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 69,
+        "type": "video",
+        "category": "Deep Cleaning",
+        "title": "High-touch surface disinfection",
+        "image": "/about-hero.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 70,
+        "type": "video",
+        "category": "Bathroom Cleaning",
+        "title": "Shower glass limescale removal",
+        "image": "/services/bathroom-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 71,
+        "type": "video",
+        "category": "Bathroom Cleaning",
+        "title": "Grout steam cleaning demonstration",
+        "image": "/services/bathroom-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 72,
+        "type": "video",
+        "category": "Office Cleaning",
+        "title": "Workstation sanitizing protocol",
+        "image": "/services/office-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 73,
+        "type": "video",
+        "category": "Office Cleaning",
+        "title": "Office carpet extraction clean",
+        "image": "/services/office-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 74,
+        "type": "video",
+        "category": "Carpet & Upholstery",
+        "title": "Heavy traffic hallway shampooing",
+        "image": "/services/carpet-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 75,
+        "type": "video",
+        "category": "Carpet & Upholstery",
+        "title": "Velvet armchair fabric refresh",
+        "image": "/services/carpet-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 76,
+        "type": "video",
+        "category": "Before & After",
+        "title": "Kitchen transformation walkthrough",
+        "image": "/services/kitchen-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 77,
+        "type": "video",
+        "category": "Before & After",
+        "title": "Office restoration before and after",
+        "image": "/services/office-cleaning.webp",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       }
     ],
     "hero": {
