@@ -264,7 +264,7 @@
       "badge": "Our Services",
       "title": "Home Cleaning",
       "description": "A clean and healthy home for a happier you.",
-      "image": "/services/home-cleaning.png",
+      "image": "/services/home-cleaning.webp",
       "imageAlt": "Professional home cleaning service",
       "icon": "Home",
       "darkIcon": true,
@@ -316,7 +316,7 @@
       "badge": "Our Services",
       "title": "Office Cleaning",
       "description": "Bright, clean workspaces boost productivity.",
-      "image": "/services/office-cleaning.png",
+      "image": "/services/office-cleaning.webp",
       "imageAlt": "Professional office cleaning service",
       "icon": "Building2",
       "darkIcon": false,
@@ -368,7 +368,7 @@
       "badge": "Our Services",
       "title": "Kitchen Cleaning",
       "description": "Hygienic and spotless kitchens for safer living.",
-      "image": "/services/kitchen-cleaning.png",
+      "image": "/services/kitchen-cleaning.webp",
       "imageAlt": "Professional kitchen cleaning service",
       "icon": "CookingPot",
       "darkIcon": true,
@@ -420,7 +420,7 @@
       "badge": "Our Services",
       "title": "Bathroom Cleaning",
       "description": "Deep cleaning for a fresh and germ-free bathroom.",
-      "image": "/services/bathroom-cleaning.png",
+      "image": "/services/bathroom-cleaning.webp",
       "imageAlt": "Professional bathroom cleaning service",
       "icon": "Bath",
       "darkIcon": false,
@@ -472,7 +472,7 @@
       "badge": "Our Services",
       "title": "Carpet & Sofa Cleaning",
       "description": "Remove dust, stains and allergens for a fresher home.",
-      "image": "/services/carpet-cleaning.png",
+      "image": "/services/carpet-cleaning.webp",
       "imageAlt": "Professional carpet & sofa cleaning service",
       "icon": "Sofa",
       "darkIcon": true,
@@ -524,7 +524,7 @@
       "badge": "Our Services",
       "title": "Window & Glass Cleaning",
       "description": "Streak-free shine and crystal-clear views for every window.",
-      "image": "/services/window-cleaning.jpg",
+      "image": "/services/window-cleaning.webp",
       "imageAlt": "Professional window and glass cleaning service",
       "icon": "Sparkles",
       "darkIcon": false,
@@ -576,7 +576,7 @@
       "badge": "Our Services",
       "title": "Deep & Move-In Cleaning",
       "description": "Intensive whole-home detailing and sanitization from top to bottom.",
-      "image": "/services/deep-cleaning.jpg",
+      "image": "/services/deep-cleaning.webp",
       "imageAlt": "Professional deep and move-in cleaning service",
       "icon": "ShieldCheck",
       "darkIcon": true,
@@ -628,7 +628,7 @@
       "badge": "Our Services",
       "title": "Commercial & Facility Cleaning",
       "description": "Industrial-grade facility maintenance and post-construction detailing.",
-      "image": "/services/commercial-cleaning.jpg",
+      "image": "/services/commercial-cleaning.webp",
       "imageAlt": "Professional commercial facility cleaning service",
       "icon": "Building",
       "darkIcon": false,
@@ -886,7 +886,7 @@
       "month": "SEP",
       "author": "Admin",
       "role": "Cleaning Expert",
-      "image": "/services/office-cleaning.png",
+      "image": "/services/office-cleaning.webp",
       "comments": 8,
       "content": [
         {
@@ -915,7 +915,7 @@
       "month": "SEP",
       "author": "Admin",
       "role": "Cleaning Expert",
-      "image": "/services/home-cleaning.png",
+      "image": "/services/home-cleaning.webp",
       "comments": 15,
       "content": [
         {
@@ -944,7 +944,7 @@
       "month": "SEP",
       "author": "Admin",
       "role": "Cleaning Expert",
-      "image": "/services/kitchen-cleaning.png",
+      "image": "/services/kitchen-cleaning.webp",
       "comments": 9,
       "content": [
         {
@@ -973,7 +973,7 @@
       "month": "AUG",
       "author": "Admin",
       "role": "Cleaning Expert",
-      "image": "/services/carpet-cleaning.png",
+      "image": "/services/carpet-cleaning.webp",
       "comments": 14,
       "content": [
         {
@@ -1002,7 +1002,7 @@
       "month": "AUG",
       "author": "Admin",
       "role": "Cleaning Expert",
-      "image": "/services/bathroom-cleaning.png",
+      "image": "/services/bathroom-cleaning.webp",
       "comments": 11,
       "content": [
         {
@@ -1359,7 +1359,7 @@
         "type": "photo",
         "category": "Carpet & Upholstery",
         "title": "Professional carpet cleaning",
-        "image": "/services/carpet-cleaning.png"
+        "image": "/services/carpet-cleaning.webp"
       },
       {
         "id": 4,
@@ -1373,21 +1373,21 @@
         "type": "photo",
         "category": "Bathroom Cleaning",
         "title": "Bathroom deep cleaning",
-        "image": "/services/bathroom-cleaning.png"
+        "image": "/services/bathroom-cleaning.webp"
       },
       {
         "id": 6,
         "type": "photo",
         "category": "Office Cleaning",
         "title": "Professional window cleaning",
-        "image": "/services/office-cleaning.png"
+        "image": "/services/office-cleaning.webp"
       },
       {
         "id": 7,
         "type": "photo",
         "category": "Kitchen Cleaning",
         "title": "Kitchen surface cleaning",
-        "image": "/services/kitchen-cleaning.png"
+        "image": "/services/kitchen-cleaning.webp"
       },
       {
         "id": 8,
@@ -1401,7 +1401,7 @@
         "type": "photo",
         "category": "Carpet & Upholstery",
         "title": "Sofa cleaning service",
-        "image": "/services/carpet-cleaning.png"
+        "image": "/services/carpet-cleaning.webp"
       },
       {
         "id": 10,
@@ -1415,35 +1415,35 @@
         "type": "photo",
         "category": "Office Cleaning",
         "title": "Office workspace cleaning",
-        "image": "/services/office-cleaning.png"
+        "image": "/services/office-cleaning.webp"
       },
       {
         "id": 12,
         "type": "photo",
         "category": "Deep Cleaning",
         "title": "Deep floor cleaning",
-        "image": "/services/home-cleaning.png"
+        "image": "/services/home-cleaning.webp"
       },
       {
         "id": 13,
         "type": "photo",
         "category": "Bathroom Cleaning",
         "title": "Bathroom surface cleaning",
-        "image": "/services/bathroom-cleaning.png"
+        "image": "/services/bathroom-cleaning.webp"
       },
       {
         "id": 14,
         "type": "photo",
         "category": "Carpet & Upholstery",
         "title": "Upholstery cleaning",
-        "image": "/services/carpet-cleaning.png"
+        "image": "/services/carpet-cleaning.webp"
       },
       {
         "id": 15,
         "type": "photo",
         "category": "Kitchen Cleaning",
         "title": "Kitchen appliance cleaning",
-        "image": "/services/kitchen-cleaning.png"
+        "image": "/services/kitchen-cleaning.webp"
       },
       {
         "id": 16,
@@ -1457,7 +1457,7 @@
         "type": "photo",
         "category": "Office Cleaning",
         "title": "Office floor cleaning",
-        "image": "/services/office-cleaning.png"
+        "image": "/services/office-cleaning.webp"
       },
       {
         "id": 18,
@@ -1471,7 +1471,7 @@
         "type": "video",
         "category": "Home Cleaning",
         "title": "Home cleaning process",
-        "image": "/services/home-cleaning.png",
+        "image": "/services/home-cleaning.webp",
         "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       },
       {
@@ -1487,7 +1487,7 @@
         "type": "video",
         "category": "Kitchen Cleaning",
         "title": "Kitchen cleaning process",
-        "image": "/services/kitchen-cleaning.png",
+        "image": "/services/kitchen-cleaning.webp",
         "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       },
       {
@@ -1495,7 +1495,7 @@
         "type": "video",
         "category": "Bathroom Cleaning",
         "title": "Bathroom cleaning process",
-        "image": "/services/bathroom-cleaning.png",
+        "image": "/services/bathroom-cleaning.webp",
         "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       },
       {
@@ -1503,7 +1503,7 @@
         "type": "video",
         "category": "Office Cleaning",
         "title": "Office cleaning process",
-        "image": "/services/office-cleaning.png",
+        "image": "/services/office-cleaning.webp",
         "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       },
       {
@@ -1511,7 +1511,7 @@
         "type": "video",
         "category": "Carpet & Upholstery",
         "title": "Carpet & upholstery cleaning process",
-        "image": "/services/carpet-cleaning.png",
+        "image": "/services/carpet-cleaning.webp",
         "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       }
     ],
