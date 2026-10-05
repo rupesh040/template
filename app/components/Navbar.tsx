@@ -326,11 +326,26 @@ export default function Navbar() {
           }
           aria-expanded={mobileMenuOpen}
           className="
-            flex h-10 w-10 items-center justify-center rounded-md
-            text-[#092a43] transition hover:bg-[#f1f5f7] cursor-pointer
+            relative flex h-10 w-10 items-center justify-center rounded-md
+            text-[#092a43] transition-colors duration-200 hover:bg-[#f1f5f7] cursor-pointer
           "
         >
-          {mobileMenuOpen ? <X size={25} /> : <Menu size={25} />}
+          <span
+            className={`
+              absolute transition-all duration-300 ease-in-out
+              ${mobileMenuOpen ? "rotate-90 opacity-0 scale-75" : "rotate-0 opacity-100 scale-100"}
+            `}
+          >
+            <Menu size={25} />
+          </span>
+          <span
+            className={`
+              absolute transition-all duration-300 ease-in-out
+              ${mobileMenuOpen ? "rotate-0 opacity-100 scale-100" : "-rotate-90 opacity-0 scale-75"}
+            `}
+          >
+            <X size={25} />
+          </span>
         </button>
 
         <Link
@@ -358,12 +373,23 @@ export default function Navbar() {
           </div>
         </Link>
       </div>
-      {mobileMenuOpen && (
+
+      <div
+        className={`
+          grid transition-all duration-300 ease-in-out min-[1025px]:hidden
+          ${
+            mobileMenuOpen
+              ? "grid-rows-[1fr] opacity-100"
+              : "grid-rows-[0fr] opacity-0 pointer-events-none"
+          }
+        `}
+      >
         <div
-          className="
-            border-t border-gray-100 bg-white shadow-lg
-            min-[1025px]:hidden
-          "
+          className={`
+            min-h-0 overflow-hidden border-t border-gray-100 bg-white shadow-lg
+            transition-transform duration-300 ease-in-out
+            ${mobileMenuOpen ? "translate-y-0" : "-translate-y-2"}
+          `}
         >
           <nav className="flex flex-col">
             {leftMenu.map((item) => {
@@ -376,7 +402,7 @@ export default function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`
                     border-b border-gray-100 px-6 py-4
-                    text-sm font-semibold
+                    text-sm font-semibold transition-colors duration-200
                     ${active ? "bg-[#f4fff5] text-[#42b83c]" : "text-[#17202a]"}
                   `}
                 >
@@ -395,7 +421,7 @@ export default function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`
                     border-b border-gray-100 px-6 py-4
-                    text-sm font-semibold
+                    text-sm font-semibold transition-colors duration-200
                     ${active ? "bg-[#f4fff5] text-[#42b83c]" : "text-[#17202a]"}
                   `}
                 >
@@ -409,7 +435,7 @@ export default function Navbar() {
             <a
               href={phoneHref}
               aria-label={phoneAriaLabel}
-              className="flex items-center gap-2 hover:text-[#42b83c]"
+              className="flex items-center gap-2 transition-colors duration-200 hover:text-[#42b83c]"
             >
               <Phone size={14} className="text-[#42b83c]" />
               <span>{phone}</span>
@@ -417,14 +443,14 @@ export default function Navbar() {
             <a
               href={mailtoHref}
               aria-label={emailAriaLabel}
-              className="flex items-center gap-2 hover:text-[#42b83c]"
+              className="flex items-center gap-2 transition-colors duration-200 hover:text-[#42b83c]"
             >
               <Mail size={14} className="text-[#42b83c]" />
               <span>{email}</span>
             </a>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }
