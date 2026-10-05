@@ -15,6 +15,11 @@
     "address": "Awel Kiett-turner 495 Boulevard, Ste 10 Elmwood Park, NJ 07407, USA"
   },
   "navbar": {
+    "followUsLabel": "Follow Us:",
+    "phoneAriaLabel": "Call PureShine",
+    "emailAriaLabel": "Email PureShine",
+    "openMenuAriaLabel": "Open navigation menu",
+    "closeMenuAriaLabel": "Close navigation menu",
     "socialLinks": [
       {
         "label": "Facebook",

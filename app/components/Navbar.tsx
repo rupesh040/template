@@ -1,11 +1,10 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
 import { Mail, Menu, Phone, X } from "lucide-react";
-
 import {
   FaFacebookF,
   FaInstagram,
@@ -27,11 +26,18 @@ const iconMap: Record<string, IconType> = {
 };
 
 const {
+  followUsLabel,
+  phoneAriaLabel,
+  emailAriaLabel,
+  openMenuAriaLabel,
+  closeMenuAriaLabel,
   socialLinks: rawSocial,
   leftMenu,
   rightMenu,
 } = content.navbar;
-const { phone, phoneHref, email, emailHref } = content.site;
+
+const { name: siteName, logo: siteLogo, phone, phoneHref, email, emailHref } = content.site;
+
 const mailtoHref = emailHref.startsWith("mailto:")
   ? emailHref
   : `mailto:${emailHref}`;
@@ -43,8 +49,8 @@ const socialLinks = rawSocial.map((s) => ({
 
 export default function Navbar() {
   const pathname = usePathname();
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1024) {
@@ -79,7 +85,7 @@ export default function Navbar() {
                 min-[1025px]:block min-[1025px]:mr-4
               "
             >
-              Follow Us:
+              {followUsLabel}
             </span>
 
             <div className="flex items-center gap-1.5 sm:gap-2.5">
@@ -106,7 +112,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <a
               href={phoneHref}
-              aria-label="Call PureShine"
+              aria-label={phoneAriaLabel}
               className="
                 flex items-center gap-2 whitespace-nowrap text-sm
               "
@@ -118,7 +124,7 @@ export default function Navbar() {
 
             <a
               href={mailtoHref}
-              aria-label="Email PureShine"
+              aria-label={emailAriaLabel}
               className="
                 ml-4 flex items-center gap-2 whitespace-nowrap text-sm
                 sm:ml-6 lg:ml-10
@@ -147,8 +153,8 @@ export default function Navbar() {
             "
           >
             <Image
-              src="/logo.png"
-              alt="PureShine"
+              src={siteLogo}
+              alt={siteName}
               width={190}
               height={110}
               priority
@@ -282,7 +288,7 @@ export default function Navbar() {
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={
-            mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
+            mobileMenuOpen ? closeMenuAriaLabel : openMenuAriaLabel
           }
           aria-expanded={mobileMenuOpen}
           className="
@@ -307,8 +313,8 @@ export default function Navbar() {
             "
           >
             <Image
-              src="/logo.png"
-              alt="PureShine"
+              src={siteLogo}
+              alt={siteName}
               width={150}
               height={85}
               priority
@@ -367,6 +373,7 @@ export default function Navbar() {
           <div className="flex flex-col gap-2.5 bg-[#f8fafc] px-6 py-4 text-xs text-[#092a43]/70 sm:flex-row sm:items-center sm:justify-between">
             <a
               href={phoneHref}
+              aria-label={phoneAriaLabel}
               className="flex items-center gap-2 hover:text-[#42b83c]"
             >
               <Phone size={14} className="text-[#42b83c]" />
@@ -374,6 +381,7 @@ export default function Navbar() {
             </a>
             <a
               href={mailtoHref}
+              aria-label={emailAriaLabel}
               className="flex items-center gap-2 hover:text-[#42b83c]"
             >
               <Mail size={14} className="text-[#42b83c]" />
