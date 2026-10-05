@@ -3,7 +3,7 @@
     "name": "PureShine",
     "tagline": "A Cleaner Space, A Happier You",
     "description": "We provide reliable, affordable, and eco-friendly cleaning services for homes, offices, and commercial spaces.",
-    "logo": "/logo.png",
+    "logo": "/logo.webp",
     "footerLogo": "/footer-logo.webp",
     "copyright": "© 2026 PureShine. All Rights Reserved.",
     "email": "info@xyz.com",
@@ -1133,7 +1133,7 @@
         "closeAriaLabel": "Close"
       },
       "sidebar": {
-        "image": "/why-chooseUs.png",
+        "image": "/why-chooseUs.webp",
         "imageAlt": "Professional cleaning service",
         "assistance": {
           "icon": "Headphones",
@@ -1394,7 +1394,7 @@
         "type": "photo",
         "category": "Deep Cleaning",
         "title": "Floor deep cleaning",
-        "image": "/why-chooseUs.png"
+        "image": "/why-chooseUs.webp"
       },
       {
         "id": 9,
@@ -1464,7 +1464,7 @@
         "type": "photo",
         "category": "Before & After",
         "title": "Cleaning transformation",
-        "image": "/why-chooseUs.png"
+        "image": "/why-chooseUs.webp"
       },
       {
         "id": 19,
@@ -1479,7 +1479,7 @@
         "type": "video",
         "category": "Deep Cleaning",
         "title": "Deep cleaning process",
-        "image": "/why-chooseUs.png",
+        "image": "/why-chooseUs.webp",
         "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       },
       {

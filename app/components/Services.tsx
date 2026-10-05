@@ -130,7 +130,7 @@ export default function Services({
 
     const firstCard = slider.querySelector<HTMLElement>("[data-service-card]");
     const cardWidth = firstCard ? firstCard.offsetWidth : slider.clientWidth;
-    const gap = 24;
+    const gap = typeof window !== "undefined" && window.innerWidth < 640 ? 14 : 24;
     const step = cardWidth + gap;
     const maxScroll = slider.scrollWidth - slider.clientWidth;
 
@@ -222,7 +222,7 @@ export default function Services({
         </div>
 
         {effectiveLayout === "grid" ? (
-          <div className="mt-12 grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4">
+          <div className="mt-8 sm:mt-12 grid grid-cols-2 justify-items-center gap-3.5 sm:gap-7 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4">
             {displayedServices.map((service, idx) => {
               const Icon = iconMap[service.icon] ?? Home;
               return (
@@ -247,7 +247,7 @@ export default function Services({
             onMouseLeave={() => setIsPaused(false)}
             onTouchStart={() => setIsPaused(true)}
             onTouchEnd={() => setIsPaused(false)}
-            className="relative mt-10 sm:mt-12"
+            className="relative mt-8 sm:mt-12"
           >
             <button
               type="button"
@@ -255,17 +255,17 @@ export default function Services({
               disabled={!canScrollLeft}
               aria-label="Previous services"
               style={{ animationDelay: "450ms" }}
-              className={`absolute -left-3 top-1/2 z-30 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-full border border-gray-100 bg-white text-[#10aa3a] shadow-[0_6px_25px_rgba(8,45,76,0.14)] transition-all duration-200 hover:bg-[#10aa3a] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-0 sm:-left-5 sm:h-[52px] sm:w-[52px] lg:-left-7 ${
+              className={`absolute -left-3 top-1/2 z-30 flex h-[40px] w-[40px] sm:h-[52px] sm:w-[52px] -translate-y-1/2 items-center justify-center rounded-full border border-gray-100 bg-white text-[#10aa3a] shadow-[0_6px_25px_rgba(8,45,76,0.14)] transition-all duration-200 hover:bg-[#10aa3a] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-0 sm:-left-5 lg:-left-7 ${
                 isVisible ? "animate-fade-in-scale" : "opacity-0"
               }`}
             >
-              <ChevronLeft size={26} strokeWidth={2.2} className="-ml-0.5" />
+              <ChevronLeft size={22} strokeWidth={2.2} className="-ml-0.5 sm:h-[26px] sm:w-[26px]" />
             </button>
 
             <div
               ref={sliderRef}
               onScroll={checkScroll}
-              className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex snap-x snap-mandatory gap-3.5 sm:gap-6 overflow-x-auto scroll-smooth pb-6 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {displayedServices.map((service, idx) => {
                 const Icon = iconMap[service.icon] ?? Home;
@@ -291,11 +291,11 @@ export default function Services({
               disabled={!canScrollRight}
               aria-label="Next services"
               style={{ animationDelay: "450ms" }}
-              className={`absolute -right-3 top-1/2 z-30 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-full border border-gray-100 bg-white text-[#10aa3a] shadow-[0_6px_25px_rgba(8,45,76,0.14)] transition-all duration-200 hover:bg-[#10aa3a] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-0 sm:-right-5 sm:h-[52px] sm:w-[52px] lg:-right-7 ${
+              className={`absolute -right-3 top-1/2 z-30 flex h-[40px] w-[40px] sm:h-[52px] sm:w-[52px] -translate-y-1/2 items-center justify-center rounded-full border border-gray-100 bg-white text-[#10aa3a] shadow-[0_6px_25px_rgba(8,45,76,0.14)] transition-all duration-200 hover:bg-[#10aa3a] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-0 sm:-right-5 lg:-right-7 ${
                 isVisible ? "animate-fade-in-scale" : "opacity-0"
               }`}
             >
-              <ChevronRight size={26} strokeWidth={2.2} className="ml-0.5" />
+              <ChevronRight size={22} strokeWidth={2.2} className="ml-0.5 sm:h-[26px] sm:w-[26px]" />
             </button>
           </div>
         )}
@@ -353,47 +353,47 @@ function ServiceCard({
       data-service-card
       aria-label={`View details for ${title}`}
       style={{ animationDelay: `${delay}ms` }}
-      className={`group flex flex-col items-center overflow-hidden rounded-[40px] border border-[#eef2f3] bg-white shadow-[0_8px_30px_rgba(8,45,76,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(8,45,76,0.12)] cursor-pointer ${
+      className={`group flex flex-col items-center overflow-hidden rounded-[26px] sm:rounded-[40px] border border-[#eef2f3] bg-white shadow-[0_8px_30px_rgba(8,45,76,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(8,45,76,0.12)] cursor-pointer ${
         isVisible ? "animate-fade-in-scale" : "opacity-0"
       } ${
         isGrid
           ? "w-full max-w-[320px]"
-          : "w-full min-w-full max-w-full flex-shrink-0 snap-start sm:w-[calc((100%-24px)/2)] sm:min-w-[calc((100%-24px)/2)] sm:max-w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)] lg:min-w-[calc((100%-48px)/3)] lg:max-w-[calc((100%-48px)/3)] xl:w-[calc((100%-72px)/4)] xl:min-w-[calc((100%-72px)/4)] xl:max-w-[calc((100%-72px)/4)]"
+          : "w-[calc((100%-14px)/2)] min-w-[calc((100%-14px)/2)] max-w-[calc((100%-14px)/2)] flex-shrink-0 snap-start sm:w-[calc((100%-24px)/2)] sm:min-w-[calc((100%-24px)/2)] sm:max-w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)] lg:min-w-[calc((100%-48px)/3)] lg:max-w-[calc((100%-48px)/3)] xl:w-[calc((100%-72px)/4)] xl:min-w-[calc((100%-72px)/4)] xl:max-w-[calc((100%-72px)/4)]"
       }`}
     >
-      <div className="relative mx-auto mt-4 block aspect-square w-[calc(100%-32px)] overflow-hidden rounded-full">
+      <div className="relative mx-auto mt-2.5 sm:mt-4 block aspect-square w-[calc(100%-16px)] sm:w-[calc(100%-32px)] overflow-hidden rounded-full">
         <Image
           src={image}
           alt={title}
           fill
-          sizes="(max-width: 640px) 80vw, (max-width: 1024px) 40vw, 25vw"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 40vw, 25vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
       <div
-        className={`relative z-10 mx-auto -mt-8 flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-full border-[3px] border-white shadow-sm transition-transform duration-300 group-hover:scale-105 ${
+        className={`relative z-10 mx-auto -mt-6 sm:-mt-8 flex h-[44px] w-[44px] sm:h-[56px] sm:w-[56px] shrink-0 items-center justify-center rounded-full border-[2.5px] sm:border-[3px] border-white shadow-sm transition-transform duration-300 group-hover:scale-105 ${
           darkIcon ? "bg-[#092a43] text-white" : "bg-[#12b43c] text-white"
         }`}
       >
-        <Icon size={25} strokeWidth={1.8} />
+        <Icon size={20} className="sm:h-[25px] sm:w-[25px]" strokeWidth={1.8} />
       </div>
 
-      <div className="flex flex-1 flex-col items-center px-6 pb-6 pt-3 text-center">
-        <h3 className="text-[17px] font-bold leading-tight text-[#122f48] transition-colors group-hover:text-[#12b43c]">
+      <div className="flex flex-1 flex-col items-center px-2.5 sm:px-6 pb-4 sm:pb-6 pt-2 sm:pt-3 text-center w-full">
+        <h3 className="text-[13px] sm:text-[17px] font-bold leading-snug sm:leading-tight text-[#122f48] transition-colors group-hover:text-[#12b43c] line-clamp-2">
           {title}
         </h3>
 
-        <p className="mt-2 min-h-[44px] max-w-[240px] text-[12px] leading-5 text-[#65788a]">
+        <p className="mt-1.5 sm:mt-2 min-h-[32px] sm:min-h-[44px] max-w-[240px] text-[11px] sm:text-[12px] leading-4 sm:leading-5 text-[#65788a] line-clamp-2">
           {description}
         </p>
 
-        <div className="mt-auto flex w-full justify-center pt-4">
+        <div className="mt-auto flex w-full justify-center pt-2 sm:pt-4">
           <span
             aria-label={`View ${title}`}
-            className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-[#12b43c] text-white shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-[#07972e]"
+            className="flex h-[32px] w-[32px] sm:h-[40px] sm:w-[40px] items-center justify-center rounded-full bg-[#12b43c] text-white shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-[#07972e]"
           >
-            <ArrowRight size={19} />
+            <ArrowRight size={16} className="sm:h-[19px] sm:w-[19px]" />
           </span>
         </div>
       </div>
