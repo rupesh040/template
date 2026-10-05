@@ -132,7 +132,7 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-white py-12">
+    <section className="relative overflow-hidden bg-white py-6">
       <div className="pointer-events-none absolute -left-[70px] -top-[80px] h-[180px] w-[180px] rounded-full bg-[#f4f9f8] sm:h-[230px] sm:w-[230px]" />
 
       <div className="pointer-events-none absolute -bottom-[100px] -left-[80px] h-[230px] w-[230px] rounded-full bg-[#f5faf9]" />

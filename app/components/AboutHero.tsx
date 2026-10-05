@@ -86,23 +86,28 @@ export default function AboutHero({
 
   return (
     <section className="relative w-full overflow-hidden">
-      <div
-        className="relative flex min-h-[320px] w-full items-end bg-cover bg-center bg-no-repeat sm:min-h-[360px] md:min-h-[400px] lg:min-h-[430px] xl:min-h-[460px]"
-        style={{
-          backgroundImage: `url('${backgroundImage}')`,
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10" />
+      <div className="relative flex min-h-[320px] w-full items-end sm:min-h-[360px] md:min-h-[400px] lg:min-h-[430px] xl:min-h-[460px]">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-hero-bg will-change-transform"
+          style={{
+            backgroundImage: `url('${backgroundImage}')`,
+          }}
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/15 transition-opacity" />
 
         <div className="relative z-10 mx-auto flex w-full max-w-[1400px] items-end px-5 pb-12 sm:px-8 sm:pb-14 md:px-10 md:pb-16 lg:px-14 lg:pb-20 xl:px-20">
           <div className="w-full max-w-[700px]">
-            <h1 className="text-4xl font-extrabold leading-none tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[64px] xl:text-[68px]">
+            <h1
+              style={{ animationDelay: "150ms" }}
+              className="animate-fade-in-up text-4xl font-extrabold leading-none tracking-tight text-white drop-shadow-sm sm:text-5xl md:text-6xl lg:text-[64px] xl:text-[68px]"
+            >
               {title}
             </h1>
-
             <nav
               aria-label="Breadcrumb"
-              className="mt-5 inline-flex max-w-full flex-wrap items-center gap-y-1 rounded-full border border-white/30 bg-black/20 px-5 py-2.5 backdrop-blur-sm sm:mt-6 sm:px-6 sm:py-3"
+              style={{ animationDelay: "280ms" }}
+              className="animate-fade-in-up mt-5 inline-flex max-w-full flex-wrap items-center gap-y-1 rounded-full border border-white/30 bg-black/25 px-5 py-2.5 backdrop-blur-md shadow-lg transition-all duration-300 hover:border-white/50 hover:bg-black/35 sm:mt-6 sm:px-6 sm:py-3"
             >
               {items.map((item, index) => {
                 const isLast = index === items.length - 1;
@@ -116,18 +121,18 @@ export default function AboutHero({
                       <ArrowRight
                         size={16}
                         strokeWidth={2}
-                        className="mx-2.5 shrink-0 text-white/80 sm:mx-3"
+                        className="mx-2.5 shrink-0 text-white/80 transition-transform duration-300 group-hover:translate-x-0.5 sm:mx-3"
                       />
                     )}
 
                     {isLast || !item.href ? (
-                      <span className="text-sm font-medium text-[#f4c430] sm:text-[15px]">
+                      <span className="text-sm font-semibold text-[#f4c430] sm:text-[15px]">
                         {item.label}
                       </span>
                     ) : (
                       <Link
                         href={item.href}
-                        className="text-sm font-medium text-white transition-colors hover:text-[#42c943] sm:text-[15px]"
+                        className="text-sm font-medium text-white/90 transition-all duration-200 hover:text-[#42c943] hover:underline sm:text-[15px]"
                       >
                         {item.label}
                       </Link>

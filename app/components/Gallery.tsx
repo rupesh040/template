@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
   Image as ImageIcon,
   Play,
+  X,
 } from "lucide-react";
 import content from "../data/content.json";
 
@@ -18,6 +19,7 @@ interface GalleryItem {
   category: string;
   title: string;
   image: string;
+  videoUrl?: string;
 }
 
 const {
@@ -33,17 +35,83 @@ const {
 const galleryItems: GalleryItem[] = rawItems as GalleryItem[];
 const ITEMS_PER_PAGE = rawItemsPerPage || 9;
 
+function getEmbedUrl(url?: string): string {
+  if (!url) return "";
+  if (url.includes("youtube.com/watch?v=")) {
+    const videoId = url.split("v=")[1]?.split("&")[0];
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  }
+  if (url.includes("youtu.be/")) {
+    const videoId = url.split("youtu.be/")[1]?.split("?")[0];
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  }
+  if (url.includes("youtube.com/embed/")) {
+    return url.includes("?") ? `${url}&autoplay=1` : `${url}?autoplay=1`;
+  }
+  return url;
+}
+
 export default function Gallery() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [activeType, setActiveType] = useState<GalleryType>("photo");
   const [activeCategory, setActiveCategory] = useState("All Photos");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedVideo, setSelectedVideo] = useState<GalleryItem | null>(null);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -30px 0px",
+      },
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+  useEffect(() => {
+    if (!selectedVideo) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedVideo(null);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedVideo]);
+
+  const isAll = (cat: string) =>
+    cat === "All Photos" || cat === "All Videos" || cat === "All";
 
   const filteredItems = useMemo(() => {
     return galleryItems.filter((item) => {
       const typeMatches = item.type === activeType;
-
       const categoryMatches =
-        activeCategory === "All Photos" || item.category === activeCategory;
+        isAll(activeCategory) || item.category === activeCategory;
 
       return typeMatches && categoryMatches;
     });
@@ -62,7 +130,7 @@ export default function Gallery() {
   const changeType = (type: GalleryType) => {
     setActiveType(type);
     setCurrentPage(1);
-    setActiveCategory("All Photos");
+    setActiveCategory(type === "photo" ? "All Photos" : "All Videos");
   };
 
   const changeCategory = (category: string) => {
@@ -74,7 +142,6 @@ export default function Gallery() {
     if (page < 1 || page > totalPages) {
       return;
     }
-
     setCurrentPage(page);
   };
 
@@ -104,34 +171,61 @@ export default function Gallery() {
   const pageNumbers = getPageNumbers();
 
   return (
-    <section className="min-h-screen bg-white px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+    <section
+      ref={sectionRef}
+      className="min-h-screen bg-white px-4 py-6"
+    >
       <div className="mx-auto w-full max-w-[1180px]">
-        {/* Section Header */}
         <div className="mx-auto max-w-[700px] text-center">
-          <span className="inline-flex rounded-full bg-[#dff7e7] px-4 py-1.5 text-[11px] font-bold text-[#0c9d36] sm:text-[12px]">
+          <span
+            style={{ animationDelay: "100ms" }}
+            className={`inline-flex rounded-full bg-[#dff7e7] px-4 py-1.5 text-[11px] font-bold text-[#0c9d36] sm:text-[12px] ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
             {badge}
           </span>
 
-          <h1 className="mt-3 text-[30px] font-extrabold leading-[1.1] tracking-tight text-[#062d4c] sm:text-[40px] lg:text-[44px]">
+          <h1
+            style={{ animationDelay: "200ms" }}
+            className={`mt-3 text-[30px] font-extrabold leading-[1.1] tracking-tight text-[#062d4c] sm:text-[40px] lg:text-[44px] ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
             {headingLine1}{" "}
             <span className="text-[#0b9e37]">{headingLine2}</span>
           </h1>
 
-          <div className="mx-auto mt-2 h-[3px] w-[34px] rounded-full bg-[#0b9e37]" />
+          <div
+            style={{ animationDelay: "280ms" }}
+            className={`mx-auto mt-2 h-[3px] w-[34px] rounded-full bg-[#0b9e37] ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          />
 
-          <p className="mx-auto mt-4 max-w-[620px] text-[12px] leading-5 text-[#718191] sm:text-[14px] sm:leading-6">
+          <p
+            style={{ animationDelay: "360ms" }}
+            className={`mx-auto mt-4 max-w-[620px] text-[12px] leading-5 text-[#718191] sm:text-[14px] sm:leading-6 ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
             {description}
           </p>
         </div>
-        <div className="mt-7 flex justify-center">
-          <div className="inline-flex rounded-full bg-[#edf4f8] p-1">
+        <div
+          style={{ animationDelay: "440ms" }}
+          className={`mt-7 flex justify-center ${
+            isVisible ? "animate-fade-in-up" : "opacity-0"
+          }`}
+        >
+          <div className="inline-flex rounded-full bg-[#edf4f8] p-1 shadow-inner">
             <button
               type="button"
               onClick={() => changeType("photo")}
-              className={`flex min-w-[120px] items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-semibold transition sm:min-w-[130px] ${
+              className={`flex min-w-[120px] items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-semibold transition-all duration-300 sm:min-w-[130px] ${
                 activeType === "photo"
-                  ? "bg-[#07534f] text-white shadow-sm"
-                  : "text-[#092f4b]"
+                  ? "bg-[#07534f] text-white shadow-md"
+                  : "text-[#092f4b] hover:text-[#07534f]"
               }`}
             >
               <ImageIcon size={17} />
@@ -141,10 +235,10 @@ export default function Gallery() {
             <button
               type="button"
               onClick={() => changeType("video")}
-              className={`flex min-w-[120px] cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-semibold transition sm:min-w-[130px] ${
+              className={`flex min-w-[120px] cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-semibold transition-all duration-300 sm:min-w-[130px] ${
                 activeType === "video"
-                  ? "bg-[#07534f] text-white shadow-sm"
-                  : "text-[#092f4b]"
+                  ? "bg-[#07534f] text-white shadow-md"
+                  : "text-[#092f4b] hover:text-[#07534f]"
               }`}
             >
               <Play size={17} />
@@ -152,53 +246,79 @@ export default function Gallery() {
             </button>
           </div>
         </div>
-        <div className="mt-6 overflow-x-auto pb-2 scrollbar-hide">
+        <div
+          style={{ animationDelay: "520ms" }}
+          className={`mt-6 overflow-x-auto pb-2 scrollbar-hide ${
+            isVisible ? "animate-fade-in-up" : "opacity-0"
+          }`}
+        >
           <div className="flex min-w-max justify-center gap-2 px-1 lg:min-w-0 lg:flex-wrap">
             {categories.map((category) => {
+              const displayCategory =
+                category === "All Photos"
+                  ? activeType === "video"
+                    ? "All Videos"
+                    : "All Photos"
+                  : category;
+
               const active =
-                activeCategory === category && activeType === "photo";
+                activeCategory === category ||
+                (isAll(activeCategory) && category === "All Photos");
 
               return (
                 <button
                   key={category}
                   type="button"
-                  onClick={() => changeCategory(category)}
-                  disabled={activeType === "video"}
-                  className={`whitespace-nowrap rounded-full border px-4 py-2 text-[11px] font-medium transition sm:px-5 sm:text-[12px] ${
+                  onClick={() =>
+                    changeCategory(
+                      category === "All Photos" && activeType === "video"
+                        ? "All Videos"
+                        : category,
+                    )
+                  }
+                  className={`whitespace-nowrap rounded-full border px-4 py-2 text-[11px] font-medium transition-all duration-300 sm:px-5 sm:text-[12px] cursor-pointer ${
                     active
-                      ? "border-[#0b9e37] bg-[#0b9e37] text-white"
+                      ? "border-[#0b9e37] bg-[#0b9e37] text-white shadow-sm scale-105"
                       : "border-[#dfe7ed] bg-white text-[#092f4b] hover:border-[#0b9e37] hover:text-[#0b9e37]"
-                  } ${
-                    activeType === "video"
-                      ? "cursor-not-allowed opacity-50"
-                      : ""
                   }`}
                 >
-                  {category}
+                  {displayCategory}
                 </button>
               );
             })}
           </div>
         </div>
         {currentItems.length > 0 ? (
-          <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-            {currentItems.map((item) => (
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {currentItems.map((item, idx) => (
               <div
-                key={item.id}
-                className="group relative aspect-[1.62] overflow-hidden rounded-[10px] bg-[#edf2f4]"
+                key={`${item.id}-${item.type}-${idx}`}
+                onClick={() => item.type === "video" && setSelectedVideo(item)}
+                style={{ animationDelay: `${200 + (idx % 9) * 60}ms` }}
+                className={`group relative aspect-[1.62] overflow-hidden rounded-[14px] bg-[#edf2f4] shadow-[0_4px_20px_rgba(8,45,76,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(8,45,76,0.14)] ${
+                  item.type === "video" ? "cursor-pointer" : ""
+                } ${isVisible ? "animate-fade-in-scale" : "opacity-0"}`}
               >
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute bottom-3 left-3 right-3 z-10 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#38e86c]">
+                    {item.category}
+                  </span>
+                  <p className="line-clamp-1 text-sm font-semibold text-white">
+                    {item.title}
+                  </p>
+                </div>
                 {item.type === "video" && (
-                  <div className="absolute cursor-pointer inset-0 flex items-center justify-center bg-black/10">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-[#0b9e37] shadow-lg">
-                      <Play size={22} fill="currentColor" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/35">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-[#0b9e37] shadow-[0_8px_25px_rgba(0,0,0,0.25)] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#0b9e37] group-hover:text-white">
+                      <Play size={24} fill="currentColor" className="ml-1" />
                     </span>
                   </div>
                 )}
@@ -206,25 +326,46 @@ export default function Gallery() {
             ))}
           </div>
         ) : (
-          <div className="mt-6 flex min-h-[300px] items-center justify-center rounded-2xl bg-[#f7faf8]">
-            <p className="text-sm text-[#718191]">No gallery items found.</p>
+          <div
+            style={{ animationDelay: "300ms" }}
+            className={`mt-8 flex min-h-[260px] flex-col items-center justify-center rounded-2xl bg-[#f7faf8] p-6 text-center ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
+            <p className="text-base font-semibold text-[#102b4c]">
+              No {activeType === "video" ? "videos" : "photos"} found
+            </p>
+            <p className="mt-1 text-xs text-[#718191]">
+              Try selecting a different category or view all {activeType === "video" ? "videos" : "photos"}.
+            </p>
+            <button
+              type="button"
+              onClick={() => changeCategory(activeType === "video" ? "All Videos" : "All Photos")}
+              className="mt-4 rounded-full bg-[#0b9e37] px-5 py-2 text-xs font-bold text-white transition hover:bg-[#08832c]"
+            >
+              View All {activeType === "video" ? "Videos" : "Photos"}
+            </button>
           </div>
         )}
         {totalPages > 1 && (
-          <div className="mt-5 flex items-center justify-center gap-2">
+          <div
+            style={{ animationDelay: "600ms" }}
+            className={`mt-8 flex items-center justify-center gap-2 ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
             <button
               type="button"
               onClick={() => goToPage(currentPage - 1)}
               disabled={currentPage === 1}
               aria-label="Previous page"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-[#dfe7ed] text-[#092f4b] transition hover:border-[#0b9e37] hover:text-[#0b9e37] disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#dfe7ed] text-[#092f4b] transition hover:border-[#0b9e37] hover:text-[#0b9e37] disabled:cursor-not-allowed disabled:opacity-40"
             >
-              <ChevronLeft size={16} />
+              <ChevronLeft size={17} />
             </button>
 
             {pageNumbers.map((page, index) => {
               const previousPage = pageNumbers[index - 1];
-
               const showDots =
                 previousPage !== undefined && page - previousPage > 1;
 
@@ -237,9 +378,9 @@ export default function Gallery() {
                   <button
                     type="button"
                     onClick={() => goToPage(page)}
-                    className={`flex h-8 w-8 items-center justify-center rounded-full text-[12px] font-semibold transition ${
+                    className={`flex h-9 w-9 items-center justify-center rounded-full text-[13px] font-semibold transition ${
                       currentPage === page
-                        ? "bg-[#0b9e37] text-white shadow-sm"
+                        ? "bg-[#0b9e37] text-white shadow-md scale-105"
                         : "text-[#092f4b] hover:bg-[#e8f7ec] hover:text-[#0b9e37]"
                     }`}
                   >
@@ -254,13 +395,73 @@ export default function Gallery() {
               onClick={() => goToPage(currentPage + 1)}
               disabled={currentPage === totalPages}
               aria-label="Next page"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-[#dfe7ed] text-[#092f4b] transition hover:border-[#0b9e37] hover:text-[#0b9e37] disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#dfe7ed] text-[#092f4b] transition hover:border-[#0b9e37] hover:text-[#0b9e37] disabled:cursor-not-allowed disabled:opacity-40"
             >
-              <ChevronRight size={16} />
+              <ChevronRight size={17} />
             </button>
           </div>
         )}
       </div>
+      {selectedVideo && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={selectedVideo.title}
+          onClick={() => setSelectedVideo(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md animate-fade-in"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-4xl overflow-hidden rounded-2xl bg-[#092135] shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/10 animate-fade-in-scale"
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedVideo(null)}
+              aria-label="Close video player"
+              className="absolute right-3 top-3 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-all hover:bg-[#0b9e37] hover:scale-105"
+            >
+              <X size={20} />
+            </button>
+            <div className="relative aspect-video w-full bg-black">
+              {selectedVideo.videoUrl &&
+              (selectedVideo.videoUrl.includes("youtube.com") ||
+                selectedVideo.videoUrl.includes("youtu.be")) ? (
+                <iframe
+                  src={getEmbedUrl(selectedVideo.videoUrl)}
+                  title={selectedVideo.title}
+                  className="h-full w-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : selectedVideo.videoUrl ? (
+                <video
+                  src={selectedVideo.videoUrl}
+                  controls
+                  autoPlay
+                  className="h-full w-full object-contain"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-white/70">
+                  <p>Video not available.</p>
+                </div>
+              )}
+            </div>
+            <div className="flex flex-col gap-1 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#12aa3b]">
+                  {selectedVideo.category}
+                </span>
+                <h3 className="text-base font-bold text-white sm:text-lg">
+                  {selectedVideo.title}
+                </h3>
+              </div>
+              <span className="inline-flex items-center gap-1.5 self-start rounded-full bg-[#12aa3b]/20 px-3 py-1 text-xs font-medium text-[#29d458] sm:self-auto">
+                <Play size={12} fill="currentColor" /> Playing
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

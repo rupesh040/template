@@ -5,65 +5,60 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-const roboto = localFont({
+const lato = localFont({
   src: [
     {
-      path: "./font/Roboto-Thin.ttf",
+      path: "./font/Lato/Lato-Thin.ttf",
       weight: "100",
       style: "normal",
     },
     {
-      path: "./font/Roboto-ExtraLight.ttf",
-      weight: "200",
-      style: "normal",
+      path: "./font/Lato/Lato-ThinItalic.ttf",
+      weight: "100",
+      style: "italic",
     },
     {
-      path: "./font/Roboto-Light.ttf",
+      path: "./font/Lato/Lato-Light.ttf",
       weight: "300",
       style: "normal",
     },
     {
-      path: "./font/Roboto-Regular.ttf",
+      path: "./font/Lato/Lato-LightItalic.ttf",
+      weight: "300",
+      style: "italic",
+    },
+    {
+      path: "./font/Lato/Lato-Regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "./font/Roboto-Medium.ttf",
-      weight: "500",
-      style: "normal",
+      path: "./font/Lato/Lato-Italic.ttf",
+      weight: "400",
+      style: "italic",
     },
     {
-      path: "./font/Roboto-SemiBold.ttf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "./font/Roboto-Bold.ttf",
+      path: "./font/Lato/Lato-Bold.ttf",
       weight: "700",
       style: "normal",
     },
     {
-      path: "./font/Roboto-ExtraBold.ttf",
-      weight: "800",
-      style: "normal",
+      path: "./font/Lato/Lato-BoldItalic.ttf",
+      weight: "700",
+      style: "italic",
     },
     {
-      path: "./font/Roboto-Black.ttf",
+      path: "./font/Lato/Lato-Black.ttf",
       weight: "900",
       style: "normal",
     },
     {
-      path: "./font/Roboto-Italic.ttf",
-      weight: "400",
-      style: "italic",
-    },
-    {
-      path: "./font/Roboto-BoldItalic.ttf",
-      weight: "700",
+      path: "./font/Lato/Lato-BlackItalic.ttf",
+      weight: "900",
       style: "italic",
     },
   ],
-  variable: "--font-roboto",
+  variable: "--font-lato",
   display: "swap",
 });
 
@@ -81,9 +76,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${roboto.variable} h-full antialiased`}
+      className={`${lato.variable} h-full antialiased`}
     >
-      <body className={`${roboto.className} min-h-full bg-white font-sans`}>
+      <body className={`${lato.className} min-h-full bg-white font-sans`}>
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

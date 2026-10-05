@@ -1,12 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import {
   CalendarDays,
   ChevronRight,
-  MessageCircle,
   Share2,
   User,
 } from "lucide-react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 interface BlogSection {
   heading?: string;
@@ -24,7 +26,7 @@ interface Blog {
   author: string;
   role: string;
   image: string;
-  comments: number;
+  comments?: number;
   content: BlogSection[];
 }
 
@@ -91,188 +93,248 @@ function WhatsappIcon() {
   );
 }
 
+
+
+function ScrollReveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+    );
+
+    observer.observe(el);
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
+      setIsVisible(true);
+    }
+
+    const timer = setTimeout(() => setIsVisible(true), 800);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      style={{ animationDelay: `${delay}ms` }}
+      className={`${className} ${
+        isVisible ? "animate-fade-in-up" : "opacity-0"
+      }`}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function BlogDetails({
   blog,
   recentPosts,
   categories,
 }: BlogDetailsProps) {
+  const displayedRecentPosts = recentPosts.slice(0, 5);
+
   return (
-    <main className="bg-white py-8 sm:py-12 lg:py-16">
+    <main className="bg-white py-6">
       <div className="mx-auto grid w-full max-w-[1180px] grid-cols-1 gap-7 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
         <article className="min-w-0">
-          <div className="relative overflow-hidden rounded-[12px]">
-            <Image
-              src={blog.image}
-              alt={blog.title}
-              width={900}
-              height={500}
-              priority
-              className="h-auto max-h-[500px] w-full object-cover"
-            />
+          <ScrollReveal delay={100}>
+            <div className="relative overflow-hidden rounded-[12px]">
+              <Image
+                src={blog.image}
+                alt={blog.title}
+                width={900}
+                height={500}
+                priority
+                className="h-auto max-h-[500px] w-full object-cover transition-transform duration-700 hover:scale-105"
+              />
 
-            <div className="absolute left-4 top-4 overflow-hidden rounded-[8px] bg-[#10a83a] text-center text-white shadow-md sm:left-5 sm:top-5">
-              <div className="px-4 py-2 text-[28px] font-extrabold leading-none sm:text-[30px]">
-                {blog.day}
+              <div className="absolute left-4 top-4 overflow-hidden rounded-[8px] bg-[#10a83a] text-center text-white shadow-md sm:left-5 sm:top-5">
+                <div className="px-4 py-2 text-[28px] font-extrabold leading-none sm:text-[30px]">
+                  {blog.day}
+                </div>
+
+                <div className="bg-[#07972f] px-3 py-1 text-[11px] font-medium sm:text-[12px]">
+                  {blog.month}
+                </div>
               </div>
 
-              <div className="bg-[#07972f] px-3 py-1 text-[11px] font-medium sm:text-[12px]">
-                {blog.month}
+              <div className="absolute bottom-4 left-4 sm:bottom-5 sm:left-5">
+                <span className="inline-flex rounded-full bg-[#e5f9eb] px-4 py-2 text-[11px] font-bold text-[#10a83a] shadow-sm sm:text-[12px]">
+                  {blog.category}
+                </span>
               </div>
             </div>
+          </ScrollReveal>
+          <ScrollReveal delay={180}>
+            <h1 className="mt-5 max-w-[850px] text-[32px] font-extrabold leading-[1.08] tracking-[-0.8px] text-[#062d4c] sm:text-[40px] lg:text-[44px]">
+              {blog.title}
+            </h1>
+          </ScrollReveal>
+          <ScrollReveal delay={260}>
+            <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-4 text-[12px] text-[#637789] sm:text-[13px]">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#e8edf2]">
+                  <User size={25} className="text-[#738395]" />
+                </div>
 
-            <div className="absolute bottom-4 left-4 sm:bottom-5 sm:left-5">
-              <span className="inline-flex rounded-full bg-[#e5f9eb] px-4 py-2 text-[11px] font-bold text-[#10a83a] shadow-sm sm:text-[12px]">
-                {blog.category}
-              </span>
-            </div>
-          </div>
-
-          <h1 className="mt-5 max-w-[850px] text-[32px] font-extrabold leading-[1.08] tracking-[-0.8px] text-[#062d4c] sm:text-[40px] lg:text-[44px]">
-            {blog.title}
-          </h1>
-
-          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-4 text-[12px] text-[#637789] sm:text-[13px]">
-            <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#e8edf2]">
-                <User size={25} className="text-[#738395]" />
+                <div>
+                  <p className="font-bold text-[#092f4b]">{blog.author}</p>
+                  <p className="mt-0.5">{blog.role}</p>
+                </div>
               </div>
 
-              <div>
-                <p className="font-bold text-[#092f4b]">{blog.author}</p>
-                <p className="mt-0.5">{blog.role}</p>
+              <span className="hidden h-7 w-px bg-[#d9e1e7] sm:block" />
+
+              <div className="flex items-center gap-2">
+                <CalendarDays size={16} className="text-[#092f4b]" />
+                <span>{blog.date}</span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Share2 size={16} className="text-[#092f4b]" />
+                <span>Share:</span>
+
+                <Link
+                  href="#"
+                  aria-label="Facebook"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1877f2] text-white transition hover:scale-105"
+                >
+                  <FacebookIcon />
+                </Link>
+
+                <Link
+                  href="#"
+                  aria-label="X"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white transition hover:scale-105"
+                >
+                  <XIcon />
+                </Link>
+
+                <Link
+                  href="#"
+                  aria-label="LinkedIn"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0a66c2] text-white transition hover:scale-105"
+                >
+                  <LinkedinIcon />
+                </Link>
+
+                <Link
+                  href="#"
+                  aria-label="WhatsApp"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#25d366] text-white transition hover:scale-105"
+                >
+                  <WhatsappIcon />
+                </Link>
               </div>
             </div>
-
-            <span className="hidden h-7 w-px bg-[#d9e1e7] sm:block" />
-
-            <div className="flex items-center gap-2">
-              <CalendarDays size={16} className="text-[#092f4b]" />
-              <span>{blog.date}</span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <MessageCircle size={16} className="text-[#092f4b]" />
-              <span>{blog.comments} Comments</span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Share2 size={16} className="text-[#092f4b]" />
-              <span>Share:</span>
-
-              <Link
-                href="#"
-                aria-label="Facebook"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1877f2] text-white transition hover:scale-105"
-              >
-                <FacebookIcon />
-              </Link>
-
-              <Link
-                href="#"
-                aria-label="X"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white transition hover:scale-105"
-              >
-                <XIcon />
-              </Link>
-
-              <Link
-                href="#"
-                aria-label="LinkedIn"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0a66c2] text-white transition hover:scale-105"
-              >
-                <LinkedinIcon />
-              </Link>
-
-              <Link
-                href="#"
-                aria-label="WhatsApp"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#25d366] text-white transition hover:scale-105"
-              >
-                <WhatsappIcon />
-              </Link>
-            </div>
-          </div>
-
+          </ScrollReveal>
           <div className="mt-7 space-y-5 sm:mt-8 sm:space-y-6">
             {blog.content.map((section, index) => (
-              <section key={index}>
-                {section.heading && (
-                  <h2 className="mb-1.5 text-[21px] font-extrabold leading-tight text-[#092f4b] sm:text-[23px]">
-                    {section.heading}
-                  </h2>
-                )}
+              <ScrollReveal key={index} delay={index * 80}>
+                <section>
+                  {section.heading && (
+                    <h2 className="mb-1.5 text-[21px] font-extrabold leading-tight text-[#092f4b] sm:text-[23px]">
+                      {section.heading}
+                    </h2>
+                  )}
 
-                <p className="max-w-[850px] text-[13px] leading-6 text-[#637789] sm:text-[14px] sm:leading-7 lg:text-[15px]">
-                  {section.text}
-                </p>
-              </section>
+                  <p className="max-w-[850px] text-[13px] leading-6 text-[#637789] sm:text-[14px] sm:leading-7 lg:text-[15px]">
+                    {section.text}
+                  </p>
+                </section>
+              </ScrollReveal>
             ))}
           </div>
         </article>
 
         <aside className="space-y-6 lg:sticky lg:top-6 lg:self-start">
-          <div className="rounded-[12px] border border-[#e7edf1] bg-white p-4 shadow-[0_3px_18px_rgba(8,45,76,0.04)] sm:p-5">
-            <h2 className="text-[17px] font-extrabold text-[#092f4b] sm:text-[18px]">
-              Recent Posts
-            </h2>
+          <ScrollReveal delay={180}>
+            <div className="rounded-[12px] border border-[#e7edf1] bg-white p-4 shadow-[0_3px_18px_rgba(8,45,76,0.04)] sm:p-5">
+              <h2 className="text-[17px] font-extrabold text-[#092f4b] sm:text-[18px]">
+                Recent Posts
+              </h2>
 
-            <div className="mt-4 divide-y divide-[#edf1f4]">
-              {recentPosts.map((post) => (
-                <Link
-                  key={post.id}
-                  href={`/blogs/${(post as any).slug || post.id}`}
-                  className="group flex gap-3 py-3 first:pt-0 last:pb-0"
-                >
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    width={92}
-                    height={62}
-                    className="h-[62px] w-[92px] shrink-0 rounded-[7px] object-cover"
-                  />
+              <div className="mt-4 divide-y divide-[#edf1f4]">
+                {displayedRecentPosts.map((post) => (
+                  <Link
+                    key={post.id}
+                    href={`/blogs/${(post as any).slug || post.id}`}
+                    className="group flex gap-3 py-3 first:pt-0 last:pb-0 transition-transform duration-200 hover:translate-x-1"
+                  >
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      width={92}
+                      height={62}
+                      className="h-[62px] w-[92px] shrink-0 rounded-[7px] object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
 
-                  <div className="min-w-0">
-                    <h3 className="line-clamp-2 text-[12px] font-bold leading-[1.4] text-[#092f4b] transition-colors group-hover:text-[#10a83a] sm:text-[13px]">
-                      {post.title}
-                    </h3>
+                    <div className="min-w-0">
+                      <h3 className="line-clamp-2 text-[12px] font-bold leading-[1.4] text-[#092f4b] transition-colors group-hover:text-[#10a83a] sm:text-[13px]">
+                        {post.title}
+                      </h3>
 
-                    <div className="mt-1.5 flex items-center gap-1 text-[10px] text-[#637789] sm:text-[11px]">
-                      <CalendarDays size={11} />
-                      <span>{post.shortDate}</span>
+                      <div className="mt-1.5 flex items-center gap-1 text-[10px] text-[#637789] sm:text-[11px]">
+                        <CalendarDays size={11} />
+                        <span>{post.shortDate}</span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
+          <ScrollReveal delay={280}>
+            <div className="rounded-[12px] border border-[#e7edf1] bg-white p-4 shadow-[0_3px_18px_rgba(8,45,76,0.04)] sm:p-5">
+              <h2 className="text-[17px] font-extrabold text-[#092f4b] sm:text-[18px]">
+                Categories
+              </h2>
 
-          <div className="rounded-[12px] border border-[#e7edf1] bg-white p-4 shadow-[0_3px_18px_rgba(8,45,76,0.04)] sm:p-5">
-            <h2 className="text-[17px] font-extrabold text-[#092f4b] sm:text-[18px]">
-              Categories
-            </h2>
-
-            <div className="mt-3">
-              {categories.map((category) => (
-                <Link
-                  key={category.name}
-                  href={`/blogs?category=${encodeURIComponent(category.name)}`}
-                  className="group flex items-center justify-between border-b border-[#edf1f4] py-2.5 text-[13px] text-[#637789] transition-colors last:border-b-0 hover:text-[#10a83a]"
-                >
-                  <span>
-                    {category.name}{" "}
-                    <span className="ml-2 text-[#8a99a6]">
-                      ({category.count})
+              <div className="mt-3">
+                {categories.map((category) => (
+                  <Link
+                    key={category.name}
+                    href={`/blogs?category=${encodeURIComponent(category.name)}`}
+                    className="group flex items-center justify-between border-b border-[#edf1f4] py-2.5 text-[13px] text-[#637789] transition-colors last:border-b-0 hover:text-[#10a83a]"
+                  >
+                    <span>
+                      {category.name}{" "}
+                      <span className="ml-2 text-[#8a99a6]">
+                        ({category.count})
+                      </span>
                     </span>
-                  </span>
 
-                  <ChevronRight
-                    size={16}
-                    className="text-[#8292a0] transition-transform group-hover:translate-x-1 group-hover:text-[#10a83a]"
-                  />
-                </Link>
-              ))}
+                    <ChevronRight
+                      size={16}
+                      className="text-[#8292a0] transition-transform group-hover:translate-x-1 group-hover:text-[#10a83a]"
+                    />
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </aside>
       </div>
     </main>

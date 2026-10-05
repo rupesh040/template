@@ -60,7 +60,9 @@ export default async function BlogDetailPage({
     redirect(`/blogs/${blog.id}`);
   }
 
-  const recentPosts = (content.blogs as any[]).filter((b) => b.id !== blog.id);
+  const recentPosts = (content.blogs as any[])
+    .filter((b) => b.id !== blog.id && b.slug !== blog.id)
+    .slice(0, 5);
 
   return (
     <>
@@ -80,9 +82,6 @@ export default async function BlogDetailPage({
         recentPosts={recentPosts}
         categories={content.categories}
       />
-
-      {/* Other articles */}
-      <BlogGrid />
     </>
   );
 }

@@ -284,7 +284,7 @@ export default function Navbar() {
           aria-expanded={mobileMenuOpen}
           className="
             flex h-10 w-10 items-center justify-center rounded-md
-            text-[#092a43] transition hover:bg-[#f1f5f7]
+            text-[#092a43] transition hover:bg-[#f1f5f7] cursor-pointer
           "
         >
           {mobileMenuOpen ? <X size={25} /> : <Menu size={25} />}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -8,10 +8,8 @@ import {
   Award,
   Clock3,
   Leaf,
-  Mail,
-  MapPin,
-  Phone,
   ShieldCheck,
+  X,
 } from "lucide-react";
 import {
   FaFacebookF,
@@ -20,6 +18,12 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import {
+  RiMailCheckFill,
+  RiMailFill,
+  RiMapPin2Fill,
+  RiPhoneFill,
+} from "react-icons/ri";
 import type { IconType } from "react-icons";
 
 import content from "../data/content.json";
@@ -43,7 +47,7 @@ const lucideIconMap: Record<string, typeof Leaf> = {
 const footer = content.footer;
 
 const quickLinks = footer.quickLinks.map((link) => [link.name, link.href]);
-const serviceLinks = footer.serviceLinks.map((link) => [link.name, link.href]);
+const serviceLinks = footer.serviceLinks.slice(0, 6).map((link) => [link.name, link.href]);
 const socialLinks = footer.socialLinks.map((social) => ({
   ...social,
   icon: faIconMap[social.label] ?? FaFacebookF,
@@ -52,22 +56,90 @@ const trustBadges = footer.trustBadges.map((badge) => ({
   ...badge,
   icon: lucideIconMap[badge.icon] ?? Leaf,
 }));
-const paymentMethods = footer.paymentMethods.map((payment) =>
-  typeof payment === "string" ? payment : payment.label,
-);
-const legalLinks = footer.legalLinks;
 
 export default function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [showPopCard, setShowPopCard] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState("");
+
+  useEffect(() => {
+    const el = footerRef.current;
+    if (!el) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -40px 0px",
+      },
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!showPopCard) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShowPopCard(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [showPopCard]);
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail.trim()) return;
+
+    setSubmittedEmail(newsletterEmail.trim());
+    setShowPopCard(true);
+    setNewsletterEmail("");
+  };
+
   return (
-    <footer className="relative overflow-hidden bg-[#032e47] text-white">
-      <div className="pointer-events-none absolute right-[-20px] top-[-20px] hidden h-[220px] w-[150px] opacity-[0.08] lg:block">
+    <footer
+      ref={footerRef}
+      className="relative overflow-hidden bg-[#032e47] text-white"
+    >
+      <div
+        className={`pointer-events-none absolute right-[-20px] top-[-20px] hidden h-[220px] w-[150px] transition-all duration-700 lg:block ${
+          isVisible ? "scale-100 opacity-[0.08]" : "scale-75 opacity-0"
+        }`}
+      >
         <LeafDecoration />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1500px] px-5 pt-8 pb-4 sm:px-8 sm:pt-10 sm:pb-4 lg:px-10 xl:px-14">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.1fr_0.75fr_0.8fr_1.05fr_1.3fr] lg:gap-6 xl:gap-8">
-          <div>
-            <Link href={footer.logoHref} className="inline-block">
+      <div className="relative z-10 mx-auto max-w-[1500px] px-5 pt-10 pb-6 sm:px-8 sm:pt-12 sm:pb-6 lg:px-10 xl:px-14">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.15fr_0.75fr_0.8fr_1.1fr_1.2fr] lg:gap-6 xl:gap-8">
+          <div
+            style={{ animationDelay: "150ms" }}
+            className={isVisible ? "animate-fade-in-up" : "opacity-0"}
+          >
+            <Link href={footer.logoHref} className="inline-block transition-transform duration-300 hover:scale-[1.02]">
               <Image
                 src={footer.logo}
                 alt={footer.logoAlt}
@@ -78,7 +150,7 @@ export default function Footer() {
               />
             </Link>
 
-            <p className="mt-2 max-w-[280px] text-[13px] leading-5 text-white/70 sm:text-[13.5px]">
+            <p className="mt-2.5 max-w-[280px] text-[13px] font-normal leading-5 text-white/70 sm:text-[13.5px]">
               {footer.description}
             </p>
 
@@ -98,7 +170,10 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
+          <div
+            style={{ animationDelay: "260ms" }}
+            className={isVisible ? "animate-fade-in-up" : "opacity-0"}
+          >
             <FooterHeading>{footer.quickLinksTitle}</FooterHeading>
 
             <ul className="mt-4 space-y-2.5">
@@ -108,7 +183,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div
+            style={{ animationDelay: "370ms" }}
+            className={isVisible ? "animate-fade-in-up" : "opacity-0"}
+          >
             <FooterHeading>{footer.servicesTitle}</FooterHeading>
 
             <ul className="mt-4 space-y-2.5">
@@ -118,42 +196,55 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div
+            style={{ animationDelay: "480ms" }}
+            className={isVisible ? "animate-fade-in-up" : "opacity-0"}
+          >
             <FooterHeading>{footer.contactTitle}</FooterHeading>
 
-            <ContactItem
-              icon={<Phone size={17} />}
-              title={footer.contact.phone}
-              subtitle={footer.contact.phoneHours}
-              href={footer.contact.phoneHref}
-            />
+            <div className="mt-4 space-y-3.5">
+              <ContactItem
+                icon={<RiPhoneFill size={17} />}
+                title={footer.contact.phone}
+                subtitle={footer.contact.phoneHours}
+                href={footer.contact.phoneHref}
+              />
 
-            <ContactItem
-              icon={<Mail size={17} />}
-              title={footer.contact.email}
-              subtitle={footer.contact.emailNote}
-              href={footer.contact.emailHref}
-            />
+              <ContactItem
+                icon={<RiMailFill size={17} />}
+                title={footer.contact.email}
+                subtitle={footer.contact.emailNote}
+                href={footer.contact.emailHref}
+              />
 
-            <ContactItem
-              icon={<MapPin size={17} />}
-              title={footer.contact.address}
-            />
+              <ContactItem
+                icon={<RiMapPin2Fill size={17} />}
+                title={footer.contact.address}
+              />
+            </div>
           </div>
 
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div
+            style={{ animationDelay: "590ms" }}
+            className={`sm:col-span-2 lg:col-span-1 ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
             <FooterHeading>{footer.newsletter.title}</FooterHeading>
 
-            <p className="mt-2 text-[12.5px] leading-5 text-white/65">
+            <p className="mt-2 text-[12.5px] font-normal leading-5 text-white/65">
               {footer.newsletter.description}
             </p>
 
             <form
-              onSubmit={(event) => event.preventDefault()}
-              className="mt-3.5 flex h-10 w-full overflow-hidden rounded-md border border-white/20 bg-white/[0.04]"
+              onSubmit={handleNewsletterSubmit}
+              className="mt-3.5 flex h-10 w-full overflow-hidden rounded-md border border-white/20 bg-white/[0.04] transition-colors focus-within:border-[#12b63a]"
             >
               <input
                 type="email"
+                required
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder={footer.newsletter.placeholder}
                 className="min-w-0 flex-1 bg-transparent px-3 text-[12.5px] text-white outline-none placeholder:text-white/40"
               />
@@ -161,7 +252,7 @@ export default function Footer() {
               <button
                 type="submit"
                 aria-label={footer.newsletter.submitLabel}
-                className="flex w-10 shrink-0 items-center justify-center bg-[#12b63a] transition hover:bg-[#0c9c30]"
+                className="flex w-10 shrink-0 items-center justify-center bg-[#12b63a] transition-all hover:bg-[#0c9c30] active:scale-95 cursor-pointer"
               >
                 <ArrowRight size={18} strokeWidth={2.5} />
               </button>
@@ -181,40 +272,76 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-7 h-px w-full bg-white/15" />
+        <div
+          style={{ animationDelay: "680ms" }}
+          className={`mt-8 h-px w-full bg-white/15 transition-opacity duration-500 ${
+            isVisible ? "opacity-100" : "opacity-0"
+          }`}
+        />
 
-        <div className="flex flex-col gap-4 pt-4 pb-1 lg:flex-row lg:items-center lg:justify-between">
-          <p className="text-center text-[12px] text-white/60 lg:text-left lg:text-[13px]">
+        <div
+          style={{ animationDelay: "720ms" }}
+          className={`flex flex-col gap-4 pt-4 pb-1 lg:flex-row lg:items-center lg:justify-between ${
+            isVisible ? "animate-fade-in" : "opacity-0"
+          }`}
+        >
+          <p className="text-center text-[12px] font-normal text-white/60 lg:text-left lg:text-[13px]">
             {footer.copyright}
           </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[12px] text-white/60 lg:text-[13px]">
-            {legalLinks.map((link, index) => (
-              <Fragment key={link.name}>
-                <Link href={link.href} className="transition hover:text-white">
-                  {link.name}
-                </Link>
-
-                {index < legalLinks.length - 1 && (
-                  <span className="text-white/25">|</span>
-                )}
-              </Fragment>
-            ))}
-          </div>
-
-          <div className="flex items-center justify-center gap-2 lg:justify-end">
-            {paymentMethods.map((payment) => (
-              <PaymentBadge key={payment} type={payment}>
-                {payment}
-              </PaymentBadge>
-            ))}
-          </div>
         </div>
       </div>
+
+      {showPopCard && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setShowPopCard(false)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm transition-all"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-[430px] overflow-hidden rounded-[24px] bg-white p-6 sm:p-8 text-center text-[#102b4c] shadow-[0_20px_50px_rgba(0,0,0,0.30)] animate-fade-in-scale"
+          >
+            <button
+              type="button"
+              onClick={() => setShowPopCard(false)}
+              aria-label="Close message"
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#f1f5f7] text-[#607187] transition hover:bg-[#e4ebf0] hover:text-[#102b4c] cursor-pointer"
+            >
+              <X size={18} />
+            </button>
+
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#e5f8eb] text-[#159447] shadow-sm">
+              <RiMailCheckFill size={36} />
+            </div>
+
+            <h3 className="mt-4 text-[20px] font-bold text-[#102b4c] sm:text-[22px]">
+              Subscribed Successfully!
+            </h3>
+
+            <p className="mt-2 text-[13px] leading-6 text-[#5b6e7f] sm:text-[14px]">
+              Thank you for subscribing! We&apos;ve sent a confirmation to{" "}
+              <span className="font-semibold text-[#102b4c]">
+                {submittedEmail}
+              </span>
+              . You&apos;ll now receive our latest updates, seasonal cleaning tips, and exclusive offers.
+            </p>
+
+            <div className="mt-6">
+              <button
+                type="button"
+                onClick={() => setShowPopCard(false)}
+                className="w-full rounded-full bg-[#10ad3b] py-3 text-[14px] font-bold text-white shadow-md transition hover:bg-[#088e2e] active:scale-95 cursor-pointer"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </footer>
   );
 }
-
 
 function FooterHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -233,7 +360,7 @@ function FooterLink({ name, href }: { name: string; href: string }) {
     <li>
       <Link
         href={href}
-        className="group flex items-center gap-2 text-[13px] leading-5 text-white/65 transition-colors hover:text-[#18bb40] sm:text-[13.5px]"
+        className="group flex items-center gap-2 text-[13px] font-medium leading-5 text-white/65 transition-colors hover:text-[#18bb40] sm:text-[13.5px]"
       >
         <span className="text-[18px] leading-4 text-white/70 transition-transform duration-200 group-hover:translate-x-1">
           ›
@@ -257,18 +384,18 @@ function ContactItem({
   href?: string;
 }) {
   const content = (
-    <div className="flex w-full items-start gap-2.5 mb-6">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#075f4e] text-white">
+    <div className="flex w-full items-start gap-2.5">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#075f4e] text-white shadow-sm">
         {icon}
       </div>
 
       <div className="min-w-0 flex-1 pt-0.5">
-        <div className="break-words text-[13px] font-medium leading-4 text-white sm:text-[13.5px]">
+        <div className="break-words text-[13px] font-semibold leading-snug text-white sm:text-[13.5px]">
           {title}
         </div>
 
         {subtitle && (
-          <p className="mt-0.5 text-[11px] leading-3 text-white/50 sm:text-[11.5px]">
+          <p className="mt-0.5 text-[11px] font-normal leading-tight text-white/55 sm:text-[11.5px]">
             {subtitle}
           </p>
         )}
@@ -280,14 +407,14 @@ function ContactItem({
     return (
       <Link
         href={href}
-        className="mt-3.5 block transition-opacity hover:opacity-80"
+        className="block transition-opacity hover:opacity-85"
       >
         {content}
       </Link>
     );
   }
 
-  return <div className="mt-3.5">{content}</div>;
+  return <div>{content}</div>;
 }
 
 function TrustBadge({
@@ -299,41 +426,13 @@ function TrustBadge({
 }) {
   return (
     <div className="flex flex-col items-center justify-center text-center">
-      <div className="flex h-8.5 w-8.5 items-center justify-center rounded-full bg-[#075f4e] text-white">
+      <div className="flex h-8.5 w-8.5 items-center justify-center rounded-full bg-[#075f4e] text-white shadow-sm">
         {icon}
       </div>
 
       <p className="mt-1.5 text-[10px] font-medium leading-tight text-white/80 sm:text-[10.5px]">
         {title}
       </p>
-    </div>
-  );
-}
-
-function PaymentBadge({
-  children,
-  type,
-}: {
-  children: React.ReactNode;
-  type: string;
-}) {
-  const styles: Record<string, string> = {
-    VISA: "text-[#1a4fa3]",
-    Mastercard: "text-[#111]",
-    Paytm: "text-[#0879d1]",
-    UPI: "text-[#273746]",
-  };
-
-  return (
-    <div className="flex h-7 min-w-[43px] items-center justify-center rounded-[3px] bg-white px-2 text-[10px] font-bold">
-      {type === "Mastercard" ? (
-        <span className="relative h-4 w-7">
-          <span className="absolute left-0 top-0 h-4 w-4 rounded-full bg-[#eb001b]" />
-          <span className="absolute right-0 top-0 h-4 w-4 rounded-full bg-[#f79e1b] mix-blend-multiply" />
-        </span>
-      ) : (
-        <span className={styles[type] ?? "text-[#273746]"}>{children}</span>
-      )}
     </div>
   );
 }

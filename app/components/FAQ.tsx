@@ -1,44 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ChevronDown, ArrowRight } from "lucide-react";
 import {
-  Home,
-  CalendarDays,
-  Leaf,
-  Coins,
-  SprayCan,
-  Clock3,
-  ShieldCheck,
-  Headphones,
-  ChevronDown,
-  Users,
-  Repeat,
-  CreditCard,
-  Sparkles,
-  Shield,
-  FileCheck,
-  type LucideIcon,
-} from "lucide-react";
+  RiHome4Fill,
+  RiCalendar2Fill,
+  RiLeafFill,
+  RiCoinsFill,
+  RiTimeFill,
+  RiShieldCheckFill,
+  RiHeadphoneFill,
+  RiTeamFill,
+  RiRepeat2Fill,
+  RiBankCardFill,
+  RiSparklingFill,
+  RiShieldFill,
+  RiFileCheckFill,
+} from "react-icons/ri";
+import { FaSprayCanSparkles } from "react-icons/fa6";
+import type { IconType } from "react-icons";
 import content from "../data/content.json";
 
-const iconMap: Record<string, LucideIcon> = {
-  Home,
-  CalendarDays,
-  Leaf,
-  Coins,
-  SprayCan,
-  Clock3,
-  ShieldCheck,
-  Headphones,
-  Users,
-  Repeat,
-  CreditCard,
-  Sparkles,
-  Shield,
-  FileCheck,
+const iconMap: Record<string, IconType> = {
+  Home: RiHome4Fill,
+  CalendarDays: RiCalendar2Fill,
+  Leaf: RiLeafFill,
+  Coins: RiCoinsFill,
+  SprayCan: FaSprayCanSparkles,
+  Clock3: RiTimeFill,
+  ShieldCheck: RiShieldCheckFill,
+  Headphones: RiHeadphoneFill,
+  Users: RiTeamFill,
+  Repeat: RiRepeat2Fill,
+  CreditCard: RiBankCardFill,
+  Sparkles: RiSparklingFill,
+  Shield: RiShieldFill,
+  FileCheck: RiFileCheckFill,
 };
 
 const {
@@ -56,7 +56,7 @@ const rawFaqs = content.faqs;
 
 const allFaqs = rawFaqs.map((f) => ({
   ...f,
-  icon: iconMap[f.icon] ?? Home,
+  icon: iconMap[f.icon] ?? RiHome4Fill,
 }));
 
 interface FAQProps {
@@ -70,8 +70,45 @@ export default function FAQ({
   limit,
   showAll,
 }: FAQProps = {}) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
+    }
+
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const timer = setTimeout(() => setIsVisible(true), 60);
+      return () => clearTimeout(timer);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -40px 0px",
+      },
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const isFaqPage =
     pathname === "/faq" ||
@@ -95,10 +132,13 @@ export default function FAQ({
   const leftFaqs = displayedFaqs.filter((_, index) => index % 2 === 0);
   const rightFaqs = displayedFaqs.filter((_, index) => index % 2 !== 0);
 
-  const ContactCardIcon = iconMap[contactCard.icon] ?? Headphones;
+  const ContactCardIcon = iconMap[contactCard.icon] ?? RiHeadphoneFill;
 
   return (
-    <section className="relative overflow-hidden bg-white py-12">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-white py-6"
+    >
       <div className="pointer-events-none absolute -left-[75px] -top-[75px] h-[180px] w-[180px] rounded-full bg-[#f2f8f5] sm:h-[230px] sm:w-[230px]" />
       <div className="pointer-events-none absolute -right-[80px] -top-[80px] h-[180px] w-[180px] rounded-full bg-[#f2f8f5] sm:h-[240px] sm:w-[240px]" />
       <div className="pointer-events-none absolute -bottom-[80px] -left-[90px] h-[190px] w-[190px] rounded-full bg-[#f5faf8]" />
@@ -111,17 +151,26 @@ export default function FAQ({
             alt={leafImageAlt}
             width={60}
             height={60}
-            className="pointer-events-none absolute left-0 top-0 rotate-[240deg]"
+            className={`pointer-events-none absolute left-0 top-0 rotate-[240deg] transition-all duration-700 ${
+              isVisible ? "scale-100 opacity-100" : "scale-75 opacity-0"
+            }`}
           />
-            <Image
+          <Image
             src={leafImage}
             alt="leaf"
             width={60}
             height={60}
-            className="pointer-events-none absolute right-0 top-0"
+            className={`pointer-events-none absolute right-0 top-0 transition-all duration-700 ${
+              isVisible ? "scale-100 opacity-100" : "scale-75 opacity-0"
+            }`}
           />
 
-          <div className="flex items-center justify-center gap-4 sm:gap-5">
+          <div
+            style={{ animationDelay: "150ms" }}
+            className={`flex items-center justify-center gap-4 sm:gap-5 ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
             <span className="hidden h-[2px] w-[55px] bg-[#13aa3b] sm:block" />
             <span className="text-[13px] font-bold tracking-[3px] text-[#10a83a] sm:text-[14px] sm:tracking-[4px]">
               {badge}
@@ -129,17 +178,27 @@ export default function FAQ({
             <span className="hidden h-[2px] w-[55px] bg-[#13aa3b] sm:block" />
           </div>
 
-          <h2 className="mt-4 text-[34px] font-extrabold leading-[1.1] tracking-tight text-[#062d4c] sm:text-[44px] lg:text-[48px]">
+          <h2
+            style={{ animationDelay: "260ms" }}
+            className={`mt-4 text-[34px] font-extrabold leading-[1.1] tracking-tight text-[#062d4c] sm:text-[44px] lg:text-[48px] ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
             {heading} <span className="text-[#10a83a]">{headingHighlight}</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-[720px] text-[13px] leading-6 text-[#5c7182] sm:text-[15px] sm:leading-7">
+
+          <p
+            style={{ animationDelay: "370ms" }}
+            className={`mx-auto mt-4 max-w-[720px] text-[13px] leading-6 text-[#5c7182] sm:text-[15px] sm:leading-7 ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
             {description}
           </p>
         </div>
-
         <div className="mt-10 hidden gap-5 lg:flex">
           <div className="flex min-w-0 flex-1 flex-col gap-4">
-            {leftFaqs.map((faq) => {
+            {leftFaqs.map((faq, i) => {
               const originalIndex = displayedFaqs.indexOf(faq);
               return (
                 <FAQItem
@@ -147,13 +206,15 @@ export default function FAQ({
                   faq={faq}
                   isOpen={openIndex === originalIndex}
                   onToggle={() => toggleFAQ(originalIndex)}
+                  delay={450 + i * 80}
+                  isVisible={isVisible}
                 />
               );
             })}
           </div>
 
           <div className="flex min-w-0 flex-1 flex-col gap-4">
-            {rightFaqs.map((faq) => {
+            {rightFaqs.map((faq, i) => {
               const originalIndex = displayedFaqs.indexOf(faq);
               return (
                 <FAQItem
@@ -161,12 +222,13 @@ export default function FAQ({
                   faq={faq}
                   isOpen={openIndex === originalIndex}
                   onToggle={() => toggleFAQ(originalIndex)}
+                  delay={500 + i * 80}
+                  isVisible={isVisible}
                 />
               );
             })}
           </div>
         </div>
-
         <div className="mt-10 flex flex-col gap-4 lg:hidden">
           {displayedFaqs.map((faq, index) => (
             <FAQItem
@@ -174,15 +236,21 @@ export default function FAQ({
               faq={faq}
               isOpen={openIndex === index}
               onToggle={() => toggleFAQ(index)}
+              delay={420 + index * 70}
+              isVisible={isVisible}
             />
           ))}
         </div>
-
         {shouldShowContactCard && (
-          <div className="mx-auto mt-8 flex max-w-[885px] flex-col gap-5 rounded-[18px] bg-[#e8f8ed] px-5 py-5 sm:mt-10 sm:flex-row sm:items-center sm:justify-between sm:px-7 lg:px-8">
+          <div
+            style={{ animationDelay: "850ms" }}
+            className={`mx-auto mt-8 flex max-w-[885px] flex-col gap-5 rounded-[18px] bg-[#e8f8ed] px-5 py-5 sm:mt-10 sm:flex-row sm:items-center sm:justify-between sm:px-7 lg:px-8 transition-transform duration-300 hover:shadow-md ${
+              isVisible ? "animate-fade-in-scale" : "opacity-0"
+            }`}
+          >
             <div className="flex items-center gap-4">
               <div className="flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-full border-2 border-[#13ad3c] bg-white text-[#092f4b]">
-                <ContactCardIcon size={30} strokeWidth={1.7} />
+                <ContactCardIcon size={32} className="h-8 w-8 text-[#092f4b]" />
               </div>
               <div className="hidden h-[52px] w-[2px] bg-[#b9dfc3] sm:block" />
 
@@ -201,9 +269,10 @@ export default function FAQ({
               className="group flex h-[50px] shrink-0 items-center justify-center gap-5 rounded-full bg-[#10ad3b] px-8 text-[14px] font-bold text-white transition hover:bg-[#07972f] sm:min-w-[185px]"
             >
               <span>{contactCard.button.label}</span>
-              <span className="text-[22px] leading-none transition-transform duration-300 group-hover:translate-x-1">
-                {contactCard.button.arrow}
-              </span>
+               <ArrowRight
+                  size={20}
+                  className="shrink-0 transition-transform duration-200 group-hover:translate-x-1"
+                />
             </Link>
           </div>
         )}
@@ -216,25 +285,38 @@ interface FAQItemProps {
   faq: {
     question: string;
     answer: string;
-    icon: LucideIcon;
+    icon: IconType;
   };
   isOpen: boolean;
   onToggle: () => void;
+  delay?: number;
+  isVisible?: boolean;
 }
 
-function FAQItem({ faq, isOpen, onToggle }: FAQItemProps) {
+function FAQItem({
+  faq,
+  isOpen,
+  onToggle,
+  delay = 450,
+  isVisible = true,
+}: FAQItemProps) {
   const Icon = faq.icon;
 
   return (
-    <div className="w-full overflow-hidden rounded-[16px] bg-white shadow-[0_5px_25px_rgba(8,45,76,0.06)] transition-shadow duration-300 hover:shadow-[0_8px_30px_rgba(8,45,76,0.09)]">
+    <div
+      style={{ animationDelay: `${delay}ms` }}
+      className={`w-full overflow-hidden rounded-[16px] bg-white shadow-[0_5px_25px_rgba(8,45,76,0.06)] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(8,45,76,0.09)] ${
+        isVisible ? "animate-fade-in-up" : "opacity-0"
+      }`}
+    >
       <button
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="flex w-full items-center gap-4 px-4 py-3 text-left sm:px-5 sm:py-4"
+        className="flex w-full items-center gap-4 px-4 py-3 text-left sm:px-5 sm:py-4 cursor-pointer"
       >
         <span className="flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-full bg-[#e5f7e9] text-[#0aaa3a] sm:h-[58px] sm:w-[58px]">
-          <Icon size={27} strokeWidth={1.8} />
+          <Icon size={29} className="h-7 w-7 text-[#0aaa3a]" />
         </span>
         <span className="flex-1 text-[14px] font-bold leading-5 text-[#092f4b] sm:text-[16px]">
           {faq.question}

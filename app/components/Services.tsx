@@ -15,6 +15,9 @@ import {
   CookingPot,
   Bath,
   Sofa,
+  Sparkles,
+  ShieldCheck,
+  Building,
   type LucideIcon,
 } from "lucide-react";
 
@@ -24,6 +27,9 @@ const iconMap: Record<string, LucideIcon> = {
   CookingPot,
   Bath,
   Sofa,
+  Sparkles,
+  ShieldCheck,
+  Building,
 };
 
 interface ServicesProps {
@@ -51,23 +57,63 @@ export default function Services({
 
   const allServices = content.services;
 
-  const cardLimit = limit !== undefined ? limit : isServicesPage ? 0 : 6;
+  const cardLimit = limit !== undefined ? limit : isServicesPage ? 0 : 8;
   const displayedServices =
     cardLimit > 0 ? allServices.slice(0, cardLimit) : allServices;
   const shouldShowViewAll =
     showViewAll !== undefined ? showViewAll : !isServicesPage;
 
+  const sectionRef = useRef<HTMLElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
+    }
+
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const timer = setTimeout(() => setIsVisible(true), 60);
+      return () => clearTimeout(timer);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.05,
+        rootMargin: "0px 0px -20px 0px",
+      },
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const checkScroll = () => {
     const slider = sliderRef.current;
     if (!slider) return;
 
     const maxScroll = slider.scrollWidth - slider.clientWidth;
-    setCanScrollLeft(slider.scrollLeft > 5);
-    setCanScrollRight(slider.scrollLeft < maxScroll - 5);
+    const hasOverflow = maxScroll > 8;
+
+    setCanScrollLeft(hasOverflow);
+    setCanScrollRight(hasOverflow);
   };
 
   useEffect(() => {
@@ -82,16 +128,44 @@ export default function Services({
     const slider = sliderRef.current;
     if (!slider) return;
 
-    const scrollAmount = slider.clientWidth * 0.85;
-    slider.scrollBy({
-      left: direction === "right" ? scrollAmount : -scrollAmount,
-      behavior: "smooth",
-    });
+    const firstCard = slider.querySelector<HTMLElement>("[data-service-card]");
+    const cardWidth = firstCard ? firstCard.offsetWidth : slider.clientWidth;
+    const gap = 24;
+    const step = cardWidth + gap;
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
+
+    if (direction === "right") {
+      if (slider.scrollLeft >= maxScroll - 15) {
+        slider.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        slider.scrollBy({ left: step, behavior: "smooth" });
+      }
+    } else {
+      if (slider.scrollLeft <= 15) {
+        slider.scrollTo({ left: maxScroll, behavior: "smooth" });
+      } else {
+        slider.scrollBy({ left: -step, behavior: "smooth" });
+      }
+    }
+
     setTimeout(checkScroll, 400);
   };
 
+  useEffect(() => {
+    if (effectiveLayout !== "slider" || isPaused) return;
+
+    const interval = setInterval(() => {
+      scrollServices("right");
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [effectiveLayout, isPaused]);
+
   return (
-    <section className="relative overflow-hidden bg-white py-12">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-white py-6"
+    >
       <div className="pointer-events-none absolute -left-20 top-0 h-[180px] w-[180px] rounded-full bg-[#f4f8f9] sm:h-[230px] sm:w-[230px]" />
       <div className="pointer-events-none absolute -right-16 top-[130px] h-[150px] w-[150px] rounded-full bg-[#f7fafb]" />
       <div className="pointer-events-none absolute left-[52%] top-[100px] h-[100px] w-[100px] rounded-full bg-[#f6fafb]" />
@@ -103,19 +177,36 @@ export default function Services({
             alt="leaf"
             width={60}
             height={60}
-            className="pointer-events-none absolute left-0 top-0 rotate-[240deg]"
+            className={`pointer-events-none absolute left-0 top-0 rotate-[240deg] transition-all duration-700 ${
+              isVisible ? "scale-100 opacity-100" : "scale-75 opacity-0"
+            }`}
           />
 
-          <p className="text-[12px] font-bold tracking-[4px] text-[#12aa3b] sm:text-[13px] sm:tracking-[5px]">
+          <p
+            style={{ animationDelay: "150ms" }}
+            className={`text-[12px] font-bold tracking-[4px] text-[#12aa3b] sm:text-[13px] sm:tracking-[5px] ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
             {badge}
           </p>
 
-          <h2 className="mt-3 text-[34px] font-extrabold leading-tight tracking-tight text-[#062d4c] sm:text-[43px] lg:text-[48px]">
+          <h2
+            style={{ animationDelay: "280ms" }}
+            className={`mt-3 text-[34px] font-extrabold leading-tight tracking-tight text-[#062d4c] sm:text-[43px] lg:text-[48px] ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
             {heading}{" "}
             <span className="text-[#10aa3a]">{headingHighlight}</span>
           </h2>
 
-          <p className="mx-auto mt-3 max-w-[700px] text-[13px] leading-6 text-[#607386] sm:text-[14px]">
+          <p
+            style={{ animationDelay: "380ms" }}
+            className={`mx-auto mt-3 max-w-[700px] text-[13px] leading-6 text-[#607386] sm:text-[14px] ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+          >
             {description}
           </p>
 
@@ -124,13 +215,15 @@ export default function Services({
             alt="leaf"
             width={60}
             height={60}
-            className="pointer-events-none absolute right-0 top-0"
+            className={`pointer-events-none absolute right-0 top-0 transition-all duration-700 ${
+              isVisible ? "scale-100 opacity-100" : "scale-75 opacity-0"
+            }`}
           />
         </div>
 
         {effectiveLayout === "grid" ? (
           <div className="mt-12 grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4">
-            {displayedServices.map((service) => {
+            {displayedServices.map((service, idx) => {
               const Icon = iconMap[service.icon] ?? Home;
               return (
                 <ServiceCard
@@ -142,18 +235,29 @@ export default function Services({
                   icon={Icon}
                   darkIcon={service.darkIcon}
                   isGrid={true}
+                  delay={450 + idx * 80}
+                  isVisible={isVisible}
                 />
               );
             })}
           </div>
         ) : (
-          <div className="relative mt-10 sm:mt-12">
+          <div
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+            className="relative mt-10 sm:mt-12"
+          >
             <button
               type="button"
               onClick={() => scrollServices("left")}
               disabled={!canScrollLeft}
               aria-label="Previous services"
-              className="absolute -left-2 top-[calc(50%-10px)] z-30 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#10aa3a] shadow-[0_5px_25px_rgba(0,0,0,0.12)] transition-all duration-200 hover:bg-[#10aa3a] hover:text-white disabled:cursor-not-allowed disabled:opacity-30 sm:-left-5 sm:h-[52px] sm:w-[52px] lg:-left-6"
+              style={{ animationDelay: "450ms" }}
+              className={`absolute -left-3 top-1/2 z-30 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-full border border-gray-100 bg-white text-[#10aa3a] shadow-[0_6px_25px_rgba(8,45,76,0.14)] transition-all duration-200 hover:bg-[#10aa3a] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-0 sm:-left-5 sm:h-[52px] sm:w-[52px] lg:-left-7 ${
+                isVisible ? "animate-fade-in-scale" : "opacity-0"
+              }`}
             >
               <ChevronLeft size={26} strokeWidth={2.2} className="-ml-0.5" />
             </button>
@@ -161,9 +265,9 @@ export default function Services({
             <div
               ref={sliderRef}
               onScroll={checkScroll}
-              className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-6"
+              className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              {displayedServices.map((service) => {
+              {displayedServices.map((service, idx) => {
                 const Icon = iconMap[service.icon] ?? Home;
                 return (
                   <ServiceCard
@@ -174,6 +278,8 @@ export default function Services({
                     image={service.image}
                     icon={Icon}
                     darkIcon={service.darkIcon}
+                    delay={450 + idx * 80}
+                    isVisible={isVisible}
                   />
                 );
               })}
@@ -184,7 +290,10 @@ export default function Services({
               onClick={() => scrollServices("right")}
               disabled={!canScrollRight}
               aria-label="Next services"
-              className="absolute -right-2 top-[calc(50%-10px)] z-30 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#10aa3a] shadow-[0_5px_25px_rgba(0,0,0,0.12)] transition-all duration-200 hover:bg-[#10aa3a] hover:text-white disabled:cursor-not-allowed disabled:opacity-30 sm:-right-5 sm:h-[52px] sm:w-[52px] lg:-right-6"
+              style={{ animationDelay: "450ms" }}
+              className={`absolute -right-3 top-1/2 z-30 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-full border border-gray-100 bg-white text-[#10aa3a] shadow-[0_6px_25px_rgba(8,45,76,0.14)] transition-all duration-200 hover:bg-[#10aa3a] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-0 sm:-right-5 sm:h-[52px] sm:w-[52px] lg:-right-7 ${
+                isVisible ? "animate-fade-in-scale" : "opacity-0"
+              }`}
             >
               <ChevronRight size={26} strokeWidth={2.2} className="ml-0.5" />
             </button>
@@ -192,10 +301,15 @@ export default function Services({
         )}
 
         {shouldShowViewAll && (
-          <div className="mt-8 flex justify-center sm:mt-10">
+          <div
+            style={{ animationDelay: "880ms" }}
+            className={`mt-8 flex justify-center sm:mt-10 ${
+              isVisible ? "animate-fade-in-scale" : "opacity-0"
+            }`}
+          >
             <Link
               href={viewAllButton.href}
-              className="group inline-flex h-[54px] items-center gap-4 rounded-full bg-[#10ad3b] px-8 text-[14px] font-bold text-white shadow-md transition hover:bg-[#07952f]"
+              className="group inline-flex h-[54px] items-center gap-4 rounded-full bg-[#10ad3b] px-8 text-[14px] font-bold text-white shadow-md transition hover:bg-[#07952f] active:scale-95"
             >
               <span>{viewAllButton.label}</span>
               <ArrowRight
@@ -218,6 +332,8 @@ interface ServiceCardProps {
   icon: React.ElementType;
   darkIcon: boolean;
   isGrid?: boolean;
+  delay?: number;
+  isVisible?: boolean;
 }
 
 function ServiceCard({
@@ -228,23 +344,29 @@ function ServiceCard({
   icon: Icon,
   darkIcon,
   isGrid = false,
+  delay = 450,
+  isVisible = true,
 }: ServiceCardProps) {
   return (
     <Link
       href={`/services/${id}`}
+      data-service-card
       aria-label={`View details for ${title}`}
-      className={`group flex flex-col overflow-hidden rounded-[40px] border border-[#eef2f3] bg-white shadow-[0_8px_30px_rgba(8,45,76,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(8,45,76,0.12)] cursor-pointer ${
+      style={{ animationDelay: `${delay}ms` }}
+      className={`group flex flex-col items-center overflow-hidden rounded-[40px] border border-[#eef2f3] bg-white shadow-[0_8px_30px_rgba(8,45,76,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(8,45,76,0.12)] cursor-pointer ${
+        isVisible ? "animate-fade-in-scale" : "opacity-0"
+      } ${
         isGrid
           ? "w-full max-w-[320px]"
-          : "min-w-[270px] max-w-[270px] flex-shrink-0 snap-center sm:min-w-[290px] sm:max-w-[290px] lg:min-w-[250px] lg:max-w-[250px] xl:min-w-[270px] xl:max-w-[270px]"
+          : "w-full min-w-full max-w-full flex-shrink-0 snap-start sm:w-[calc((100%-24px)/2)] sm:min-w-[calc((100%-24px)/2)] sm:max-w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)] lg:min-w-[calc((100%-48px)/3)] lg:max-w-[calc((100%-48px)/3)] xl:w-[calc((100%-72px)/4)] xl:min-w-[calc((100%-72px)/4)] xl:max-w-[calc((100%-72px)/4)]"
       }`}
     >
-      <div className="relative mx-auto mt-4 block aspect-square w-[calc(100%-24px)] overflow-hidden rounded-full">
+      <div className="relative mx-auto mt-4 block aspect-square w-[calc(100%-32px)] overflow-hidden rounded-full">
         <Image
           src={image}
           alt={title}
           fill
-          sizes="(max-width: 640px) 75vw, (max-width: 1024px) 35vw, 20vw"
+          sizes="(max-width: 640px) 80vw, (max-width: 1024px) 40vw, 25vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
@@ -257,19 +379,19 @@ function ServiceCard({
         <Icon size={25} strokeWidth={1.8} />
       </div>
 
-      <div className="flex flex-1 flex-col items-center px-5 pb-5 pt-2 text-center">
-        <h3 className="text-[16px] font-bold leading-tight text-[#122f48] transition-colors group-hover:text-[#12b43c]">
+      <div className="flex flex-1 flex-col items-center px-6 pb-6 pt-3 text-center">
+        <h3 className="text-[17px] font-bold leading-tight text-[#122f48] transition-colors group-hover:text-[#12b43c]">
           {title}
         </h3>
 
-        <p className="mt-2 min-h-[48px] max-w-[220px] text-[12px] leading-5 text-[#65788a]">
+        <p className="mt-2 min-h-[44px] max-w-[240px] text-[12px] leading-5 text-[#65788a]">
           {description}
         </p>
 
-        <div className="mt-auto flex w-full justify-center pt-3">
+        <div className="mt-auto flex w-full justify-center pt-4">
           <span
             aria-label={`View ${title}`}
-            className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-[#12b43c] text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-[#07972f]"
+            className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-[#12b43c] text-white shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-[#07972e]"
           >
             <ArrowRight size={19} />
           </span>

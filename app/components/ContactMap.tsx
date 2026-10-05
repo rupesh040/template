@@ -20,9 +20,9 @@ export default function ContactMap() {
   } = mapData ?? {};
 
   return (
-    <section className="bg-white px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
-      <div className="mx-auto max-w-[1180px]">
-        <div className="relative h-[300px] overflow-hidden rounded-[16px] sm:h-[360px] lg:h-[400px]">
+    <section className="bg-white px-4 py-6">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="relative h-[300px] overflow-hidden rounded-[16px] sm:h-[460px] lg:h-[600px]">
           {!mapLoaded && (
             <div className="absolute inset-0 z-10 animate-pulse bg-[#e9f0eb]" />
           )}
@@ -80,4 +80,4 @@ export default function ContactMap() {
     </section>
   );
 }
-
+

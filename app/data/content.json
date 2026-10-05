@@ -12,7 +12,7 @@
     "phoneHref": "tel:+10000000000",
     "phoneHours": "Mon – Sat, 9:00 AM – 7:00 PM",
     "emailNote": "We reply within 24 hours",
-    "address": "495 Boulevard, Ste 10, Elmwood Park, NJ 07407, USA"
+    "address": "Awel Kiett-turner 495 Boulevard, Ste 10 Elmwood Park, NJ 07407, USA"
   },
   "navbar": {
     "socialLinks": [
@@ -167,17 +167,15 @@
     }
   },
   "whyChooseUs": {
-    "badge": "WHY CHOOSE US",
+    "badge": "Why Choose Us",
     "headingLine1": "More Than Cleaning,",
     "headingLine2": "A Healthier Tomorrow",
-    "description": "We are committed to delivering high-quality cleaning services that make your home or workplace cleaner, healthier and more comfortable. Here is why our clients trust us.",
-    "image": "/aboutCleaning.webp",
-    "imageAlt": "PureShine professional cleaning service",
-    "mission": {
-      "icon": "Target",
-      "text": "Our Mission: Creating Cleaner, Healthier Spaces for Happier Lives."
-    },
-    "benefits": [
+    "description": "We are committed to delivering high-quality cleaning services that make your home or workplace cleaner, healthier and more comfortable. Here's why our clients trust us.",
+    "leafImage": "/leaf.png",
+    "leafImageAlt": "leaf decoration",
+    "image": "/aboutCleanings.webp",
+    "imageAlt": "Professional cleaning service",
+    "features": [
       {
         "icon": "Users",
         "title": "Trained Professionals",
@@ -199,14 +197,19 @@
         "description": "High-quality cleaning at competitive rates."
       }
     ],
-    "highlights": [
+    "mission": {
+      "icon": "Target",
+      "line1": "Our Mission: Creating Cleaner,",
+      "line2": "Healthier Spaces for Happier Lives."
+    },
+    "benefits": [
       {
         "icon": "Sparkles",
         "title": "100% Satisfaction",
         "description": "Your happiness is our priority."
       },
       {
-        "icon": "Home",
+        "icon": "House",
         "title": "Customized Solutions",
         "description": "Cleaning plans as per your needs."
       },
@@ -222,6 +225,7 @@
     }
   },
   "professionalCleaning": {
+    "badge": "Our Services",
     "titleLine1": "Professional Home",
     "titleLine2": "Deep Cleaning for a",
     "highlight": "Spotless Space",
@@ -257,13 +261,16 @@
   "services": [
     {
       "id": "home-cleaning",
+      "badge": "Our Services",
       "title": "Home Cleaning",
       "description": "A clean and healthy home for a happier you.",
       "image": "/services/home-cleaning.png",
+      "imageAlt": "Professional home cleaning service",
       "icon": "Home",
       "darkIcon": true,
       "tagline": "From dusty to dazzling — ",
       "longDescription": "Our home cleaning service is designed to bring a spotless, healthy environment to every room in your house. From dusting and vacuuming to wiping down surfaces and sanitising bathrooms, our trained professionals handle every detail so you can focus on what matters most. We use safe, eco-friendly products that are tough on grime but gentle on your family and pets.",
+      "footer": "Whether it's your living room, bedroom, kitchen or bathroom, our trained experts go beyond regular cleaning to deliver a deeper, healthier result that you can see and feel. We use only safe, eco-friendly products that protect your family and the environment.",
       "features": [
         "Full room cleaning including bedrooms, living areas and hallways",
         "Vacuuming, sweeping and mopping all floor types",
@@ -306,13 +313,16 @@
     },
     {
       "id": "office-cleaning",
+      "badge": "Our Services",
       "title": "Office Cleaning",
       "description": "Bright, clean workspaces boost productivity.",
       "image": "/services/office-cleaning.png",
+      "imageAlt": "Professional office cleaning service",
       "icon": "Building2",
       "darkIcon": false,
       "tagline": "A cleaner office means a sharper team.",
       "longDescription": "First impressions matter. Our professional office cleaning service ensures your workplace is spotless, hygienic and welcoming every single day. We work around your schedule — early morning, evenings or weekends — so your business is never disrupted. From reception areas to meeting rooms, restrooms and open-plan desks, we cover it all with precision and care.",
+      "footer": "Whether it's your private offices, open workspace, reception area or meeting rooms, our trained experts deliver a spotless, sanitised environment that fosters health and productivity. We tailor our cleaning schedules to keep your operations running smoothly Whether it's your private offices, open workspace, reception area or meeting rooms, our trained experts deliver a spotless, sanitised environment that fosters health and productivity. We tailor our cleaning schedules to keep your operations running smoothly. Whether it's your private offices, open workspace, reception area or meeting rooms, our trained experts deliver a spotless, sanitised environment that fosters health and productivity. We tailor our cleaning schedules to keep your operations running smoothly.",
       "features": [
         "Desks, chairs and workstation sanitisation",
         "Reception and common area cleaning",
@@ -355,13 +365,16 @@
     },
     {
       "id": "kitchen-cleaning",
+      "badge": "Our Services",
       "title": "Kitchen Cleaning",
       "description": "Hygienic and spotless kitchens for safer living.",
       "image": "/services/kitchen-cleaning.png",
+      "imageAlt": "Professional kitchen cleaning service",
       "icon": "CookingPot",
       "darkIcon": true,
       "tagline": "Where food meets cleanliness —",
       "longDescription": "The kitchen is the heart of your home, and it deserves the deepest clean. Grease build-up, stained tiles, dirty ovens and blocked sinks are no match for our specialist kitchen cleaning team. We deep-clean every surface, appliance and hidden corner to eliminate bacteria, grime and odours — leaving you with a kitchen that looks, smells and feels brand new.",
+      "footer": "Whether it's your stovetops, deep ovens, grease filters, or tiled surfaces, our trained kitchen specialists use non-toxic, food-safe products to eliminate grease and bacteria, leaving your kitchen hygienic and sparkling clean.",
       "features": [
         "Oven, hob and extractor fan deep cleaning",
         "Refrigerator interior cleaning and deodorising",
@@ -404,13 +417,16 @@
     },
     {
       "id": "bathroom-cleaning",
+      "badge": "Our Services",
       "title": "Bathroom Cleaning",
       "description": "Deep cleaning for a fresh and germ-free bathroom.",
       "image": "/services/bathroom-cleaning.png",
+      "imageAlt": "Professional bathroom cleaning service",
       "icon": "Bath",
       "darkIcon": false,
       "tagline": "Sparkling tiles, zero germs — ",
       "longDescription": "Bathrooms harbour more bacteria than any other room in the house. Our deep bathroom cleaning service eliminates 99.9% of germs using hospital-grade disinfectants and professional equipment. We scrub tiles and grout, descale taps and showerheads, clean behind the toilet, and leave every surface gleaming. Enjoy a fresh, spa-like bathroom without lifting a finger.",
+      "footer": "Whether it's your shower stalls, ceramic tiles, vanity counters, or toilets, our certified experts disinfect and descale every fixture with hospital-grade sanitisation to give you a fresh, germ-free bathroom space.",
       "features": [
         "Toilet deep scrub and disinfection inside and out",
         "Shower, bath and tile grout scrubbing",
@@ -453,13 +469,16 @@
     },
     {
       "id": "carpet-sofa-cleaning",
+      "badge": "Our Services",
       "title": "Carpet & Sofa Cleaning",
       "description": "Remove dust, stains and allergens for a fresher home.",
       "image": "/services/carpet-cleaning.png",
+      "imageAlt": "Professional carpet & sofa cleaning service",
       "icon": "Sofa",
       "darkIcon": true,
       "tagline": "Restore the softness ",
       "longDescription": "Carpets and sofas trap dust mites, allergens, pet hair and stains deep within their fibres. Our hot-water extraction and steam cleaning methods reach far beyond the surface to restore your upholstery and carpets to their original freshness. Whether it is a stubborn wine stain, pet odour, or years of accumulated dust, we have the expertise and equipment to handle it all.",
+      "footer": "Whether it's your living room sofas, delicate wool carpets, or high-traffic rugs, our trained specialists use powerful steam and hot-water extraction to remove trapped allergens and stubborn stains without damaging delicate fibres.",
       "features": [
         "Hot-water extraction deep carpet cleaning",
         "Steam cleaning for sofas and upholstered furniture",
@@ -499,6 +518,162 @@
           "description": "We speed-dry your carpets and sofas and apply a fresh-scent finish."
         }
       ]
+    },
+    {
+      "id": "window-cleaning",
+      "badge": "Our Services",
+      "title": "Window & Glass Cleaning",
+      "description": "Streak-free shine and crystal-clear views for every window.",
+      "image": "/services/window-cleaning.jpg",
+      "imageAlt": "Professional window and glass cleaning service",
+      "icon": "Sparkles",
+      "darkIcon": false,
+      "tagline": "Crystal clear views, streak-free clarity — ",
+      "longDescription": "Dirty windows, hard water spots and dust accumulation can dim the natural light in your home or office. Our professional window and glass cleaning service uses purified water, eco-friendly streak-free solutions, and specialized squeegees to deliver impeccable transparency. We clean interior and exterior glass, frames, sills, and tracks for both residential and commercial buildings.",
+      "footer": "Whether it's floor-to-ceiling glass, skylights, interior partitions or sliding patio doors, our trained specialists guarantee sparkling, streak-free clarity that maximizes natural light and enhances your view.",
+      "features": [
+        "Interior and exterior window glass cleaning",
+        "Streak-free purified water wash system",
+        "Window frame, tracks and sill detailing",
+        "Hard water stain and mineral deposit removal",
+        "Skylights, mirrors and glass partition cleaning",
+        "Safe multi-storey access equipment and techniques",
+        "Eco-friendly, chemical-residue-free solutions"
+      ],
+      "includes": [
+        "Interior & exterior panes",
+        "Frames & sills",
+        "Window tracks",
+        "Glass balustrades & mirrors",
+        "Fly screen dusting",
+        "Hard water spot removal"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Free Inspection",
+          "description": "We examine window types, height access and glass conditions to plan the optimal cleaning approach."
+        },
+        {
+          "step": 2,
+          "title": "Pre-Treatment",
+          "description": "Hard water minerals, pollen and bird lime are pre-treated with gentle eco-solutions."
+        },
+        {
+          "step": 3,
+          "title": "Purified Water Wash",
+          "description": "We squeegee and wash every pane using purified water technology for zero spotting or streaks."
+        },
+        {
+          "step": 4,
+          "title": "Frame & Sill Detailing",
+          "description": "Frames, sills and tracks are wiped dry and inspected for a flawless crystal-clear finish."
+        }
+      ]
+    },
+    {
+      "id": "deep-cleaning",
+      "badge": "Our Services",
+      "title": "Deep & Move-In Cleaning",
+      "description": "Intensive whole-home detailing and sanitization from top to bottom.",
+      "image": "/services/deep-cleaning.jpg",
+      "imageAlt": "Professional deep and move-in cleaning service",
+      "icon": "ShieldCheck",
+      "darkIcon": true,
+      "tagline": "Every corner detailed, every germ eradicated — ",
+      "longDescription": "Our intensive deep cleaning service goes far beyond surface dusting. Designed for seasonal spring cleans, end-of-tenancy inspections, and move-in/move-out readiness, we sanitize every hidden nook and cranny. From behind major appliances and inside empty cabinets to high baseboards, grout lines, and ceiling fans, we ensure your living space is pristine, safe, and move-in ready.",
+      "footer": "Whether you are moving into a new home, handing keys back to a landlord, or simply resetting your living space, our certified deep cleaning team delivers thorough, guaranteed sanitization with immaculate attention to detail.",
+      "features": [
+        "Behind & underneath heavy appliances cleaning",
+        "Inside kitchen cabinets, drawers and pantry wipe-down",
+        "Deep tile grout scrubbing and lime-scale removal",
+        "Detailed baseboards, door frames and light switches",
+        "High-touch point disinfection and sanitization",
+        "End-of-lease bond back guaranteed standards",
+        "Hospital-grade non-toxic disinfectants"
+      ],
+      "includes": [
+        "Complete room detailing",
+        "Inside all empty cupboards",
+        "Behind appliances",
+        "Doors, frames & baseboards",
+        "Light fixtures & switches",
+        "Sanitized floors & tiles"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Initial Walkthrough",
+          "description": "We evaluate priority zones and specific landlord or homeowner checklists."
+        },
+        {
+          "step": 2,
+          "title": "High-to-Low Dusting",
+          "description": "Cobwebs, vents, light fixtures and doorframes are thoroughly cleared from ceiling to floor."
+        },
+        {
+          "step": 3,
+          "title": "Intensive Sanitization",
+          "description": "Appliance backs, cabinet interiors, tiles, and fixtures are deep scrubbed and sanitized."
+        },
+        {
+          "step": 4,
+          "title": "Final Quality Sign-Off",
+          "description": "We conduct a detailed 50-point checklist inspection to ensure 100% satisfaction."
+        }
+      ]
+    },
+    {
+      "id": "commercial-cleaning",
+      "badge": "Our Services",
+      "title": "Commercial & Facility Cleaning",
+      "description": "Industrial-grade facility maintenance and post-construction detailing.",
+      "image": "/services/commercial-cleaning.jpg",
+      "imageAlt": "Professional commercial facility cleaning service",
+      "icon": "Building",
+      "darkIcon": false,
+      "tagline": "Built for business, perfected for people — ",
+      "longDescription": "High-traffic commercial spaces demand heavy-duty cleaning and meticulous presentation. PureShine provides end-to-end facility detailing for retail storefronts, showrooms, corporate lobbies, medical clinics, and post-construction job sites. Equipped with industrial floor scrubbers, HEPA vacuums, and commercial pressure washers, we keep your business immaculate, safe, and compliant.",
+      "footer": "Whether you run a busy retail showroom, commercial complex, fitness facility or medical centre, our bonded commercial crew delivers reliable, high-spec sanitation on flexible off-hours schedules.",
+      "features": [
+        "Industrial floor scrubbing, buffing and polishing",
+        "Post-construction dust extraction and debris removal",
+        "High-traffic retail and corporate lobby maintenance",
+        "Commercial restroom multi-point sanitization",
+        "HEPA air filtration and particulate vacuuming",
+        "OSHA and health-code compliant protocols",
+        "Flexible night-shift and weekend service rosters"
+      ],
+      "includes": [
+        "Commercial lobbies & halls",
+        "Retail display areas",
+        "Polished concrete & terrazzo",
+        "High-touch sanitization",
+        "Industrial waste removal",
+        "Facility restrooms"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Facility Audit",
+          "description": "We assess your square footage, flooring types, and shift schedules to draft an SLA."
+        },
+        {
+          "step": 2,
+          "title": "Heavy Debris Extraction",
+          "description": "Industrial vacuums and sweepers eliminate fine drywall dust and high-traffic dirt."
+        },
+        {
+          "step": 3,
+          "title": "Machine Scrub & Polish",
+          "description": "Commercial ride-on and walk-behind scrubbers deep-clean and polish all floor surfaces."
+        },
+        {
+          "step": 4,
+          "title": "Certified Sign-Off",
+          "description": "Our site supervisor verifies all health and safety checklists for immediate handover."
+        }
+      ]
     }
   ],
   "serviceDetailPage": {
@@ -508,7 +683,7 @@
     "featuresSection": {
       "badge": "Everything We Cover",
       "heading": "Full List of Features",
-      "description": "Every clean is performed to the highest standard. Here is exactly what is included when you book with PureShine."
+      "description": "Every clean is performed to the highest standard. Here is exactly what is included when you book with PureShine ."
     },
     "includedSection": {
       "badge": "Areas Covered",
@@ -758,6 +933,93 @@
       ],
       "slug": "the-benefits-of-deep-cleaning-your-home",
       "numericId": "3"
+    },
+    {
+      "id": "essential-kitchen-cleaning-checklist",
+      "title": "The Essential Kitchen Cleaning & Sanitization Checklist",
+      "category": "Home Cleaning",
+      "date": "September 05, 2026",
+      "shortDate": "Sep 05, 2026",
+      "day": "05",
+      "month": "SEP",
+      "author": "Admin",
+      "role": "Cleaning Expert",
+      "image": "/services/kitchen-cleaning.png",
+      "comments": 9,
+      "content": [
+        {
+          "heading": "Why Kitchen Cleanliness Comes First",
+          "text": "The kitchen is the heart of every home, but it is also the area most susceptible to grease build-up, food residue, and bacterial contamination. A systematic sanitization routine safeguards your family's health and maintains your cooking appliances in peak condition."
+        },
+        {
+          "heading": "Degreasing Cooking Surfaces and Range Hoods",
+          "text": "Airborne grease quickly settles on stove backsplashes, range hoods, and cabinetry. Using eco-friendly degreasers and microfiber cloths prevents stubborn grime accumulation and keeps your kitchen air fresh."
+        },
+        {
+          "heading": "Sanitizing Countertops and Sinks",
+          "text": "Food prep surfaces require daily sanitization to eliminate cross-contamination risks. Stainless steel and granite surfaces benefit from pH-neutral cleaners that restore shine without dulling protective sealants."
+        }
+      ],
+      "slug": "essential-kitchen-cleaning-checklist",
+      "numericId": "4"
+    },
+    {
+      "id": "how-to-keep-carpets-fresh-and-stain-free",
+      "title": "How to Keep Carpets Fresh and Stain-Free Year Round",
+      "category": "Cleaning Tips",
+      "date": "August 28, 2026",
+      "shortDate": "Aug 28, 2026",
+      "day": "28",
+      "month": "AUG",
+      "author": "Admin",
+      "role": "Cleaning Expert",
+      "image": "/services/carpet-cleaning.png",
+      "comments": 14,
+      "content": [
+        {
+          "heading": "Understanding Carpet Fiber Care",
+          "text": "Carpets endure continuous foot traffic, pet dander, and accidental spills. Proper vacuuming combined with routine deep-steam cleaning lifts embedded grit that could otherwise wear down delicate carpet fibers."
+        },
+        {
+          "heading": "Immediate Spill Response Techniques",
+          "text": "Whenever spills happen, blotting rather than vigorous rubbing is essential. Rubbing drives liquids deeper into carpet padding, while gentle blotting with a clean cloth extracts stains effectively."
+        },
+        {
+          "heading": "Neutralizing Stubborn Odors",
+          "text": "Natural baking soda treatments and enzymatic deodorizers eliminate stubborn pet and humidity smells at the root, leaving your living room smelling crisp and inviting."
+        }
+      ],
+      "slug": "how-to-keep-carpets-fresh-and-stain-free",
+      "numericId": "5"
+    },
+    {
+      "id": "mastering-bathroom-hygiene-and-tile-care",
+      "title": "Mastering Bathroom Hygiene: Expert Tips for Tile & Grout",
+      "category": "Deep Cleaning",
+      "date": "August 20, 2026",
+      "shortDate": "Aug 20, 2026",
+      "day": "20",
+      "month": "AUG",
+      "author": "Admin",
+      "role": "Cleaning Expert",
+      "image": "/services/bathroom-cleaning.png",
+      "comments": 11,
+      "content": [
+        {
+          "heading": "Combating Soap Scum and Hard Water Minerals",
+          "text": "High humidity and mineral-rich water create stubborn calcium deposits on shower screens and tile grout. Routine squeegeeing and non-abrasive descalers prevent mineral etching and restore crystal clarity."
+        },
+        {
+          "heading": "Grout Deep Cleaning and Sealing",
+          "text": "Grout is naturally porous and traps moisture over time. Professional deep extraction and silicone sealing shield grout lines from discoloration, mold spores, and structural deterioration."
+        },
+        {
+          "heading": "Proper Ventilation Habits",
+          "text": "Running exhaust fans for at least twenty minutes post-shower evacuates residual humidity, actively deterring mildew growth and preserving paint finishes."
+        }
+      ],
+      "slug": "mastering-bathroom-hygiene-and-tile-care",
+      "numericId": "6"
     }
   ],
   "categories": [
@@ -806,7 +1068,7 @@
           "info@xyz.com",
           "info@xyz.com"
         ]
-      } 
+      }
     ],
     "form": {
       "badge": "Send us a Message",
@@ -852,11 +1114,23 @@
       },
       "submitButton": {
         "label": "Submit Now",
-        "submittingLabel": "Sending..."
+        "submittingLabel": "Sending...",
+        "icon": "ArrowRight"
       },
       "privacyNote": {
         "icon": "LockKeyhole",
         "text": "Your information is safe with us. We respect your privacy."
+      },
+      "popCard": {
+        "icon": "CheckCircle2",
+        "closeIcon": "X",
+        "title": "Message Sent Successfully!",
+        "thankYouPrefix": "Thank you, ",
+        "thankYouSuffix": "! We have received your message.",
+        "defaultMessage": "Thank you! We have received your message.",
+        "followUp": "Our PureShine team will review your inquiry and get back to you shortly.",
+        "buttonText": "Okay, Got It!",
+        "closeAriaLabel": "Close"
       },
       "sidebar": {
         "image": "/why-chooseUs.png",
@@ -872,11 +1146,11 @@
     },
     "map": {
       "title": "PureShine Location",
-      "src": "https://www.google.com/maps?q=121+King+Street,+Melbourne,+3000,+Australia&output=embed",
-      "locationTitle": "121 King Street",
-      "locationSubtitle": "Melbourne, 3000, Australia",
+      "src": "https://www.google.com/maps?q=Awel+Kiett-turner+495+Boulevard,+Ste+10+Elmwood+Park,+NJ+07407,+USA&output=embed",
+      "locationTitle": "Awel Kiett-turner",
+      "locationSubtitle": "495 Boulevard, Ste 10 Elmwood Park, NJ 07407, USA",
       "viewLargerMapText": "View larger map",
-      "viewLargerMapHref": "https://www.google.com/maps?q=121+King+Street,+Melbourne,+3000,+Australia",
+      "viewLargerMapHref": "https://www.google.com/maps?q=Awel+Kiett-turner+495+Boulevard,+Ste+10+Elmwood+Park,+NJ+07407,+USA",
       "zoomIn": "+",
       "zoomOut": "−"
     },
@@ -888,11 +1162,11 @@
   },
   "contactMap": {
     "title": "PureShine Location",
-    "src": "https://www.google.com/maps?q=121+King+Street,+Melbourne,+3000,+Australia&output=embed",
-    "locationTitle": "121 King Street",
-    "locationSubtitle": "Melbourne, 3000, Australia",
+    "src": "https://www.google.com/maps?q=Awel+Kiett-turner+495+Boulevard,+Ste+10+Elmwood+Park,+NJ+07407,+USA&output=embed",
+    "locationTitle": "Awel Kiett-turner",
+    "locationSubtitle": "495 Boulevard, Ste 10 Elmwood Park, NJ 07407, USA",
     "viewLargerMapText": "View larger map",
-    "viewLargerMapHref": "https://www.google.com/maps?q=121+King+Street,+Melbourne,+3000,+Australia",
+    "viewLargerMapHref": "https://www.google.com/maps?q=Awel+Kiett-turner+495+Boulevard,+Ste+10+Elmwood+Park,+NJ+07407,+USA",
     "zoomIn": "+",
     "zoomOut": "−"
   },
@@ -906,13 +1180,13 @@
     "contactTitle": "Contact Information",
     "copyright": "© 2026 PureShine. All Rights Reserved.",
     "contact": {
-      "phone": "+91 98765 43210",
-      "phoneHref": "tel:+919876543210",
+      "phone": "+1 0000000000",
+      "phoneHref": "tel:+10000000000",
       "phoneHours": "Mon – Sat, 9:00 AM – 7:00 PM",
       "email": "info@pureshine.com",
       "emailHref": "mailto:info@pureshine.com",
       "emailNote": "We reply within 24 hours",
-      "address": "123, Green Park, New Delhi, Delhi – 110016, India"
+      "address": "Awel Kiett-turner 495 Boulevard, Ste 10 Elmwood Park, NJ 07407, USA"
     },
     "newsletter": {
       "title": "Newsletter",
@@ -968,8 +1242,8 @@
         "href": "/serviceDetail/carpet-sofa-cleaning"
       },
       {
-        "name": "Sofa Cleaning",
-        "href": "/serviceDetail/carpet-sofa-cleaning"
+        "name": "Window Cleaning",
+        "href": "/serviceDetail/window-cleaning"
       }
     ],
     "socialLinks": [
@@ -1197,28 +1471,48 @@
         "type": "video",
         "category": "Home Cleaning",
         "title": "Home cleaning process",
-        "image": "/services/home-cleaning.png"
+        "image": "/services/home-cleaning.png",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       },
       {
         "id": 20,
         "type": "video",
         "category": "Deep Cleaning",
         "title": "Deep cleaning process",
-        "image": "/why-chooseUs.png"
+        "image": "/why-chooseUs.png",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       },
       {
         "id": 21,
         "type": "video",
         "category": "Kitchen Cleaning",
         "title": "Kitchen cleaning process",
-        "image": "/services/kitchen-cleaning.png"
+        "image": "/services/kitchen-cleaning.png",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       },
       {
         "id": 22,
         "type": "video",
         "category": "Bathroom Cleaning",
         "title": "Bathroom cleaning process",
-        "image": "/services/bathroom-cleaning.png"
+        "image": "/services/bathroom-cleaning.png",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 23,
+        "type": "video",
+        "category": "Office Cleaning",
+        "title": "Office cleaning process",
+        "image": "/services/office-cleaning.png",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+      },
+      {
+        "id": 24,
+        "type": "video",
+        "category": "Carpet & Upholstery",
+        "title": "Carpet & upholstery cleaning process",
+        "image": "/services/carpet-cleaning.png",
+        "videoUrl": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
       }
     ],
     "hero": {
