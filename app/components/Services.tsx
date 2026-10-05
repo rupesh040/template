@@ -177,7 +177,7 @@ export default function Services({
             alt="leaf"
             width={60}
             height={60}
-            className={`pointer-events-none absolute left-0 top-0 rotate-[240deg] transition-all duration-700 ${
+            className={`pointer-events-none absolute left-0 top-1 h-auto w-[46px] rotate-[240deg] transition-all duration-700 sm:left-2 sm:top-2 sm:w-[58px] ${
               isVisible ? "scale-100 opacity-100" : "scale-75 opacity-0"
             }`}
           />
@@ -215,7 +215,7 @@ export default function Services({
             alt="leaf"
             width={60}
             height={60}
-            className={`pointer-events-none absolute right-0 top-0 transition-all duration-700 ${
+            className={`pointer-events-none absolute right-0 top-1 h-auto w-[46px] -scale-x-100 rotate-[240deg] transition-all duration-700 sm:right-2 sm:top-2 sm:w-[58px] ${
               isVisible ? "scale-100 opacity-100" : "scale-75 opacity-0"
             }`}
           />
@@ -309,12 +309,12 @@ export default function Services({
           >
             <Link
               href={viewAllButton.href}
-              className="group inline-flex h-[54px] items-center gap-4 rounded-full bg-[#10ad3b] px-8 text-[14px] font-bold text-white shadow-md transition hover:bg-[#07952f] active:scale-95"
+              className="group inline-flex h-[54px] items-center justify-center gap-3 rounded-full bg-[#10ad3b] px-8 text-[14px] font-bold text-white shadow-md transition hover:bg-[#07952f] active:scale-95"
             >
-              <span>{viewAllButton.label}</span>
+              <span className="leading-none">{viewAllButton.label}</span>
               <ArrowRight
-                size={20}
-                className="transition-transform duration-300 group-hover:translate-x-1"
+                size={19}
+                className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
               />
             </Link>
           </div>

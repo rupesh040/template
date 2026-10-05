@@ -3,45 +3,40 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, X } from "lucide-react";
 import {
-  ArrowRight,
-  Award,
-  Clock3,
-  Leaf,
-  ShieldCheck,
-  X,
-} from "lucide-react";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
-} from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import {
+  RiAwardFill,
+  RiFacebookFill,
+  RiInstagramFill,
+  RiLeafFill,
+  RiLinkedinFill,
   RiMailCheckFill,
   RiMailFill,
   RiMapPin2Fill,
   RiPhoneFill,
+  RiShieldCheckFill,
+  RiTimeFill,
+  RiTwitterXFill,
+  RiYoutubeFill,
 } from "react-icons/ri";
 import type { IconType } from "react-icons";
 
 import content from "../data/content.json";
 
-const faIconMap: Record<string, IconType> = {
-  Facebook: FaFacebookF,
-  Instagram: FaInstagram,
-  Twitter: FaXTwitter,
-  X: FaXTwitter,
-  LinkedIn: FaLinkedinIn,
-  YouTube: FaYoutube,
+const socialIconMap: Record<string, IconType> = {
+  Facebook: RiFacebookFill,
+  Instagram: RiInstagramFill,
+  Twitter: RiTwitterXFill,
+  X: RiTwitterXFill,
+  LinkedIn: RiLinkedinFill,
+  YouTube: RiYoutubeFill,
 };
 
-const lucideIconMap: Record<string, typeof Leaf> = {
-  Leaf,
-  Award,
-  ShieldCheck,
-  Clock3,
+const badgeIconMap: Record<string, IconType> = {
+  Leaf: RiLeafFill,
+  Award: RiAwardFill,
+  ShieldCheck: RiShieldCheckFill,
+  Clock3: RiTimeFill,
 };
 
 const footer = content.footer;
@@ -50,11 +45,11 @@ const quickLinks = footer.quickLinks.map((link) => [link.name, link.href]);
 const serviceLinks = footer.serviceLinks.slice(0, 6).map((link) => [link.name, link.href]);
 const socialLinks = footer.socialLinks.map((social) => ({
   ...social,
-  icon: faIconMap[social.label] ?? FaFacebookF,
+  icon: socialIconMap[social.label] ?? RiFacebookFill,
 }));
 const trustBadges = footer.trustBadges.map((badge) => ({
   ...badge,
-  icon: lucideIconMap[badge.icon] ?? Leaf,
+  icon: badgeIconMap[badge.icon] ?? RiLeafFill,
 }));
 
 export default function Footer() {
@@ -164,7 +159,7 @@ export default function Footer() {
                   aria-label={label}
                   className="flex h-8 w-8 items-center justify-center rounded-full border border-white/25 text-white/80 transition-all duration-200 hover:border-[#17b83c] hover:bg-[#17b83c] hover:text-white"
                 >
-                  <Icon size={13} />
+                  <Icon size={16} />
                 </Link>
               ))}
             </div>
@@ -204,21 +199,21 @@ export default function Footer() {
 
             <div className="mt-4 space-y-3.5">
               <ContactItem
-                icon={<RiPhoneFill size={17} />}
+                icon={<RiPhoneFill size={21} />}
                 title={footer.contact.phone}
                 subtitle={footer.contact.phoneHours}
                 href={footer.contact.phoneHref}
               />
 
               <ContactItem
-                icon={<RiMailFill size={17} />}
+                icon={<RiMailFill size={21} />}
                 title={footer.contact.email}
                 subtitle={footer.contact.emailNote}
                 href={footer.contact.emailHref}
               />
 
               <ContactItem
-                icon={<RiMapPin2Fill size={17} />}
+                icon={<RiMapPin2Fill size={21} />}
                 title={footer.contact.address}
               />
             </div>
@@ -254,7 +249,7 @@ export default function Footer() {
                 aria-label={footer.newsletter.submitLabel}
                 className="flex w-10 shrink-0 items-center justify-center bg-[#12b63a] transition-all hover:bg-[#0c9c30] active:scale-95 cursor-pointer"
               >
-                <ArrowRight size={18} strokeWidth={2.5} />
+                <ArrowRight size={20} strokeWidth={2.5} />
               </button>
             </form>
 
@@ -263,7 +258,7 @@ export default function Footer() {
                 {trustBadges.map((badge) => (
                   <TrustBadge
                     key={badge.title}
-                    icon={<badge.icon size={16} />}
+                    icon={<badge.icon size={19} />}
                     title={badge.title}
                   />
                 ))}
@@ -308,11 +303,11 @@ export default function Footer() {
               aria-label="Close message"
               className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#f1f5f7] text-[#607187] transition hover:bg-[#e4ebf0] hover:text-[#102b4c] cursor-pointer"
             >
-              <X size={18} />
+              <X size={20} />
             </button>
 
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#e5f8eb] text-[#159447] shadow-sm">
-              <RiMailCheckFill size={36} />
+              <RiMailCheckFill size={40} />
             </div>
 
             <h3 className="mt-4 text-[20px] font-bold text-[#102b4c] sm:text-[22px]">
