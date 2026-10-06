@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Mail, MapPin, Phone, type LucideIcon } from "lucide-react";
-import content from "../data/content.json";
+import content from "../data";
 
 const iconMap: Record<string, LucideIcon> = { MapPin, Phone, Mail };
 

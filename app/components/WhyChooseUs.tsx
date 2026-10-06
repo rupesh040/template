@@ -14,7 +14,7 @@ import {
   RiCheckboxCircleFill,
 } from "react-icons/ri";
 import type { IconType } from "react-icons";
-import content from "../data/content.json";
+import content from "../data";
 
 const iconMap: Record<string, IconType> = {
   Users: RiTeamFill,

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import content from "../data/content.json";
+import content from "../data";
 
 const { heading, subheading, description, items: testimonials } =
   content.testimonials;

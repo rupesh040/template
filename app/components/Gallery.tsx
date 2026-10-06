@@ -9,7 +9,7 @@ import {
   Play,
   X,
 } from "lucide-react";
-import content from "../data/content.json";
+import content from "../data";
 
 type GalleryType = "photo" | "video";
 

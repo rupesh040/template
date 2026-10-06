@@ -15,7 +15,7 @@ import {
   X,
 } from "lucide-react";
 
-import content from "../data/content.json";
+import content from "../data";
 
 const iconMap: Record<string, LucideIcon> = {
   User,

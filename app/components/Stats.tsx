@@ -11,7 +11,7 @@ import {
 } from "react-icons/ri";
 import { FaSprayCanSparkles } from "react-icons/fa6";
 import type { IconType } from "react-icons";
-import content from "../data/content.json";
+import content from "../data";
 
 const iconMap: Record<string, IconType> = {
   Users: RiTeamFill,

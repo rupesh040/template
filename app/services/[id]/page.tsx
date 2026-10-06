@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Check, ArrowLeft, PhoneCall } from "lucide-react";
-import content from "../../data/content.json";
+import content from "../../data";
 import AboutHero from "../../components/AboutHero";
 import ProfessionalCleaning from "../../components/ProfessionalCleaning";
 import Services from "../../components/Services";

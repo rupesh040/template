@@ -1,7 +1,7 @@
 import AboutHero from "../components/AboutHero";
 import ProfessionalCleaning from "../components/ProfessionalCleaning";
 import Services from "../components/Services";
-import content from "../data/content.json";
+import content from "../data";
 
 export default function serviceDetail() {
   const { defaultTitle, defaultBreadcrumb, heroBackground } =

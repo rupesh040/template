@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Check } from "lucide-react";
-import content from "../data/content.json";
+import content from "../data";
 
 interface ProfessionalCleaningProps {
   serviceId?: string;

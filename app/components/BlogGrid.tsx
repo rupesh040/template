@@ -9,7 +9,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import content from "../data/content.json";
+import content from "../data";
 
 const blogs = content.blogs;
 

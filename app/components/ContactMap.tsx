@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import content from "../data/content.json";
+import content from "../data";
 
 export default function ContactMap() {
   const [mapLoaded, setMapLoaded] = useState(false);

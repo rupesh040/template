@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import content from "../data/content.json";
+import content from "../data";
 
 import {
   ArrowRight,

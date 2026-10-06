@@ -1,5 +1,5 @@
 import { notFound, redirect } from "next/navigation";
-import content from "../../data/content.json";
+import content from "../../data";
 import AboutHero from "../../components/AboutHero";
 import BlogDetails from "../../components/BlogDetails";
 import BlogGrid from "../../components/BlogGrid";

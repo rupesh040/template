@@ -11,7 +11,7 @@ import {
 import type { IconType } from "react-icons";
 import { useEffect, useRef, useState } from "react";
 
-import content from "../data/content.json";
+import content from "../data";
 
 const iconMap: Record<string, IconType> = {
   Users: RiTeamFill,
