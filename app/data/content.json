@@ -5,7 +5,7 @@
     "description": "We provide reliable, affordable, and eco-friendly cleaning services for homes, offices, and commercial spaces.",
     "logo": "/logo.webp",
     "footerLogo": "/footer-logo.webp",
-    "copyright": "© 2026 PureShine. All Rights Reserved.",
+    "copyright": "© 2026 All Rights Reserved. Powered by Lestow",
     "email": "info@xyz.com",
     "emailHref": "mailto:info@xyz.com",
     "phone": "+1 0000000000",
@@ -908,6 +908,7 @@
     {
       "id": "how-professional-cleaning-services-improve-your-home",
       "title": "How Professional Cleaning Services Improve Your Home",
+      "description": "Discover how professional cleaning services elevate indoor air quality, save valuable time, and keep your home fresh and immaculate.",
       "category": "Cleaning Tips",
       "date": "September 20, 2026",
       "shortDate": "Sep 20, 2026",
@@ -937,6 +938,7 @@
     {
       "id": "easy-ways-to-keep-your-office-clean",
       "title": "Easy Ways to Keep Your Office Clean",
+      "description": "Simple and practical workplace maintenance strategies to boost team productivity, minimize clutter, and support employee health.",
       "category": "Office Cleaning",
       "date": "September 15, 2026",
       "shortDate": "Sep 15, 2026",
@@ -966,6 +968,7 @@
     {
       "id": "the-benefits-of-deep-cleaning-your-home",
       "title": "The Benefits of Deep Cleaning Your Home",
+      "description": "Explore why a comprehensive deep cleaning tackles hidden grime, eliminates stubborn allergens, and revitalizes your living space.",
       "category": "Deep Cleaning",
       "date": "September 10, 2026",
       "shortDate": "Sep 10, 2026",
@@ -995,6 +998,7 @@
     {
       "id": "essential-kitchen-cleaning-checklist",
       "title": "The Essential Kitchen Cleaning & Sanitization Checklist",
+      "description": "A thorough sanitization checklist covering cooking surfaces, range hoods, and food prep areas to ensure a spotless kitchen.",
       "category": "Home Cleaning",
       "date": "September 05, 2026",
       "shortDate": "Sep 05, 2026",
@@ -1024,6 +1028,7 @@
     {
       "id": "how-to-keep-carpets-fresh-and-stain-free",
       "title": "How to Keep Carpets Fresh and Stain-Free Year Round",
+      "description": "Expert methods to remove stubborn carpet stains, neutralize deep-seated odors, and maintain fiber softness year-round.",
       "category": "Cleaning Tips",
       "date": "August 28, 2026",
       "shortDate": "Aug 28, 2026",
@@ -1053,6 +1058,7 @@
     {
       "id": "mastering-bathroom-hygiene-and-tile-care",
       "title": "Mastering Bathroom Hygiene: Expert Tips for Tile & Grout",
+      "description": "Professional advice on eradicating hard water deposits, sanitizing tile grout, and preventing mold build-up in high-humidity areas.",
       "category": "Deep Cleaning",
       "date": "August 20, 2026",
       "shortDate": "Aug 20, 2026",
@@ -1082,6 +1088,7 @@
     {
       "id": "eco-friendly-cleaning-practices-for-healthy-homes",
       "title": "Eco-Friendly Cleaning: Green Solutions for a Healthy Home",
+      "description": "Switch to sustainable plant-based cleaners and natural disinfectants for a healthier home environment without harmful chemicals.",
       "category": "Cleaning Tips",
       "date": "August 12, 2026",
       "shortDate": "Aug 12, 2026",
@@ -1111,6 +1118,7 @@
     {
       "id": "post-construction-cleaning-checklist",
       "title": "The Ultimate Post-Construction Cleaning & Dust Removal Guide",
+      "description": "Step-by-step guidance on capturing fine drywall dust, safely removing paint overspray, and preparing new renovations for move-in.",
       "category": "Deep Cleaning",
       "date": "August 05, 2026",
       "shortDate": "Aug 05, 2026",
@@ -1140,6 +1148,7 @@
     {
       "id": "seasonal-spring-cleaning-checklist-for-every-room",
       "title": "Seasonal Spring Cleaning: Resetting Your Home Room by Room",
+      "description": "A room-by-room spring cleaning routine to declutter, refresh upholstery, and bring renewed energy into your home.",
       "category": "Home Cleaning",
       "date": "July 28, 2026",
       "shortDate": "Jul 28, 2026",
@@ -1317,7 +1326,7 @@
     "quickLinksTitle": "Quick Links",
     "servicesTitle": "Our Services",
     "contactTitle": "Contact Information",
-    "copyright": "© 2026 PureShine. All Rights Reserved.",
+    "copyright": "©2026 All Rights Reserved. Powered by Lestow",
     "contact": {
       "phone": "+1 0000000000",
       "phoneHref": "tel:+10000000000",

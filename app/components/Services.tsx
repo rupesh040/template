@@ -95,6 +95,7 @@ export default function Services({
   const sliderRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
@@ -157,6 +158,7 @@ export default function Services({
   };
 
   useEffect(() => {
+    setIsMounted(true);
     if (effectiveLayout === "slider") {
       checkScroll();
       window.addEventListener("resize", checkScroll);
@@ -290,7 +292,8 @@ export default function Services({
             <button
               type="button"
               onClick={() => scrollServices("left")}
-              disabled={!canScrollLeft}
+              disabled={isMounted ? !canScrollLeft : false}
+              suppressHydrationWarning
               aria-label="Previous services"
               style={{ animationDelay: "450ms" }}
               className={`absolute -left-3 top-1/2 z-30 flex h-[40px] w-[40px] sm:h-[52px] sm:w-[52px] -translate-y-1/2 items-center justify-center rounded-full border border-gray-100 bg-white text-[#10aa3a] shadow-[0_6px_25px_rgba(8,45,76,0.14)] transition-all duration-200 hover:bg-[#10aa3a] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-0 sm:-left-5 lg:-left-7 ${
@@ -326,7 +329,8 @@ export default function Services({
             <button
               type="button"
               onClick={() => scrollServices("right")}
-              disabled={!canScrollRight}
+              disabled={isMounted ? !canScrollRight : false}
+              suppressHydrationWarning
               aria-label="Next services"
               style={{ animationDelay: "450ms" }}
               className={`absolute -right-3 top-1/2 z-30 flex h-[40px] w-[40px] sm:h-[52px] sm:w-[52px] -translate-y-1/2 items-center justify-center rounded-full border border-gray-100 bg-white text-[#10aa3a] shadow-[0_6px_25px_rgba(8,45,76,0.14)] transition-all duration-200 hover:bg-[#10aa3a] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-0 sm:-right-5 lg:-right-7 ${
@@ -351,6 +355,7 @@ export default function Services({
               type="button"
               onClick={() => goToPage(currentPage - 1)}
               disabled={currentPage === 1}
+              suppressHydrationWarning
               aria-label="Previous page"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#092a43] transition-all hover:border-[#10aa3a] hover:text-[#10aa3a] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
             >
@@ -363,6 +368,7 @@ export default function Services({
                   key={page}
                   type="button"
                   onClick={() => goToPage(page)}
+                  suppressHydrationWarning
                   className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-all cursor-pointer ${
                     currentPage === page
                       ? "bg-[#10aa3a] text-white shadow-md scale-105"
@@ -378,6 +384,7 @@ export default function Services({
               type="button"
               onClick={() => goToPage(currentPage + 1)}
               disabled={currentPage === totalPages}
+              suppressHydrationWarning
               aria-label="Next page"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#092a43] transition-all hover:border-[#10aa3a] hover:text-[#10aa3a] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
             >
